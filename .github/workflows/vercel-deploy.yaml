@@ -11,7 +11,7 @@ jobs:
     environment: Production
 
     env:
-      NEXT_PUBLIC_APP_URL: ${{ secrets.APP_URL }}
+      VITE_APP_URL: ${{ secrets.APP_URL }}
 
     steps:
       - name: Checkout repo
