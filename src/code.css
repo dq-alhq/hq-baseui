@@ -1,0 +1,121 @@
+.shiki {
+  background-color: var(--shiki-light-bg);
+}
+
+.shiki span {
+  color: var(--shiki-light);
+}
+
+.shiki code {
+  display: grid;
+  min-width: 100%;
+}
+
+.shiki .line {
+  display: inline-block;
+  width: 100%;
+  min-height: 1lh;
+}
+
+html.dark .shiki,
+html.dark .shiki span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--color-shiki-bg) !important;
+}
+
+[data-theme*=" "] {
+  @apply outline-hidden;
+}
+[data-theme*=" "] pre {
+  @apply overflow-auto font-mono leading-relaxed outline-hidden;
+}
+
+[data-theme*=" "] {
+  @apply relative text-white;
+}
+
+[data-theme*=" "] code {
+  border-width: 0;
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  overflow-wrap: break-word;
+  min-width: 100%;
+  display: grid;
+  counter-reset: line;
+  box-decoration-break: clone;
+}
+
+[data-theme*=" "] .line {
+  @apply inline-block min-h-4 w-full px-4 py-0.5;
+}
+
+[data-theme*=" "] [data-line-numbers] .line {
+  @apply px-2;
+}
+
+[data-theme*=" "] [data-line-numbers] > .line::before {
+  display: inline-block;
+  width: 1.8rem;
+  margin-right: 1.4rem;
+  text-align: right;
+  content: counter(line);
+  counter-increment: line;
+  @apply text-xs text-muted-foreground/40;
+}
+
+[data-theme*=" "] .line--highlighted {
+  @apply bg-muted;
+}
+
+[data-theme*=" "] .line-highlighted span {
+  @apply relative;
+}
+
+[data-theme*=" "] .word--highlighted {
+  @apply rounded-md border bg-muted p-1;
+}
+
+.shiki .highlighted {
+  @apply -ml-4 w-[calc(100%+2rem)] bg-ring pl-4;
+}
+
+html .shiki span.highlighted-word {
+  @apply rounded-sm bg-secondary! py-0.5 px-1.5 text-sm/6 text-secondary-foreground! border;
+}
+
+[data-theme*=" "] {
+  @apply text-foreground px-4 pt-6 text-sm font-medium;
+}
+
+[data-theme*=" "] {
+  @apply text-muted-foreground p-2 text-sm font-medium;
+}
+
+[data-theme*=" "] > code {
+  @apply border-0 p-0 text-sm! leading-loose! md:text-base;
+}
+
+span[data-theme*=" "] > code {
+  background: transparent !important;
+}
+
+
+code[data-line-numbers] {
+  counter-reset: line;
+}
+
+code[data-line-numbers] > [data-line]::before {
+  content: counter(line);
+  counter-increment: line;
+  @apply mr-4 inline-block w-4 text-right text-zinc-500;
+}
+
+[data-highlighted-line] {
+  @apply -ml-4 border-l border-blue-400 bg-gradient-to-r from-blue-600/10 via-(--shiki-bg) to-(--shiki-bg) pl-4;
+}
+
+[data-highlighted-chars] {
+  box-shadow: 0 0 0 4px rgb(82 82 91 / 0.5);
+  @apply rounded bg-zinc-600/50;
+}

@@ -1,0 +1,38 @@
+---
+title: Number Field
+description: A number field allows a user to enter a number, and increment or decrement the value using stepper buttons.
+references: ['https://base-ui.com/react/components/number-field']
+published: true
+---
+
+<Demo component='number-field/number-field-demo' />
+
+## Installation
+<Install component='number-field' />
+
+## Usage
+
+```tsx showLineNumbers
+import { NumberField } from '@/components/ui/number-field'
+```
+
+```tsx showLineNumbers
+<NumberField>
+  <NumberField.Label>Amount</NumberField.Label>
+  <NumberField.Input />
+</NumberField>
+```
+
+## Composition
+
+
+Use the following composition to build an `NumberField`:
+
+```text
+NumberField
+├── NumberField.Label
+└── NumberField.Input
+```
+
+## API References
+See the [Base UI documentation](https://base-ui.com/react/components/number-field) for the full API reference.

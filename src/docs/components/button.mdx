@@ -1,0 +1,119 @@
+---
+title: Button
+description: A button allows a user to perform an action, with mouse, touch, and keyboard interactions.
+references: ['https://base-ui.com/react/components/button']
+published: true
+---
+
+<Demo component='button/button-basic' />
+
+
+## Installation
+<Install component='button' />
+
+## Usage
+
+```tsx
+import { Button } from "@/components/ui/button"
+```
+
+```tsx
+<Button variant="outline">Button</Button>
+```
+
+## Cursor
+
+Tailwind v4 [switched](https://tailwindcss.com/docs/upgrade-guide#buttons-use-the-default-cursor) from `cursor: pointer` to `cursor: default` for the button component.
+
+If you want to keep the `cursor: pointer` behavior, add the following code to your CSS file:
+
+You can also enable this during project setup with `npx shadcn@latest init --pointer`.
+
+```css showLineNumbers title="globals.css"
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+```
+
+## Examples
+
+### Size
+
+Use the `size` prop to change the size of the button.
+
+<Demo component="button/button-sizes" />
+
+### Default
+
+<Demo component="button/button-default" />
+
+### Outline
+
+<Demo component="button/button-outline" />
+
+### Secondary
+
+<Demo component="button/button-secondary" />
+
+### Ghost
+
+<Demo component="button/button-ghost" />
+
+### Destructive
+
+<Demo component="button/button-destructive" />
+
+### Link
+
+<Demo component="button/button-link" />
+
+### Variants
+<Demo component="button/button-variants" />
+
+### Icon
+
+<Demo component="button/button-icon" />
+
+### With Icon
+
+<Demo component="button/button-with-icon" />
+
+### Rounded
+
+Use the `rounded-full` class to make the button rounded.
+
+<Demo component="button/button-rounded" />
+
+### Loading
+
+use `loading` props to Render a Loading Spinner inside the button to show a loading state and disabled the button.
+
+<Demo component="button/button-loading" />
+
+### Button Group
+
+To create a button group, use the `ButtonGroup` component. See the [Button Group](/docs/components/base/button-group) documentation for more details.
+
+<Demo component="button-group/button-group-demo" />
+
+### As Link
+
+You can use the `buttonVariants` helper to make a link look like a button.
+
+**Do not use `<Button render={<a />} nativeButton={false} />` for links.** The Base UI `Button` component always applies `role="button"`, which overrides the semantic link role on `<a>` elements. Use `buttonVariants` with a plain `<a>` tag instead.
+
+<Demo component="button/button-render" />
+
+## API Reference
+
+### Button
+
+The `Button` component is a wrapper around the `button` element that adds a variety of styles and functionality.
+
+| Prop      | Type                                                                                                              | Default     |
+| --------- | ----------------------------------------------------------------------------------------------------------------- | ----------- |
+| `variant` | `"primary" \| "outline" \| "ghost" \| "destructive" \| "secondary" \| "warning" \| "success" \| "info" \| "link"` | `"primary"` |
+| `size`    | `"xs" \| "sm" \| "md" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"`                                   | `"md"`      |

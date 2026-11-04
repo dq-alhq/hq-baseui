@@ -1,0 +1,76 @@
+---
+title: Tooltip
+description: Hover to reveal details, like a secret whispering info, perfect for extra hints or help where needed.
+references: ['https://base-ui.com/react/components/tooltip']
+published: true
+---
+<Demo component="tooltip/tooltip-demo" />
+
+## Installation
+<Install component='tooltip' />
+
+<Steps className='mt-4'>
+<Step title={"Add the `TooltipProvider` to the root of your app."}>
+
+
+```tsx title="app/layout.tsx" showLineNumbers {1,7}
+import { TooltipProvider } from "@/components/ui/tooltip"
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        <TooltipProvider>{children}</TooltipProvider>
+      </body>
+    </html>
+  )
+}
+```
+</Step>
+
+</Steps>
+
+## Usage
+
+```tsx showLineNumbers
+import { Tooltip } from "@/components/ui/tooltip"
+```
+
+```tsx showLineNumbers
+<Tooltip>
+  <Tooltip.Trigger>Hover</Tooltip.Trigger>
+  <Tooltip.Content>
+    <p>Add to library</p>
+  </Tooltip.Content>
+</Tooltip>
+```
+
+## Composition
+
+Use the following composition to build a `Tooltip`:
+
+```text
+Tooltip
+├── Tooltip.Trigger
+└── Tooltip.Content
+```
+
+## Side
+
+Use the `side` prop to change the position of the tooltip.
+
+<Demo component="tooltip/tooltip-sides" />
+
+## With Keyboard Shortcut
+
+<Demo component="tooltip/tooltip-keyboard" />
+
+## Disabled Button
+
+Show a tooltip on a disabled button by wrapping it with a span.
+
+<Demo component="tooltip/tooltip-disabled" />
+
+## API Reference
+
+See the [Base UI Tooltip](https://base-ui.com/react/components/tooltip#api-reference) documentation.

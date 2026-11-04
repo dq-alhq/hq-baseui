@@ -1,0 +1,104 @@
+---
+title: Menubar
+description: A visually persistent menu common in desktop applications that provides quick access to a consistent set of commands.
+published: true
+references: ['https://base-ui.com/react/components/menubar']
+---
+
+<Demo component="menubar/menubar-demo" />
+
+## Installation
+<Install component='menubar' />
+
+## Usage
+
+```tsx showLineNumbers
+import { Menubar } from "@/components/ui/menubar"
+```
+
+```tsx showLineNumbers
+<Menubar>
+  <Menubar.Menu>
+    <Menubar.Trigger>File</Menubar.Trigger>
+    <Menubar.Content>
+      <Menubar.Group>
+        <Menubar.Item>
+          New Tab <Menubar.Shortcut>⌘T</Menubar.Shortcut>
+        </Menubar.Item>
+        <Menubar.Item>New Window</Menubar.Item>
+      </Menubar.Group>
+      <Menubar.Separator />
+      <Menubar.Group>
+        <Menubar.Item>Share</Menubar.Item>
+        <Menubar.Item>Print</Menubar.Item>
+      </Menubar.Group>
+    </Menubar.Content>
+  </Menubar.Menu>
+</Menubar>
+```
+
+## Composition
+
+Use the following composition to build a `Menubar`:
+
+```text
+Menubar
+├── Menubar.Menu
+│   ├── Menubar.Trigger
+│   └── Menubar.Content
+│       ├── Menubar.Group
+│       │   ├── Menubar.Label
+│       │   ├── Menubar.Item
+│       │   └── Menubar.Item
+│       ├── Menubar.Separator
+│       ├── Menubar.Group
+│       │   ├── Menubar.Label
+│       │   ├── Menubar.CheckboxItem
+│       │   └── Menubar.CheckboxItem
+│       ├── Menubar.Separator
+│       ├── Menubar.Group
+│       │   ├── Menubar.Label
+│       │   └── Menubar.RadioGroup
+│       │       ├── Menubar.RadioItem
+│       │       └── Menubar.RadioItem
+│       └── Menubar.Sub
+│           ├── Menubar.SubTrigger
+│           └── Menubar.SubContent
+│               └── Menubar.Group
+│                   ├── Menubar.Label
+│                   ├── Menubar.Item
+│                   └── Menubar.Item
+└── Menubar.Menu
+    ├── Menubar.Trigger
+    └── Menubar.Content
+        └── Menubar.Group
+            ├── Menubar.Label
+            ├── Menubar.Item
+            └── Menubar.Item
+```
+
+## Checkbox
+
+Use `Menubar.CheckboxItem` for toggleable options.
+
+<Demo component="menubar/menubar-checkbox" />
+
+## Radio
+
+Use `Menubar.RadioGroup` and `Menubar.RadioItem` for single-select options.
+
+<Demo component="menubar/menubar-radio" />
+
+## Submenu
+
+Use `Menubar.Sub`, `Menubar.SubTrigger`, and `Menubar.SubContent` for nested menus.
+
+<Demo component="menubar/menubar-submenu" />
+
+## With Icons
+
+<Demo component="menubar/menubar-icons" />
+
+## API Reference
+
+See the [Base UI Menubar](https://base-ui.com/react/components/menubar#api-reference) documentation.

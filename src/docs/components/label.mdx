@@ -1,0 +1,43 @@
+---
+title: Label
+description: Renders an accessible label associated with controls.
+published: true
+---
+
+<Demo component="label/label-demo" />
+
+<Note>
+  For form fields, use the [Field](/docs/components/field) component which
+  includes built-in label, description, and error handling.
+</Note>
+
+## Installation
+<Install component='label' />
+
+## Usage
+
+```tsx
+import { Label } from "@/components/ui/label"
+```
+
+```tsx
+<Label htmlFor="email">Your email address</Label>
+```
+
+## Label in Field
+
+For form fields, use the [Field](/docs/components/field) component which
+includes built-in `Field.Label`, `Field.Description`, and `Field.Error` components.
+
+```tsx
+<Field>
+  <Field.Label>Your email address</Field.Label>
+  <Input type="email" />
+</Field>
+```
+
+<Demo component="field/field-demo" />
+
+## API Reference
+
+See the [Base UI Label](https://base-ui.com/react/components/label#api-reference) documentation for more information.

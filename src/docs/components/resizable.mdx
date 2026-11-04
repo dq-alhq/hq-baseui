@@ -1,0 +1,58 @@
+---
+title: Resizable
+description: Accessible resizable panel groups and layouts with keyboard support.
+published: true
+references: ['https://github.com/bvaughn/react-resizable-panels']
+---
+
+<Demo component="resizable/resizable-demo" />
+
+## About
+
+The `Resizable` component is built on top of [react-resizable-panels](https://github.com/bvaughn/react-resizable-panels) by [bvaughn](https://github.com/bvaughn).
+
+## Installation
+<Install component='resizable' />
+
+## Usage
+
+```tsx showLineNumbers
+import { Resizable } from "@/components/ui/resizable"
+```
+
+```tsx showLineNumbers
+<Resizable orientation="horizontal">
+  <Resizable.Content>One</Resizable.Content>
+  <Resizable.Separator />
+  <Resizable.Content>Two</Resizable.Content>
+</Resizable>
+```
+
+## Composition
+
+Use the following composition to build a `Resizable`:
+
+```text
+Resizable
+├── Resizable.Content
+├── Resizable.Separator
+└── Resizable.Content
+```
+
+## Examples
+
+### Vertical
+
+Use `orientation="vertical"` for vertical resizing.
+
+<Demo component="resizable/resizable-vertical" />
+
+### Handle
+
+Use the `withHandle` prop on `ResizableHandle` to hide/show a visible handle.
+
+<Demo component="resizable/resizable-handle" />
+
+## API Reference
+
+See the [react-resizable-panels](https://github.com/bvaughn/react-resizable-panels/tree/main/packages/react-resizable-panels) documentation.

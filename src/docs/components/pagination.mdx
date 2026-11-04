@@ -1,0 +1,79 @@
+---
+title: Pagination
+description: The pagination component can be used to navigate across a series of content and data sets for various pages such as blog posts, products, and more.
+published: true
+---
+
+<Demo component='pagination/pagination-demo'/>
+
+## Installation
+<Install component='pagination' />
+
+## Usage
+
+```tsx showLineNumbers
+import { Pagination } from "@/components/ui/pagination"
+```
+
+```tsx showLineNumbers
+<Pagination>
+  <Pagination.First href="#" />
+  <Pagination.Prev href="#" />
+  <Pagination.Item href="#">1</Pagination.Item>
+  <Pagination.Item href="#" isActive>
+    2
+  </Pagination.Item>
+  <Pagination.Item href="#">3</Pagination.Item>
+  <Pagination.Ellipsis />
+  <Pagination.Next href="#" />
+  <Pagination.Last href="#" />
+</Pagination>
+```
+
+## Composition
+
+Use the following composition to build a `Pagination`:
+
+```text
+Pagination
+├── Pagination.First
+├── Pagination.Prev
+├── Pagination.Item
+├── Pagination.Ellipsis
+└── Pagination.Next
+└── Pagination.Last
+```
+
+## Examples
+
+### Spacing
+Use `"spacing"` prop to adjust spacing between navigation buttons.
+
+<Demo component='pagination/pagination-spacing'/>
+
+### Variants
+Use `variant="outline"` for an outline style or `variant="ghost"` for plain style.
+
+<Demo component='pagination/pagination-variants'/>
+
+### Sizes
+<Demo component='pagination/pagination-sizes'/>
+
+### Simple
+<Demo component='pagination/pagination-simple'/>
+
+### Controls
+<Demo component='pagination/pagination-controls'/>
+
+### Complex
+<Demo component='pagination/pagination-complex'/>
+
+## API References
+
+### Pagination
+
+| Prop      | Type                           | Default     |
+| --------- | ------------------------------ | ----------- |
+| `variant` | `"outline" \| "ghost"`         | `"outline"` |
+| `size`    | `"xs" \| "sm" \| "md" \| "lg"` | `"md"`      |
+| `spacing` | `number`                       | 0           |

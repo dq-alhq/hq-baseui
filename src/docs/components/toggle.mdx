@@ -1,0 +1,109 @@
+---
+title: Toggle
+description: A toggle button allows a user to toggle a selection on or off, for example switching between two states or modes.
+references: ['https://base-ui.com/react/components/toggle','https://base-ui.com/react/components/toggle-group']
+published: true
+---
+
+<Demo component='toggle/toggle-demo' />
+
+## Installation
+<Install component='toggle' />
+
+## Usage
+
+### Toggle Group
+```tsx
+import { ToggleGroup } from "@/components/ui/toggle-group"
+```
+
+```tsx
+<ToggleGroup type="single">
+  <ToggleGroup.Item value="a">A</ToggleGroup.Item>
+  <ToggleGroup.Item value="b">B</ToggleGroup.Item>
+  <ToggleGroup.Item value="c">C</ToggleGroup.Item>
+</ToggleGroup>
+```
+
+### Toggle
+```tsx
+import { Toggle } from "@/components/ui/toggle"
+```
+
+```tsx
+<Toggle>Toggle</Toggle>
+```
+
+## Composition
+
+Use the following composition to build a `ToggleGroup`:
+
+```text
+ToggleGroup
+├── ToggleGroup.Item
+└── ToggleGroup.Item
+```
+
+## Examples
+
+## Toggle Group
+
+### Outline
+
+Use `variant="outline"` for an outline style.
+
+<Demo component="toggle/toggle-group-outline" />
+
+### Size
+
+Use the `size` prop to change the size of the toggle group.
+
+<Demo component="toggle/toggle-group-sizes" />
+
+### Spacing
+
+Use `spacing` to add spacing between toggle group items.
+
+<Demo component="toggle/toggle-group-spacing" />
+
+### Vertical
+
+Use `orientation="vertical"` for vertical toggle groups.
+
+<Demo component="toggle/toggle-group-vertical" />
+
+### Disabled
+
+<Demo component="toggle/toggle-group-disabled" />
+
+### Custom
+
+A custom toggle group example.
+
+<Demo component="toggle/toggle-group-font-weight-selector" />
+
+## Toggle
+
+### Outline
+
+Use `variant="outline"` for an outline style.
+
+<Demo component="toggle/toggle-outline" />
+
+### With Text
+
+<Demo component="toggle/toggle-text" />
+
+### Size
+
+Use the `size` prop to change the size of the toggle.
+
+<Demo component="toggle/toggle-sizes" />
+
+### Disabled
+
+<Demo component="toggle/toggle-disabled" />
+
+## API Reference
+
+See the [Base UI Toggle Group](https://base-ui.com/react/components/toggle-group#api-reference) and [Base UI Toggle](https://base-ui.com/react/components/toggle#api-reference) documentation.

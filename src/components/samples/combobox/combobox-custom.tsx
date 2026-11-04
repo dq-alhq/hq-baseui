@@ -1,0 +1,83 @@
+import { Combobox } from "@/components/ui/combobox"
+import { Item, ItemContent, ItemDescription, ItemTitle } from "@/components/ui/item"
+
+const countries = [
+  { code: "", value: "", continent: "", label: "Select country" },
+  {
+    code: "ar",
+    value: "argentina",
+    label: "Argentina",
+    continent: "South America"
+  },
+  { code: "au", value: "australia", label: "Australia", continent: "Oceania" },
+  { code: "br", value: "brazil", label: "Brazil", continent: "South America" },
+  { code: "ca", value: "canada", label: "Canada", continent: "North America" },
+  { code: "cn", value: "china", label: "China", continent: "Asia" },
+  {
+    code: "co",
+    value: "colombia",
+    label: "Colombia",
+    continent: "South America"
+  },
+  { code: "eg", value: "egypt", label: "Egypt", continent: "Africa" },
+  { code: "fr", value: "france", label: "France", continent: "Europe" },
+  { code: "de", value: "germany", label: "Germany", continent: "Europe" },
+  { code: "it", value: "italy", label: "Italy", continent: "Europe" },
+  { code: "jp", value: "japan", label: "Japan", continent: "Asia" },
+  { code: "ke", value: "kenya", label: "Kenya", continent: "Africa" },
+  { code: "mx", value: "mexico", label: "Mexico", continent: "North America" },
+  {
+    code: "nz",
+    value: "new-zealand",
+    label: "New Zealand",
+    continent: "Oceania"
+  },
+  { code: "ng", value: "nigeria", label: "Nigeria", continent: "Africa" },
+  {
+    code: "za",
+    value: "south-africa",
+    label: "South Africa",
+    continent: "Africa"
+  },
+  { code: "kr", value: "south-korea", label: "South Korea", continent: "Asia" },
+  {
+    code: "gb",
+    value: "united-kingdom",
+    label: "United Kingdom",
+    continent: "Europe"
+  },
+  {
+    code: "us",
+    value: "united-states",
+    label: "United States",
+    continent: "North America"
+  }
+]
+
+export default () => {
+  return (
+    <Combobox
+      items={countries.filter((country) => country.code !== "")}
+      itemToStringValue={(country: (typeof countries)[number]) => country.label}
+    >
+      <Combobox.Input placeholder="Search countries..." />
+      <Combobox.Content>
+        <Combobox.Empty>No countries found.</Combobox.Empty>
+        <Combobox.List>
+          {(country) => (
+            <Combobox.Item key={country.code} value={country}>
+              <Item className="p-0" size="xs">
+                <ItemContent>
+                  <ItemTitle className="whitespace-nowrap">{country.label}</ItemTitle>
+                  <ItemDescription>
+                    {country.continent} ({country.code})
+                  </ItemDescription>
+                </ItemContent>
+              </Item>
+            </Combobox.Item>
+          )}
+        </Combobox.List>
+      </Combobox.Content>
+    </Combobox>
+  )
+}

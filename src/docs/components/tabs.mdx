@@ -1,0 +1,67 @@
+---
+title: Tabs
+description: Tabs organize content into multiple sections and allow users to navigate between them.
+references: ['https://base-ui.com/react/components/tabs']
+published: true
+---
+<Demo component='tabs/tabs-demo'/>
+
+## Installation
+<Install component='tabs' />
+
+## Usage
+
+```tsx showLineNumbers
+import { Tabs } from "@/components/ui/tabs"
+```
+
+```tsx showLineNumbers
+<Tabs defaultValue="account" className="w-100">
+  <Tabs.List>
+    <Tabs.Trigger value="account">Account</Tabs.Trigger>
+    <Tabs.Trigger value="password">Password</Tabs.Trigger>
+  </Tabs.List>
+  <Tabs.Contents>
+    <Tabs.Content value="account">Make changes to your account here.</Tabs.Content>
+    <Tabs.Content value="password">Change your password here.</Tabs.Content>
+  </Tabs.Contents>
+</Tabs>
+```
+
+## Composition
+
+Use the following composition to build `Tabs`:
+
+```text
+Tabs
+├── Tabs.List
+│   ├── Tabs.Trigger
+│   └── Tabs.Trigger
+└── Tabs.Contents
+    ├── Tabs.Content
+    └── Tabs.Content
+```
+
+## Line
+
+Use the `variant="line"` prop on `TabsList` for a line style.
+
+<Demo component="tabs/tabs-line" />
+
+## Vertical
+
+Use `orientation="vertical"` for vertical tabs.
+
+<Demo component="tabs/tabs-vertical" />
+
+## Disabled
+
+<Demo component="tabs/tabs-disabled" />
+
+## Icons
+
+<Demo component="tabs/tabs-icons" />
+
+## API Reference
+
+See the [Base UI Tabs](https://base-ui.com/react/components/tabs#api-reference) documentation.

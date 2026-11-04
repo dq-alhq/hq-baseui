@@ -1,0 +1,93 @@
+---
+title: Date Picker
+description: A date picker combines a DateField and a Calendar popover to allow users to enter or select a date and time value.
+references: ['https://daypicker.dev/']
+published: true
+---
+
+<Demo component="date-picker/date-picker-demo" />
+
+## Installation
+<Install component='date-picker' />
+
+## Usage
+
+### React Hook Form
+
+```tsx
+const form = useForm({
+  defaultValues: {
+    date: undefined as Date | undefined
+  }
+})
+
+<DatePicker
+  value={form.watch("date")}
+  onChange={(date) => form.setValue("date", date)}
+/>
+```
+
+### Input Validation
+
+```tsx
+<DatePicker
+  dateFormat="dd/MM/yyyy"
+  onChange={(date) => {
+    console.log("Valid date:", date)
+  }}
+  onInvalid={(value) => {
+    console.log("Invalid input:", value)
+  }}
+  aria-describedby="tanggal-error"
+/>
+```
+
+### Disabled Weekends
+
+```tsx
+<DatePicker
+  isDateDisabled={(date) => {
+    return [0, 6].includes(date.getDay())
+  }}
+/>
+```
+
+### Date Range Picker
+
+```tsx
+<DateRangePicker
+  numberOfMonths={2}
+  dateFormat="yyyy-MM-dd"
+  onChange={(range) => {
+    router.get("/reports", {
+      start_date: range?.from
+        ? format(range.from, "yyyy-MM-dd")
+        : undefined,
+      end_date: range?.to
+        ? format(range.to, "yyyy-MM-dd")
+        : undefined
+    })
+  }}
+/>
+```
+
+## Examples
+
+### Basic
+
+A basic date picker component.
+
+<Demo component="date-picker/date-picker-basic" />
+
+### Date Range Picker
+
+A date picker component for selecting a range of dates.
+
+<Demo component="date-picker/date-picker-range" />
+
+### Time Picker
+
+A date picker component with a time input field for selecting a time.
+
+<Demo component="date-picker/date-picker-time" />
+

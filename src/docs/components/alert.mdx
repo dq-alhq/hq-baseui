@@ -1,0 +1,94 @@
+---
+title: Alert
+description: The Alert component can be used to provide information or messages, but also highlighted information complementing the normal flow of paragraphs and headers on a page.
+published: true
+---
+
+<Demo component='alert/alert-demo' />
+
+## Installation
+<Install component='alert' />
+
+
+## Usage
+
+```tsx showLineNumbers
+import { Alert } from "@/components/ui/alert"
+```
+
+```tsx showLineNumbers
+<Alert>
+  <IconInfo />
+  <Alert.Title>Heads up!</Alert.Title>
+  <Alert.Description>
+    You can add components and dependencies to your app using the cli.
+  </Alert.Description>
+  <Alert.Action>
+    <Button variant="outline">Enable</Button>
+  </Alert.Action>
+</Alert>
+```
+
+## Composition
+
+Use the following composition to build an `Alert`:
+
+```text
+Alert
+├── Icon
+├── Alert.Title
+├── Alert.Description
+└── Alert.Action
+```
+
+## Examples
+
+### Basic
+A basic alert with an icon, title and description.
+<Demo component='alert/alert-basic' />
+
+### Destructive
+Use `variant="destructive"` to create a destructive alert.
+<Demo component='alert/alert-destructive' />
+
+### Action
+Use `Alert.Action` to add a button or other action element to the alert.
+<Demo component='alert/alert-action' />
+
+### Colors
+<Demo component='alert/alert-colors' />
+
+
+## API Reference
+
+### Alert
+
+The `Alert` component displays a callout for user attention.
+
+| Prop      | Type                         | Default     |
+| --------- | ---------------------------- | ----------- |
+| `variant` | `"default" \| "destructive"` | `"default"` |
+
+### Alert.Title
+
+The `Alert.Title` component displays the title of the alert.
+
+| Prop        | Type     | Default |
+| ----------- | -------- | ------- |
+| `className` | `string` | -       |
+
+### Alert.Description
+
+The `Alert.Description` component displays the description or content of the alert.
+
+| Prop        | Type     | Default |
+| ----------- | -------- | ------- |
+| `className` | `string` | -       |
+
+### Alert.Action
+
+The `Alert.Action` component displays an action element (like a button) positioned absolutely in the top-right corner of the alert.
+
+| Prop        | Type     | Default |
+| ----------- | -------- | ------- |
+| `className` | `string` | -       |

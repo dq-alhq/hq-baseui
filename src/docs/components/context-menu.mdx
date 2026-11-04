@@ -1,0 +1,132 @@
+---
+title: Context Menu
+description: Displays a menu of actions triggered by a right click.
+references: ['https://base-ui.com/react/components/context-menu']
+published: true
+---
+<Demo component='context-menu/context-menu-demo' />
+
+## Installation
+<Install component='context-menu' />
+
+## Usage
+
+```tsx showLineNumbers
+import { ContextMenu } from "@/components/ui/context-menu"
+```
+
+```tsx showLineNumbers
+<Context.Menu>
+  <ContextMenu.Trigger>Right click here</ContextMenu.Trigger>
+  <ContextMenu.Content>
+    <ContextMenu.Item>Profile</ContextMenu.Item>
+    <ContextMenu.Item>Billing</ContextMenu.Item>
+    <ContextMenu.Item>Team</ContextMenu.Item>
+    <ContextMenu.Item>Subscription</ContextMenu.Item>
+  </ContextMenu.Content>
+</Context.Menu>
+```
+
+## Composition
+
+Use the following composition to build a `ContextMenu`:
+
+```text
+ContextMenu
+├── ContextMenu.Trigger
+└── ContextMenu.Content
+    ├── ContextMenu.Group
+    │   ├── ContextMenu.Label
+    │   ├── ContextMenu.Item
+    │   └── ContextMenu.Item
+    ├── ContextMenu.Separator
+    ├── ContextMenu.Group
+    │   ├── ContextMenu.Label
+    │   ├── ContextMenu.CheckboxItem
+    │   └── ContextMenu.CheckboxItem
+    ├── ContextMenu.Separator
+    ├── ContextMenu.Group
+    │   ├── ContextMenu.Label
+    │   └── ContextMenu.RadioGroup
+    │       ├── ContextMenu.RadioItem
+    │       └── ContextMenu.RadioItem
+    └── ContextMenu.Sub
+        ├── ContextMenu.SubTrigger
+        └── ContextMenu.SubContent
+            └── ContextMenu.Group
+                ├── ContextMenu.Item
+                └── ContextMenu.Item
+```
+## Examples
+
+### Basic
+
+A simple context menu with a few actions.
+
+<Demo component="context-menu/context-menu-basic" />
+
+### Submenu
+
+Use `ContextMenu.Sub` to nest secondary actions.
+
+<Demo component="context-menu/context-menu-submenu" />
+
+### Shortcuts
+
+Add `ContextMenu.Shortcut` to show keyboard hints.
+
+<Demo component="context-menu/context-menu-shortcuts" />
+
+### Groups
+
+Group related actions and separate them with dividers.
+
+<Demo component="context-menu/context-menu-groups" />
+
+### Icons
+
+Combine icons with labels for quick scanning.
+
+<Demo component="context-menu/context-menu-icons" />
+
+### Checkboxes
+
+Use `ContextMenu.CheckboxItem` for toggles.
+
+<Demo component="context-menu/context-menu-checkboxes" />
+
+### Radio
+
+Use `ContextMenu.RadioItem` for exclusive choices.
+
+<Demo component="context-menu/context-menu-radio" />
+
+### Destructive
+
+Use `variant="destructive"` to style the menu item as destructive.
+
+<Demo component="context-menu/context-menu-destructive" />
+
+### Sides
+
+Control submenu placement with side and align props.
+
+<Demo component="context-menu/context-menu-sides" />
+
+Use `side="inline-end"` to place the menu on the logical right side of the trigger.
+
+```tsx showLineNumbers
+<ContextMenu>
+  <ContextMenu.Trigger>Right click here</ContextMenu.Trigger>
+  <ContextMenu.Content side="inline-end">
+    <ContextMenu.Item>Profile</ContextMenu.Item>
+    <ContextMenu.Item>Billing</ContextMenu.Item>
+    <ContextMenu.Item>Team</ContextMenu.Item>
+    <ContextMenu.Item>Subscription</ContextMenu.Item>
+  </ContextMenu.Content>
+</ContextMenu>
+```
+
+## API Reference
+
+See the [Base UI](https://base-ui.com/react/components/context-menu#api-reference) documentation for more information.

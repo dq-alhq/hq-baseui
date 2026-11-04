@@ -1,0 +1,248 @@
+---
+title: Combobox
+description: A combo box combines a text input with a listbox, allowing users to filter a list of options to items matching a query.
+references: ['https://base-ui.com/react/components/combobox']
+published: true
+---
+
+<Demo component='combobox/combobox-demo' />
+
+## Installation
+<Install component='combobox' />
+
+## Usage
+
+```tsx showLineNumbers
+import { Combobox } from "@/components/ui/combobox"
+```
+
+```tsx showLineNumbers
+const frameworks = ["Next.js", "SvelteKit", "Nuxt.js", "Remix", "Astro"]
+
+export function ExampleCombobox() {
+  return (
+    <Combobox items={frameworks}>
+      <Combobox.Input placeholder="Select a framework" />
+      <Combobox.Content>
+        <Combobox.Empty>No items found.</Combobox.Empty>
+        <Combobox.List>
+          {(item) => (
+            <Combobox.Item key={item} value={item}>
+              {item}
+            </Combobox.Item>
+          )}
+        </Combobox.List>
+      </Combobox.Content>
+    </Combobox>
+  )
+}
+```
+
+## Composition
+
+### Simple
+
+A single-line input and a flat list (see [Basic](#basic)).
+
+```text
+Combobox
+├── Combobox.Input
+└── Combobox.Content
+    ├── Combobox.Empty
+    └── Combobox.List
+        ├── Combobox.Item
+        └── Combobox.Item
+```
+
+### With chips
+
+Multi-select with `multiple`, chips, and a chips input (see [Multiple](#multiple)).
+
+```text
+Combobox
+├── Combobox.Chips
+│   ├── ComboboxValue
+│   │   └── Combobox.Chip
+│   └── Combobox.ChipsInput
+└── Combobox.Content
+    ├── Combobox.Empty
+    └── Combobox.List
+        ├── Combobox.Item
+        └── Combobox.Item
+```
+
+### With groups and collection
+
+Nested items per group using `Combobox.Collection` inside each `Combobox.Group`, with a separator between groups (see [Groups](#groups)).
+
+```text
+Combobox
+├── Combobox.Input
+└── Combobox.Content
+    ├── Combobox.Empty
+    └── Combobox.List
+        ├── Combobox.Group
+        │   ├── Combobox.Label
+        │   └── Combobox.Collection
+        │       ├── Combobox.Item
+        │       └── Combobox.Item
+        ├── Combobox.Separator
+        └── Combobox.Group
+            ├── Combobox.Label
+            └── Combobox.Collection
+                ├── Combobox.Item
+                └── Combobox.Item
+```
+
+## Custom Items
+
+Use `itemToStringValue` when your items are objects.
+
+```tsx showLineNumbers
+import * as React from "react"
+
+import { Combobox } from "@/components/ui/combobox"
+
+type Framework = {
+  label: string
+  value: string
+}
+
+const frameworks: Framework[] = [
+  { label: "Next.js", value: "next" },
+  { label: "SvelteKit", value: "sveltekit" },
+  { label: "Nuxt", value: "nuxt" },
+]
+
+export function ExampleComboboxCustomItems() {
+  return (
+    <Combobox
+      items={frameworks}
+      itemToStringValue={(framework) => framework.label}
+    >
+      <Combobox.Input placeholder="Select a framework" />
+      <Combobox.Content>
+        <Combobox.Empty>No items found.</Combobox.Empty>
+        <Combobox.List>
+          {(framework) => (
+            <Combobox.Item key={framework.value} value={framework}>
+              {framework.label}
+            </Combobox.Item>
+          )}
+        </Combobox.List>
+      </Combobox.Content>
+    </Combobox>
+  )
+}
+```
+
+## Multiple Selection
+
+Use `multiple` with chips for multi-select behavior.
+
+```tsx showLineNumbers
+import * as React from "react"
+
+import { Combobox } from "@/components/ui/combobox"
+
+const frameworks = ["Next.js", "SvelteKit", "Nuxt.js", "Remix", "Astro"]
+
+export function ExampleComboboxMultiple() {
+  const [value, setValue] = React.useState<string[]>([])
+
+  return (
+    <Combobox
+      items={frameworks}
+      multiple
+      value={value}
+      onValueChange={setValue}
+    >
+      <Combobox.Chips>
+        <ComboboxValue>
+          {value.map((item) => (
+            <Combobox.Chip key={item}>{item}</Combobox.Chip>
+          ))}
+        </ComboboxValue>
+        <Combobox.ChipsInput placeholder="Add framework" />
+      </Combobox.Chips>
+      <Combobox.Content>
+        <Combobox.Empty>No items found.</Combobox.Empty>
+        <Combobox.List>
+          {(item) => (
+            <Combobox.Item key={item} value={item}>
+              {item}
+            </Combobox.Item>
+          )}
+        </Combobox.List>
+      </Combobox.Content>
+    </Combobox>
+  )
+}
+```
+
+## Examples
+
+### Basic
+
+A simple combobox with a list of frameworks.
+
+<Demo component="combobox/combobox-basic" />
+
+### Multiple
+
+A combobox with multiple selection using `multiple` and `Combobox.Chips`.
+
+<Demo component="combobox/combobox-multiple" />
+
+### Clear Button
+
+Use the `showClear` prop to show a clear button.
+
+<Demo component="combobox/combobox-clear" />
+
+### Groups
+
+Use `Combobox.Group` and `Combobox.Separator` to group items.
+
+<Demo component="combobox/combobox-groups" />
+
+### Custom Items
+
+You can render a custom component inside `Combobox.Item`.
+
+<Demo component="combobox/combobox-custom" />
+
+### Invalid
+
+Use the `aria-invalid` prop to make the combobox invalid.
+
+<Demo component="combobox/combobox-invalid" />
+
+### Disabled
+
+Use the `disabled` prop to disable the combobox.
+
+<Demo component="combobox/combobox-disabled" />
+
+### Auto Highlight
+
+Use the `autoHighlight` prop to automatically highlight the first item on filter.
+
+<Demo component="combobox/combobox-auto-highlight" />
+
+### Popup
+
+You can trigger the combobox from a button or any other component by using the `render` prop. Move the `Combobox.Input` inside the `Combobox.Content`.
+
+<Demo component="combobox/combobox-popup" />
+
+### Input Group
+
+You can add an addon to the combobox by using the `InputGroupAddon` component inside the `Combobox.Input`.
+
+<Demo component="combobox/combobox-input-group" />
+
+
+## API Reference
+
+See the [Base UI](https://base-ui.com/react/components/combobox#api-reference) documentation for more information.

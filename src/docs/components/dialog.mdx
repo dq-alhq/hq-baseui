@@ -1,0 +1,76 @@
+---
+title: Dialog
+description: Pop up a dialog box, demanding attention like a traffic stop sign, ideal for critical interactions.
+references: ['https://base-ui.com/react/components/dialog']
+published: true
+---
+
+<Demo component='dialog/dialog-demo' />
+
+## Installation
+<Install component='dialog' />
+
+## Usage
+
+```tsx showLineNumbers
+import { Dialog } from "@/components/ui/dialog"
+```
+
+```tsx showLineNumbers
+<Dialog>
+  <Dialog.Trigger>Open</Dialog.Trigger>
+  <Dialog.Content>
+    <Dialog.Header>
+      <Dialog.Title>Are you absolutely sure?</Dialog.Title>
+      <Dialog.Description>
+        This action cannot be undone. This will permanently delete your account
+        and remove your data from our servers.
+      </Dialog.Description>
+    </Dialog.Header>
+    <Dialog.Body>
+      Content goes here
+    </Dialog.Body>
+  </Dialog.Content>
+</Dialog>
+```
+
+## Composition
+
+Use the following composition to build a `Dialog`:
+
+```text
+Dialog
+├── Dialog.Trigger
+└── Dialog.Content
+    ├── Dialog.Header
+    │   ├── Dialog.Title
+    │   ├── Dialog.Description
+    |   └── Dialog.Body
+    └── Dialog.Footer
+```
+
+## Examples
+
+### Custom Close Button
+
+Replace the default close control with your own button.
+
+<Demo component='dialog/dialog-close-button' />
+
+### No Close Button
+
+Use `showCloseButton={false}` to hide the close button.
+
+<Demo component='dialog/dialog-no-close-button' />
+
+### Sticky Footer
+
+Keep actions visible while the content scrolls.
+
+<Demo component='dialog/dialog-sticky-footer' />
+
+### Scrollable Content
+
+Long content can scroll while the header stays in view.
+
+<Demo component='dialog/dialog-scrollable-content' />

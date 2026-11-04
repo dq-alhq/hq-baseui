@@ -1,0 +1,112 @@
+---
+title: KBD
+description: KBD is a component to display which key or combination of keys performs a given action.
+published: true
+---
+
+<Demo component="kbd/kbd-demo" />
+
+## Installation
+<Install component='kbd' />
+
+## Usage
+
+```tsx
+import { Kbd } from "@/components/ui/kbd"
+```
+
+```tsx
+<Kbd>Ctrl</Kbd>
+```
+
+## Composition
+
+Use the following composition to build `Kbd` and `Kbd.Group`:
+
+```text
+Kbd
+Kbd.Group
+├── Kbd
+└── Kbd
+```
+
+## Examples
+
+### Group
+
+Use the `Kbd.Group` component to group keyboard keys together.
+
+<Demo component="kbd/kbd-group" />
+
+### Button
+
+Use the `Kbd` component inside a `Button` component to display a keyboard key inside a button.
+
+<Demo component="kbd/kbd-button" />
+
+### Tooltip
+
+You can use the `Kbd` component inside a `Tooltip` component to display a tooltip with a keyboard key.
+
+<Demo component="kbd/kbd-tooltip" />
+
+### Input Group
+
+You can use the `Kbd` component inside a `InputGroup.Addon` component to display a keyboard key inside an input group.
+
+<Demo component="kbd/kbd-input-group" />
+
+## API Reference
+
+### Kbd
+
+Use the `Kbd` component to display a keyboard key.
+
+| Prop        | Type     | Default |
+| ----------- | -------- | ------- |
+| `className` | `string` | ``      |
+
+```tsx
+<Kbd>Ctrl</Kbd>
+```
+
+### Kbd.Group
+
+Use the `Kbd.Group` component to group `Kbd` components together.
+
+| Prop        | Type     | Default |
+| ----------- | -------- | ------- |
+| `className` | `string` | ``      |
+
+```tsx
+<Kbd.Group>
+  <Kbd>Ctrl</Kbd>
+  <Kbd>B</Kbd>
+</Kbd.Group>
+```
+
+## Keys
+
+| Key      | Symbol | Name            |
+|----------|--------|-----------------|
+| ctrl     | ^      | Control         |
+| mod      | ⌘      | Command/Control |
+| win      | ⌘      | Win             |
+| meta     | ⌘      | Meta            |
+| alt      | ⌥      | Option/Alt      |
+| shift    | ⇧      | Shift           |
+| space    | ␣      | Space           |
+| tab      | ⇥      | Tab             |
+| delete   | ⌫      | Delete          |
+| capslock | ⇪      | Caps Lock       |
+| up       | ↑      | Up              |
+| right    | →      | Right           |
+| down     | ↓      | Down            |
+| left     | ←      | Left            |
+| pageup   | ⇞      | Page Up         |
+| pagedown | ⇞      | Page Down       |
+| home     | ↖      | Home            |
+| end      | ↘      | End             |
+| enter    | ↵      | Enter           |
+| esc      | ⎋      | Escape          |
+| fn       | Fn     | Function        |

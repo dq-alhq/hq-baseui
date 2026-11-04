@@ -1,0 +1,55 @@
+---
+title: Slider
+description: A slider allows a user to select one or more values within a range.
+references: ['https://base-ui.com/react/components/slider']
+published: true
+---
+
+<Demo component="slider/slider-demo" />
+
+## Installation
+<Install component='slider' />
+
+## Usage
+
+```tsx
+import { Slider } from "@/components/ui/slider"
+```
+
+```tsx
+<Slider defaultValue={[33]} max={100} step={1} />
+```
+
+## Examples
+
+### Range
+
+Use an array with two values for a range slider.
+
+<Demo component="slider/slider-range" />
+
+### Multiple Thumbs
+
+Use an array with multiple values for multiple thumbs.
+
+<Demo component="slider/slider-multiple" />
+
+### Vertical
+
+Use `orientation="vertical"` for a vertical slider.
+
+<Demo component="slider/slider-vertical" />
+
+### Controlled
+
+<Demo component="slider/slider-controlled" />
+
+### Disabled
+
+Use the `disabled` prop to disable the slider.
+
+<Demo component="slider/slider-disabled" />
+
+## API Reference
+
+See the [Base UI Slider](https://base-ui.com/react/components/slider#api-reference) documentation.

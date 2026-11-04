@@ -1,0 +1,142 @@
+---
+title: Dropdown Menu
+description: Menus display a list of actions or options that a user can choose.
+references: ['https://base-ui.com/react/components/menu']
+published: true
+---
+
+<Demo component="dropdown-menu/dropdown-menu-demo" />
+
+## Installation
+<Install component='dropdown-menu' />
+
+## Usage
+
+```tsx showLineNumbers
+import { Button } from "@/components/ui/button"
+import { DropdownMenu } from "@/components/ui/dropdown-menu"
+```
+
+```tsx showLineNumbers
+<DropdownMenu>
+  <DropdownMenu.Trigger render={<Button variant="outline" />}>
+    Open
+  </DropdownMenu.Trigger>
+  <DropdownMenu.Content>
+    <DropdownMenu.Group>
+      <DropdownMenu.Label>My Account</DropdownMenu.Label>
+      <DropdownMenu.Item>Profile</DropdownMenu.Item>
+      <DropdownMenu.Item>Billing</DropdownMenu.Item>
+    </DropdownMenu.Group>
+    <DropdownMenu.Separator />
+    <DropdownMenu.Group>
+      <DropdownMenu.Item>Team</DropdownMenu.Item>
+      <DropdownMenu.Item>Subscription</DropdownMenu.Item>
+    </DropdownMenu.Group>
+  </DropdownMenu.Content>
+</DropdownMenu>
+```
+
+## Composition
+
+Use the following composition to build a `DropdownMenu`:
+
+```text
+DropdownMenu
+├── DropdownMenu.Trigger
+└── DropdownMenu.Content
+    ├── DropdownMenu.Group
+    │   ├── DropdownMenu.Label
+    │   ├── DropdownMenu.Item
+    │   └── DropdownMenu.Item
+    ├── DropdownMenu.Separator
+    ├── DropdownMenu.Group
+    │   ├── DropdownMenu.Label
+    │   ├── DropdownMenu.CheckboxItem
+    │   └── DropdownMenu.CheckboxItem
+    ├── DropdownMenu.Separator
+    ├── DropdownMenu.Group
+    │   ├── DropdownMenu.Label
+    │   └── DropdownMenu.RadioGroup
+    │       ├── DropdownMenu.RadioItem
+    │       └── DropdownMenu.RadioItem
+    └── DropdownMenu.Sub
+        ├── DropdownMenu.SubTrigger
+        └── DropdownMenu.SubContent
+            └── DropdownMenu.Group
+                ├── DropdownMenu.Label
+                ├── DropdownMenu.Item
+                └── DropdownMenu.Item
+```
+
+## Examples
+
+### Basic
+
+A basic dropdown menu with labels and separators.
+
+<Demo component="dropdown-menu/dropdown-menu-basic" />
+
+### Submenu
+
+Use `DropdownMenu.Sub` to nest secondary actions.
+
+<Demo component="dropdown-menu/dropdown-menu-submenu" />
+
+### Shortcuts
+
+Add `DropdownMenu.Shortcut` to show keyboard hints.
+
+<Demo component="dropdown-menu/dropdown-menu-shortcuts" />
+
+### Icons
+
+Combine icons with labels for quick scanning.
+
+<Demo component="dropdown-menu/dropdown-menu-icons" />
+
+### Checkboxes
+
+Use `DropdownMenu.CheckboxItem` for toggles.
+
+<Demo component="dropdown-menu/dropdown-menu-checkboxes" />
+
+### Checkboxes Icons
+
+Add icons to checkbox items.
+
+<Demo component="dropdown-menu/dropdown-menu-checkboxes-icons" />
+
+### Radio Group
+
+Use `DropdownMenu.RadioGroup` for exclusive choices.
+
+<Demo component="dropdown-menu/dropdown-menu-radio-group" />
+
+### Radio Icons
+
+Show radio options with icons.
+
+<Demo component="dropdown-menu/dropdown-menu-radio-icons" />
+
+### Destructive
+
+Use `variant="destructive"` for irreversible actions.
+
+<Demo component="dropdown-menu/dropdown-menu-destructive" />
+
+### Avatar
+
+An account switcher dropdown triggered by an avatar.
+
+<Demo component="dropdown-menu/dropdown-menu-avatar" />
+
+### Complex
+
+A richer example combining groups, icons, and submenus.
+
+<Demo component="dropdown-menu/dropdown-menu-complex" />
+
+## API Reference
+
+See the [Base UI documentation](https://base-ui.com/react/components/menu) for the full API reference.

@@ -1,0 +1,119 @@
+---
+title: Native Select
+description: A styled native HTML select element with consistent design system integration.
+---
+
+<Note>
+  For a styled select component, see the [Select](/docs/components/select)
+  component.
+</Note>
+
+<Demo component="native-select/native-select-demo" />
+
+## Installation
+<Install component='native-select' />
+
+## Usage
+
+```tsx showLineNumbers
+import { NativeSelect } from "@/components/ui/native-select"
+```
+
+```tsx showLineNumbers
+<NativeSelect>
+  <NativeSelect.Item value="">Select a fruit</NativeSelect.Item>
+  <NativeSelect.Item value="apple">Apple</NativeSelect.Item>
+  <NativeSelect.Item value="banana">Banana</NativeSelect.Item>
+  <NativeSelect.Item value="blueberry">Blueberry</NativeSelect.Item>
+  <NativeSelect.Item value="pineapple">Pineapple</NativeSelect.Item>
+</NativeSelect>
+```
+
+## Composition
+
+### Simple
+
+Options placed directly under `NativeSelect` (no `NativeSelect.Group`).
+
+```text
+NativeSelect
+├── NativeSelect.Item
+├── NativeSelect.Item
+├── NativeSelect.Item
+└── NativeSelect.Item
+```
+
+### With groups
+
+Use `NativeSelect.Group` to organize options into categories.
+
+```text
+NativeSelect
+├── NativeSelect.Group
+│   ├── NativeSelect.Item
+│   └── NativeSelect.Item
+└── NativeSelect.Group
+    ├── NativeSelect.Item
+    └── NativeSelect.Item
+```
+
+## Groups
+
+Use `NativeSelect.Group` to organize options into categories.
+
+<Demo component="native-select/native-select-groups" />
+
+## Disabled
+
+Add the `disabled` prop to the `NativeSelect` component to disable the select.
+
+<Demo component="native-select/native-select-disabled" />
+
+## Invalid
+
+Use `invalid` attribute to `Field` to show validation errors.
+
+<Demo component="native-select/native-select-invalid" />
+
+## Native Select vs Select
+
+- Use `NativeSelect` for native browser behavior, better performance, or mobile-optimized dropdowns.
+- Use `Select` for custom styling, animations, or complex interactions.
+
+## API Reference
+
+### NativeSelect
+
+The main select component that wraps the native HTML select element.
+
+```tsx
+<NativeSelect>
+  <NativeSelect.Item value="option1">Option 1</NativeSelect.Item>
+  <NativeSelect.Item value="option2">Option 2</NativeSelect.Item>
+</NativeSelect>
+```
+
+### NativeSelectOption
+
+Represents an individual option within the select.
+
+| Prop       | Type      | Default |
+| ---------- | --------- | ------- |
+| `value`    | `string`  |         |
+| `disabled` | `boolean` | `false` |
+
+### NativeSelect.Group
+
+Groups related options together for better organization.
+
+| Prop       | Type      | Default |
+| ---------- | --------- | ------- |
+| `label`    | `string`  |         |
+| `disabled` | `boolean` | `false` |
+
+```tsx
+<NativeSelect.Group label="Fruits">
+  <NativeSelect.Item value="apple">Apple</NativeSelect.Item>
+  <NativeSelect.Item value="banana">Banana</NativeSelect.Item>
+</NativeSelect.Group>
+```

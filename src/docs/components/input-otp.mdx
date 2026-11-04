@@ -1,0 +1,107 @@
+---
+title: Input OTP
+description: Accessible one-time password component with copy paste functionality.
+references: ['https://base-ui.com/react/components/otp-field']
+published: true
+---
+
+## Installation
+<Install component='input-otp' />
+
+
+## Usage
+
+```tsx showLineNumbers
+import { OTPField } from "@/components/ui/input-otp"
+```
+
+```tsx showLineNumbers
+<OTPField length={6}>
+  <OTPField.Input />
+  <OTPField.Input />
+  <OTPField.Input />
+  <OTPField.Separator />
+  <OTPField.Input />
+  <OTPField.Input />
+  <OTPField.Input />
+</OTPField>
+```
+
+## Composition
+
+Use the following composition to build an `OTPField`:
+
+```text
+OTPField
+├── OTPField.Input
+├── OTPField.Input
+├── OTPField.Input
+├── OTPField.Separator
+├── OTPField.Input
+├── OTPField.Input
+└── OTPField.Input
+```
+
+## Examples
+
+### Pattern
+
+Use the `validationType` prop to define a custom pattern for the OTP input.
+
+```tsx showLineNumbers {1,5}
+<OTPField length={6} validationType="numeric">
+  ...
+</OTPField>
+```
+
+<Demo component="input-otp/input-otp-pattern" />
+
+### Separator
+
+Use the `<OTPField.Separator />` component to add a separator between input groups.
+
+<Demo component="input-otp/input-otp-separator" />
+
+### Spacing
+
+Use the `spacing` prop to adjust gap/spacing between inputs.
+
+<Demo component="input-otp/input-otp-spacing" />
+
+### Disabled
+
+Use the `disabled` prop to disable the input.
+
+<Demo component="input-otp/input-otp-disabled" />
+
+### Controlled
+
+Use the `value` and `onValueChange` props to control the input value.
+
+<Demo component="input-otp/input-otp-controlled" />
+
+### Invalid
+
+Use `aria-invalid` on the slots to show an error state.
+
+<Demo component="input-otp/input-otp-invalid" />
+
+### Four Digits
+
+A common pattern for PIN codes. This uses the `validationType="numeric"` prop.
+
+<Demo component="input-otp/input-otp-four-digits" />
+
+### Alphanumeric
+
+Use `validationType="alphanumeric"` to accept both letters and numbers.
+
+<Demo component="input-otp/input-otp-alphanumeric" />
+
+### Form
+
+<Demo component="input-otp/input-otp-form" />
+
+## API Reference
+
+See the [Base UI documentation](https://base-ui.com/react/components/otp-field) for the full API reference.

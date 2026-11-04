@@ -1,0 +1,78 @@
+---
+title: Collapsible
+description: An interactive component which expands/collapses a panel.
+references: ['https://base-ui.com/react/components/collapsible']
+published: true
+---
+
+<Demo component='collapsible/collapsible-demo'  />
+
+## Installation
+<Install component='collapsible' />
+
+## Usage
+
+```tsx showLineNumbers
+import { Collapsible } from "@/components/ui/collapsible"
+```
+
+```tsx showLineNumbers
+<Collapsible>
+  <Collapsible.Trigger>Can I use this in my project?</Collapsible.Trigger>
+  <Collapsible.Content>
+    Yes. Free to use for personal and commercial projects. No attribution
+    required.
+  </Collapsible.Content>
+</Collapsible>
+```
+
+## Composition
+
+Use the following composition to build a `Collapsible`:
+
+```text
+Collapsible
+├── Collapsible.Trigger
+└── Collapsible.Content
+```
+
+## Controlled State
+
+Use the `open` and `onOpenChange` props to control the state.
+
+```tsx showLineNumbers
+import * as React from "react"
+
+export function Example() {
+  const [open, setOpen] = React.useState(false)
+
+  return (
+    <Collapsible open={open} onOpenChange={setOpen}>
+      <Collapsible.Trigger>Toggle</Collapsible.Trigger>
+      <Collapsible.Content>Content</Collapsible.Content>
+    </Collapsible>
+  )
+}
+```
+
+## Examples
+
+### Basic
+
+<Demo component="collapsible/collapsible-basic" />
+
+### Settings Panel
+
+Use a trigger button to reveal additional settings.
+
+<Demo component="collapsible/collapsible-settings" />
+
+### File Tree
+
+Use nested collapsibles to build a file tree. In a conversation, this is the [File Tree](/docs/ai-elements/base/file-tree) pattern.
+
+<Demo component="collapsible/collapsible-file-tree" />
+
+## API Reference
+
+See the [Base UI](https://base-ui.com/react/components/collapsible#api-reference) documentation for more information.

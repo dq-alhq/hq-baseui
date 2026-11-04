@@ -1,0 +1,222 @@
+---
+title: Field
+description: Combine labels, controls, and help text to compose accessible form fields and grouped inputs.
+published: true
+references: ['https://base-ui.com/react/components/field']
+---
+
+<Demo component="field/field-demo" />
+
+## Installation
+<Install component='field' />
+
+
+## Usage
+
+```tsx showLineNumbers
+import { Field } from "@/components/ui/field"
+```
+
+```tsx showLineNumbers
+<Field.Set>
+  <Field.Legend description='This appears on invoices and emails.'>
+    Profile
+  </Field.Legend>
+  <Field.Group>
+    <Field>
+      <Field.Label>Full name</Field.Label>
+      <Input autoComplete="off" placeholder="Evil Rabbit" />
+      <Field.Description>This appears on invoices and emails.</Field.Description>
+    </Field>
+    <Field invalid>
+      <Field.Label>Username</Field.Label>
+      <Input autoComplete="off" />
+      <Field.Error>Choose another username.</Field.Error>
+    </Field>
+    <Field>
+      <Switch />
+      <Field.Label>Subscribe to the newsletter</Field.Label>
+    </Field>
+  </Field.Group>
+</Field.Set>
+```
+
+## Composition
+
+### Field
+
+A single control with label, helper text, and validation.
+
+```text
+Field
+├── Field.Label
+├── Input / Textarea / Select
+├── Field.Description
+└── Field.Error
+```
+
+### FieldGroup
+
+Related fields in one group. Use `Field.Separator` between sections when needed.
+
+```text
+Field.Group
+├── Field
+│   ├── Field.Label
+│   ├── Input / Textarea / Switch / Select / Combobox
+│   ├── Field.Description
+│   └── Field.Error
+├── Field
+│   ├── Field.Label
+│   ├── Input / Textarea / Switch / Select / Combobox
+│   ├── Field.Description
+│   └── Field.Error
+├── Field.Separator
+└── Field
+    ├── Field.Label
+    └── Input / Textarea / Switch / Select / Combobox
+    ├── Field.Description
+    └── Field.Error
+```
+
+### FieldSet
+
+Semantic grouping with a legend and description, usually containing a `Field.Group`.
+
+```text
+Field.Set
+├── Field.Legend
+└── Field.Group
+    ├── Field
+    │   ├── Field.Label
+    │   ├── Input / Textarea / Select / Combobox
+    │   ├── Field.Description
+    │   └── Field.Error
+    └── Field
+        ├── Field.Label
+        ├── Field.Description
+        └── Input / Textarea / Select / Combobox
+```
+
+### Checkbox Group / Radio Group / Switch
+```text
+Radio.Group
+├── Field
+│   ├── Field.Label
+│   ├── Field.Description
+│   └── Radio
+├── Field
+│   ├── Field.Label
+│   ├── Field.Description
+│   └── Radio
+├── Field
+│   ├── Field.Label
+│   ├── Field.Description
+│   └── Radio
+├── Field.Separator
+Checkbox.Group
+├── Field
+│   ├── Field.Label
+│   ├── Field.Description
+│   └── Checkbox
+├── Field
+│   ├── Field.Label
+│   ├── Field.Description
+│   └── Checkbox
+├── Field
+│   ├── Field.Label
+│   ├── Field.Description
+│   └── Checkbox
+├── Field.Separator
+├── Field
+│   ├── Switch
+│   ├── Field.Label
+│   └── Field.Description
+└── Field
+    ├── Switch
+    ├── Field.Label
+    └── Field.Description
+
+```
+
+## Anatomy
+
+The `Field` family is designed for composing accessible forms. A typical field is structured as follows:
+
+```tsx showLineNumbers
+<Field>
+  <Field.Label>Label</Field.Label>
+  <Field.Description>Optional helper text.</Field.Description>
+  {/* Input, Select, Switch, etc. */}
+  <Field.Error>Validation message.</Field.Error>
+</Field>
+```
+
+- `Field` is the core wrapper for a single field.
+
+## Examples
+
+### Input
+
+<Demo component="field/field-input" />
+
+### Textarea
+
+<Demo component="field/field-textarea" />
+
+### Select
+
+<Demo component="field/field-select" />
+
+### Slider
+
+<Demo component="field/field-slider" />
+
+### Field.set
+
+<Demo component="field/field-field.set" />
+
+### Checkbox
+
+<Demo component="field/field-checkbox" />
+
+### Radio
+
+<Demo component="field/field-radio" />
+
+### Switch
+
+<Demo component="field/field-switch" />
+
+### Choice Card
+
+Wrap `Field` components inside `Field.Label` to create selectable field groups. This works with `Radio`, `Checkbox` and `Switch` components.
+
+<Demo component="field/field-choice-card" />
+
+### Field Group
+
+Stack `Field` components with `Field.Group`. Add `Field.Separator` to divide them.
+
+<Demo component="field/field-group" />
+
+## Validation and Errors
+
+- Add `invalid` to `Field` to switch the entire block into an error state.
+- Render `Field.Error` immediately after the control to keep error messages aligned with the field.
+
+```tsx showLineNumbers /data-invalid/ /aria-invalid/
+<Field invalid>
+  <Field.Label>Email</Field.Label>
+  <Input type="email" />
+  <Field.Error>Enter a valid email address.</Field.Error>
+</Field>
+```
+
+## Accessibility
+
+- `Field.Set` with `'description'` props keep related controls grouped for keyboard and assistive tech users.
+- Apply `Field.Separator` sparingly to ensure screen readers encounter clear section boundaries.
+
+## API Reference
+See the [Base UI documentation](https://base-ui.com/react/components/field) for the full API reference.

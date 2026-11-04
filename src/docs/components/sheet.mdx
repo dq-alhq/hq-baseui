@@ -1,0 +1,61 @@
+---
+title: Sheet
+description: Sheet is like modal, but it's used to display content that complements the main content of the screen.
+references: ['https://base-ui.com/react/components/dialog']
+published: true
+---
+
+<Demo component="sheet/sheet-demo" />
+
+## Installation
+<Install component='sheet' />
+
+## Usage
+
+```tsx showLineNumbers
+import { Sheet } from "@/components/ui/sheet"
+```
+
+```tsx showLineNumbers
+<Sheet>
+  <Sheet.Trigger>Open</Sheet.Trigger>
+  <Sheet.Content>
+    <Sheet.Header>
+      <Sheet.Title>Are you absolutely sure?</Sheet.Title>
+      <Sheet.Description>This action cannot be undone.</Sheet.Description>
+    </Sheet.Header>
+  </Sheet.Content>
+</Sheet>
+```
+
+## Composition
+
+Use the following composition to build a `Sheet`:
+
+```text
+Sheet
+├── Sheet.Trigger
+└── Sheet.Content
+    ├── Sheet.Header
+    │   ├── Sheet.Title
+    │   └── Sheet.Description
+    ├── Sheet.Body
+    └── Sheet.Footer
+```
+
+## Example
+
+### Side
+
+Use the `side` prop on `Sheet.Content` to set the edge of the screen where the sheet appears. Values are `top`, `right`, `bottom`, or `left`.
+
+<Demo component="sheet/sheet-side" />
+
+### No Close Button
+
+Use `showCloseButton={false}` on `Sheet.Content` to hide the close button.
+
+<Demo component="sheet/sheet-no-close-button" />
+
+## API Reference
+See the [Base UI Dialog](https://base-ui.com/react/components/dialog#api-reference) documentation.

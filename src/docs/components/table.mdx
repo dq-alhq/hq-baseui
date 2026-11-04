@@ -1,0 +1,85 @@
+---
+title: Table
+description: A table displays data in rows and columns and enables a user to navigate its contents via directional navigation keys, and optionally supports row selection and sorting.
+published: true
+---
+
+<Demo component="table/table-demo" />
+
+## Installation
+<Install component='table' />
+
+## Usage
+
+```tsx showLineNumbers
+import { Table } from "@/components/ui/table"
+```
+
+```tsx showLineNumbers
+<Table>
+  <Table.Caption>A list of your recent invoices.</Table.Caption>
+  <Table.Header>
+    <Table.Row>
+      <Table.Head className="w-25">Invoice</Table.Head>
+      <Table.Head>Status</Table.Head>
+      <Table.Head>Method</Table.Head>
+      <Table.Head className="text-right">Amount</Table.Head>
+    </Table.Row>
+  </Table.Header>
+  <Table.Body>
+    <Table.Row>
+      <Table.Cell className="font-medium">INV001</Table.Cell>
+      <Table.Cell>Paid</Table.Cell>
+      <Table.Cell>Credit Card</Table.Cell>
+      <Table.Cell className="text-right">$250.00</Table.Cell>
+    </Table.Row>
+  </Table.Body>
+</Table>
+```
+
+## Composition
+
+Use the following composition to build a `Table`:
+
+```text
+Table
+├── Table.Caption
+├── Table.Header
+│   └── Table.Row
+│       ├── Table.Head
+│       ├── Table.Head
+│       ├── Table.Head
+│       └── Table.Head
+├── Table.Body
+│   ├── Table.Row
+│   │   ├── Table.Cell
+│   │   ├── Table.Cell
+│   │   ├── Table.Cell
+│   │   └── Table.Cell
+│   └── Table.Row
+│       ├── Table.Cell
+│       ├── Table.Cell
+│       ├── Table.Cell
+│       └── Table.Cell
+└── Table.Footer
+```
+
+## Examples
+
+### Footer
+
+Use the `<Table.Footer />` component to add a footer to the table.
+
+<Demo component="table/table-footer" />
+
+### Actions
+
+A table showing actions for each row using a `<DropdownMenu />` component.
+
+<Demo component="table/table-actions" />
+
+### Data Table
+
+You can use the `<Table />` component to build more complex data tables. Combine it with [@tanstack/react-table](https://tanstack.com/table/latest) to create tables with sorting, filtering and pagination.
+
+See the [Data Table](/docs/components/data-table) documentation for more information.

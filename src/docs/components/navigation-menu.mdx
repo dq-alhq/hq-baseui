@@ -1,0 +1,78 @@
+---
+title: Navigation Menu
+description: A collection of links for navigating websites.
+published: true
+references: ['https://base-ui.com/react/components/navigation-menu']
+---
+
+<Demo component="navigation-menu/navigation-menu-demo" />
+
+## Installation
+<Install component='navigation-menu' />
+
+## Usage
+
+```tsx showLineNumbers
+import { NavigationMenu } from "@/components/ui/navigation-menu"
+```
+
+```tsx showLineNumbers
+<NavigationMenu>
+  <NavigationMenu.List>
+    <NavigationMenu.Item>
+      <NavigationMenu.Trigger>Item One</NavigationMenu.Trigger>
+      <NavigationMenu.Content>
+        <NavigationMenu.Link>Link</NavigationMenu.Link>
+      </NavigationMenu.Content>
+    </NavigationMenu.Item>
+  </NavigationMenu.List>
+</NavigationMenu>
+```
+
+## Composition
+
+Use the following composition to build a `NavigationMenu`:
+
+```text
+NavigationMenu
+├── NavigationMenu.List
+│   ├── NavigationMenu.Item
+│   │   ├── NavigationMenu.Trigger
+│   │   └── NavigationMenu.Content
+│   │       ├── NavigationMenu.Link
+│   │       └── NavigationMenu.Link
+│   └── NavigationMenu.Item
+│       └── NavigationMenu.Link
+└── NavigationMenu.Indicator
+```
+
+## Link Component
+
+Use the `render` prop to compose a custom link component such as Next.js `Link`.
+
+```tsx showLineNumbers
+import Link from "next/link"
+
+import {
+  NavigationMenuItem,
+  NavigationMenuLink,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu"
+
+export function NavigationMenuDemo() {
+  return (
+    <NavigationMenuItem>
+      <NavigationMenuLink
+        render={<Link href="/docs" />}
+        className={navigationMenuTriggerStyle()}
+      >
+        Documentation
+      </NavigationMenuLink>
+    </NavigationMenuItem>
+  )
+}
+```
+
+## API Reference
+
+See the [Base UI Navigation Menu](https://base-ui.com/react/components/navigation-menu#api-reference) documentation for more information.

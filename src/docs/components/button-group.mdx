@@ -1,0 +1,192 @@
+---
+title: Button Group
+description: A container that groups related buttons together with consistent styling.
+published: true
+---
+
+<Demo component="button-group/button-group-demo" />
+
+## Installation
+<Install component='button-group' />
+
+## Usage
+
+```tsx
+import { Button } from '@/components/ui/button'
+import { ButtonGroup } from "@/components/ui/button-group"
+```
+
+```tsx
+<ButtonGroup>
+  <Button>Button 1</Button>
+  <Button>Button 2</Button>
+</ButtonGroup>
+```
+
+## Composition
+
+Use the following composition to build a `ButtonGroup`:
+
+```text
+ButtonGroup
+├── Button or Input
+├── ButtonGroup.Separator
+└── ButtonGroup.Text
+```
+
+## Accessibility
+
+- The `ButtonGroup` component has the `role` attribute set to `group`.
+- Use `Tab` to navigate between the buttons in the group.
+- Use `aria-label` or `aria-labelledby` to label the button group.
+
+```tsx showLineNumbers
+<ButtonGroup aria-label="Button group">
+  <Button>Button 1</Button>
+  <Button>Button 2</Button>
+</ButtonGroup>
+```
+
+## ButtonGroup vs ToggleGroup
+
+- Use the `ButtonGroup` component when you want to group buttons that perform an action.
+- Use the `ToggleGroup` component when you want to group buttons that toggle a state.
+
+## Examples
+
+### Orientation
+
+Set the `orientation` prop to change the button group layout.
+
+<Demo component="button-group/button-group-orientation" />
+
+### Size
+
+Control the size of buttons using the `size` prop on individual buttons.
+
+<Demo component="button-group/button-group-size" />
+
+### Nested
+
+Nest `<ButtonGroup>` components to create button groups with spacing.
+
+<Demo component="button-group/button-group-nested" />
+
+### Separator
+
+The `ButtonGroup.Separator` component visually divides buttons within a group.
+
+Buttons with variant `outline` do not need a separator since they have a border. For other variants, a separator is recommended to improve the visual hierarchy.
+
+<Demo component="button-group/button-group-separator" />
+
+### Split
+
+Create a split button group by adding two buttons separated by a `ButtonGroup.Separator`.
+
+<Demo component="button-group/button-group-split" />
+
+### Input
+
+Wrap an `Input` component with buttons.
+
+<Demo component="button-group/button-group-input" />
+
+### Input Group
+
+Wrap an `InputGroup` component to create complex input layouts.
+
+<Demo component="button-group/button-group-input-group" />
+
+### Dropdown Menu
+
+Create a split button group with a `DropdownMenu` component.
+
+<Demo component="button-group/button-group-dropdown" />
+
+### Select
+
+Pair with a `Select` component.
+
+<Demo component="button-group/button-group-select" />
+
+### Popover
+
+Use with a `Popover` component.
+
+<Demo component="button-group/button-group-popover" />
+
+
+## API Reference
+
+### ButtonGroup
+
+The `ButtonGroup` component is a container that groups related buttons together with consistent styling.
+
+| Prop          | Type                         | Default        |
+| ------------- | ---------------------------- | -------------- |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
+
+```tsx
+<ButtonGroup>
+  <Button>Button 1</Button>
+  <Button>Button 2</Button>
+</ButtonGroup>
+```
+
+Nest multiple button groups to create complex layouts with spacing. See the [nested](#nested) example for more details.
+
+```tsx
+<ButtonGroup>
+  <ButtonGroup />
+  <ButtonGroup />
+</ButtonGroup>
+```
+
+### ButtonGroup.Separator
+
+The `ButtonGroup.Separator` component visually divides buttons within a group.
+
+| Prop          | Type                         | Default      |
+| ------------- | ---------------------------- | ------------ |
+| `orientation` | `"horizontal" \| "vertical"` | `"vertical"` |
+
+```tsx
+<ButtonGroup>
+  <Button>Button 1</Button>
+  <ButtonGroup.Separator />
+  <Button>Button 2</Button>
+</ButtonGroup>
+```
+
+### ButtonGroup.Text
+
+Use this component to display text within a button group.
+
+| Prop     | Type                 | Default |
+| -------- | -------------------- | ------- |
+| `render` | `React.ReactElement` |         |
+
+```tsx
+<ButtonGroup>
+  <ButtonGroup.Text>Text</ButtonGroup.Text>
+  <Button>Button</Button>
+</ButtonGroup>
+```
+
+Use the `render` prop to render a custom component as the text, for example a label.
+
+```tsx showLineNumbers
+import { ButtonGroup } from "@/components/ui/button-group"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+
+export function ButtonGroupTextDemo() {
+  return (
+    <ButtonGroup>
+      <ButtonGroup.Text render={<Label htmlFor="name" />}>Text</ButtonGroup.Text>
+      <Input placeholder="Type something here..." id="name" />
+    </ButtonGroup>
+  )
+}
+```

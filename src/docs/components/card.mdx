@@ -1,0 +1,129 @@
+---
+title: Card
+description: Cards are a flexible and extensible content container. They are commonly used within a page layout or as part of a related group of content.
+published: true
+---
+
+<Demo component='card/card-demo' />
+
+## Installation
+<Install component='card' />
+
+## Usage
+
+```tsx showLineNumbers
+import { Card } from "@/components/ui/card"
+```
+
+```tsx showLineNumbers
+<Card>
+  <Card.Header>
+    <Card.Title>Card Title</Card.Title>
+    <Card.Description>Card Description</Card.Description>
+    <Card.Action>Card Action</Card.Action>
+  </Card.Header>
+  <Card.Content>
+    <p>Card Content</p>
+  </Card.Content>
+  <Card.Footer>
+    <p>Card Footer</p>
+  </Card.Footer>
+</Card>
+```
+
+## Composition
+
+Use the following composition to build a `Card`:
+
+```text
+Card
+├── Card.Header
+│   ├── Card.Title
+│   ├── Card.Description
+│   └── Card.Action
+├── Card.Content
+└── Card.Footer
+```
+
+## Examples
+
+### Size
+
+Use the `size="sm"` prop to set the size of the card to small. The small size variant uses smaller spacing.
+
+<Demo component="card/card-small" />
+
+### Spacing
+
+In addition to the `size` prop, you can use the `--card-spacing` CSS variable to control the spacing between sections and the inset of card parts.
+
+<Demo component="card/card-spacing" />
+
+Use negative margins with `-mx-(--card-spacing)` to make content go edge to edge while keeping it aligned with the card inset. When the edge-to-edge content sits above a footer, use `-mb-(--card-spacing)` on `Card.Content` to remove the section gap.
+
+<Demo component="card/card-edge-to-edge" />
+
+### Image
+
+Add an image before the card header to create a card with an image.
+
+<Demo component="card/card-image" />
+
+## API Reference
+
+### Card
+
+The `Card` component is the root container for card content.
+
+| Prop        | Type                | Default     |
+| ----------- | ------------------- | ----------- |
+| `size`      | `"default" \| "sm"` | `"default"` |
+| `className` | `string`            | -           |
+
+### Card.Header
+
+The `Card.Header` component is used for a title, description, and optional action.
+
+| Prop        | Type     | Default |
+| ----------- | -------- | ------- |
+| `className` | `string` | -       |
+
+### Card.Title
+
+The `Card.Title` component is used for the card title.
+
+| Prop        | Type     | Default |
+| ----------- | -------- | ------- |
+| `className` | `string` | -       |
+
+### Card.Description
+
+The `Card.Description` component is used for helper text under the title.
+
+| Prop        | Type     | Default |
+| ----------- | -------- | ------- |
+| `className` | `string` | -       |
+
+### Card.Action
+
+The `Card.Action` component places content in the top-right of the header (for example, a button or a badge).
+
+| Prop        | Type     | Default |
+| ----------- | -------- | ------- |
+| `className` | `string` | -       |
+
+### Card.Content
+
+The `Card.Content` component is used for the main card body.
+
+| Prop        | Type     | Default |
+| ----------- | -------- | ------- |
+| `className` | `string` | -       |
+
+### Card.Footer
+
+The `Card.Footer` component is used for actions and secondary content at the bottom of the card.
+
+| Prop        | Type     | Default |
+| ----------- | -------- | ------- |
+| `className` | `string` | -       |

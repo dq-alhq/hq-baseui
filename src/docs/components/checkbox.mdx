@@ -1,0 +1,73 @@
+---
+title: Checkbox
+description: A checkbox allows a user to select multiple items from a list of individual items, or to mark one individual item as selected.
+references: ['https://base-ui.com/react/components/checkbox']
+published: true
+---
+<Demo component='checkbox/checkbox-demo' />
+
+## Installation
+<Install component='checkbox' />
+
+## Usage
+
+```tsx
+import { Checkbox } from "@/components/ui/checkbox"
+import { Field } "@/components/ui/field"
+```
+
+```tsx
+<Field>
+  <Checkbox />
+  <Field.Label>
+    Accept terms and conditions
+  </Field.Label>
+</Field>
+```
+
+## Examples
+
+### Basic
+
+Pair the checkbox with `Field` and `Field.Label` for proper layout and labeling.
+<Demo component="checkbox/checkbox-basic" />
+
+### Controlled
+
+Use `defaultChecked` for uncontrolled checkboxes, or `checked` and
+`onCheckedChange` to control the state.
+
+<Demo component="checkbox/checkbox-controlled" />
+
+### Invalid State
+
+Set `invalid` on the `<Field>` wrapper  to show the invalid styles.
+
+<Demo component="checkbox/checkbox-invalid" />
+
+### Description
+
+`<Field.Description>` or `<Description>` for helper text.
+
+<Demo component="checkbox/checkbox-description" />
+
+### Disabled
+
+Use the `disabled` prop to prevent interaction to the `<Field>` component for disabled styles.
+
+<Demo component="checkbox/checkbox-disabled" />
+
+### Group
+
+Use multiple fields to create a checkbox list.
+
+<Demo component="checkbox/checkbox-group" />
+
+### Table
+
+<Demo component="checkbox/checkbox-table" />
+
+
+## API Reference
+
+See the [Base UI](https://base-ui.com/react/components/checkbox#api-reference) documentation for more information.

@@ -1,0 +1,14 @@
+import { Slider } from "@/components/ui/slider"
+
+export default () => {
+  return (
+    <div className="mx-auto flex w-full max-w-xs items-center justify-center gap-6">
+      <Slider className="h-40" defaultValue={[50]} max={100} orientation="vertical" step={1}>
+        <Slider.Value />
+      </Slider>
+      <Slider className="h-40" defaultValue={[25]} max={100} orientation="vertical" step={1}>
+        <Slider.Value />
+      </Slider>
+    </div>
+  )
+}

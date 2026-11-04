@@ -1,0 +1,86 @@
+---
+title: Radio
+description: A radio group allows a user to select a single item from a list of mutually exclusive options.
+references: ['https://base-ui.com/react/components/radio-group']
+published: true
+---
+
+<Demo component='radio/radio-group-demo' />
+
+## Installation
+<Install component='radio' />
+
+## Usage
+
+```tsx showLineNumbers
+import { Field } from "@/components/ui/field"
+import { Radio } from "@/components/ui/radio"
+```
+
+```tsx showLineNumbers
+<Radio.Group defaultValue="option-one">
+  <Field className="flex items-center gap-3">
+    <Radio value="option-one" id="option-one" />
+    <Field.Label htmlFor="option-one">Option One</Field.Label>
+  </Field>
+  <Field className="flex items-center gap-3">
+    <Radio value="option-two" id="option-two" />
+    <Field.Label htmlFor="option-two">Option Two</Field.Label>
+  </Field>
+</Radio.Group>
+```
+
+## Composition
+
+Use the following composition to build a `Radio`:
+
+```text
+Radio.Group
+├── Radio
+└── Radio
+```
+
+or prefer RadioGroup
+
+```text
+RadioGroup
+├── RadioGroup.Item
+└── RadioGroup.Item
+```
+
+## Examples
+
+### Description
+
+Radio group items with a description using the `Field` component.
+
+<Demo component="radio/radio-group-description" />
+
+### Choice Card
+
+Use `FieldLabel` to wrap the entire `Field` for a clickable card-style selection.
+
+<Demo component="radio/radio-group-choice-card" />
+
+### Fieldset
+
+Use `Field.Set` and `Field.Legend` to group radio items with a label and description.
+
+<Demo component="radio/radio-group-fieldset" />
+
+### Disabled
+
+Use the `disabled` prop on `Radio.Group` to disable all items.
+
+<Demo component="radio/radio-group-disabled" />
+
+### Invalid
+
+Use `aria-invalid` on `RadioGroupItem` and `data-invalid` on `Field` to show validation errors.
+
+<Demo component="radio/radio-group-invalid" />
+
+
+## API Reference
+
+See the [Base UI Radio Group](https://base-ui.com/react/components/radio-group#api-reference) documentation.

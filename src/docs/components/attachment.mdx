@@ -1,0 +1,232 @@
+---
+title: Attachment
+description: Displays a file or image attachment with media, metadata, upload state, and actions.
+published: true
+---
+
+<Demo component="attachment/attachment-demo" />
+
+The `Attachment` component displays a file or image attachment, its media, name, and metadata, with optional actions and upload state. Use it for files and images in chat composers, message threads, and upload lists.
+
+## Installation
+<Install component='attachment' />
+
+## Usage
+
+```tsx
+import { Attachment } from "@/components/ui/attachment"
+```
+
+```tsx
+<Attachment>
+  <Attachment.Media>
+    <IconFile />
+  </Attachment.Media>
+  <Attachment.Content>
+    <Attachment.Title>my-file.pdf</Attachment.Title>
+    <Attachment.Description>PDF · 2.4 MB</Attachment.Description>
+  </Attachment.Content>
+  <Attachment.Actions>
+    <Attachment.Action aria-label="Remove my-file.pdf">
+      <IconX />
+    </Attachment.Action>
+  </Attachment.Actions>
+</Attachment>
+```
+
+## Composition
+
+Use the following composition to build an attachment:
+
+```text
+Attachment
+├── Attachment.Media
+├── Attachment.Content
+│   ├── Attachment.Title
+│   └── Attachment.Description
+├── Attachment.Actions
+│   └── Attachment.Action
+└── Attachment.Trigger
+```
+
+Use `Attachment.Group` to lay out multiple attachments in a scrollable row:
+
+```text
+Attachment.Group
+├── Attachment
+└── Attachment
+```
+
+## Features
+
+- Icon and image media through `Attachment.Media`
+- Upload states: `idle`, `uploading`, `processing`, `error`, and `done` with built-in styling and a shimmer while in progress
+- Three sizes and horizontal or vertical orientation
+- A full-card `Attachment.Trigger` that opens a link or dialog while the actions stay independently clickable
+- Scrollable, snapping `Attachment.Group` with an edge fade
+- Customizable styling through the `className` prop on every part
+
+## Examples
+
+### Image
+
+Set `variant="image"` on `Attachment.Media` and render an `<img>` inside it. Use `orientation="vertical"` to stack the media above the content.
+
+<Demo component="attachment/attachment-image" />
+
+### States
+
+Set `state` to reflect the upload lifecycle. `uploading` and `processing` shimmer the title, and `error` switches to a destructive treatment.
+
+<Demo component="attachment/attachment-states" />
+
+### Sizes
+
+Use `size` to switch between `default`, `sm`, and `xs`.
+
+<Demo component="attachment/attachment-sizes" />
+
+### Group
+
+Wrap attachments in `Attachment.Group` to lay them out in a horizontally scrollable, snapping row with an edge fade.
+
+<Demo component="attachment/attachment-group" />
+
+### Trigger
+
+Add an `Attachment.Trigger` to make the whole card open a link or dialog. It fills the card behind the actions, so the actions stay clickable.
+
+<Demo component="attachment/attachment-trigger" />
+
+```tsx showLineNumbers
+<Dialog>
+  <Attachment>
+    {/* media, content, actions */}
+    <Dialog.Trigger
+      render={<Attachment.Trigger aria-label="Preview research-summary.pdf" />}
+    />
+  </Attachment>
+  <Dialog.Content>{/* ... */}</Dialog.Content>
+</Dialog>
+```
+
+## Accessibility
+
+`Attachment.Action` renders a `Button`, and `Attachment.Trigger` renders a real `<button>` (or your element via `render`). Follow the guidance below so both are operable and announced.
+
+### Label icon-only actions
+
+`AttachmentAction` is usually icon-only, so give each one an `aria-label` describing the action and its target.
+
+```tsx showLineNumbers
+<Attachment.Action aria-label="Remove sales-dashboard.pdf">
+  <XIcon />
+</Attachment.Action>
+```
+
+### Label the trigger
+
+`AttachmentTrigger` covers the card with no text of its own, so give it an `aria-label` for what activating it does.
+
+```tsx showLineNumbers
+<Attachment.Trigger
+  render={
+    <a
+      href={url}
+      target="_blank"
+      rel="noreferrer"
+      aria-label="Open workspace.png"
+    />
+  }
+/>
+```
+
+The trigger sits behind the actions in the stacking order, so an `Attachment.Action` and the `Attachment.Trigger` never trap each other — both remain separately focusable and clickable.
+
+### Keyboard scrolling
+
+An `Attachment.Group` scrolls horizontally. When its attachments are interactive: a trigger or actions, keyboard users reach off-screen items by tabbing to them. For a row of presentational attachments, make the group itself focusable and scrollable by adding `tabIndex={0}`, `role="group"`, and an `aria-label`.
+
+### Meaning beyond color
+
+The `error` state uses a destructive color. Keep the failure reason in `Attachment.Description` so the state is not conveyed by color alone.
+
+## API Reference
+
+### Attachment
+
+The root attachment container.
+
+| Prop          | Type                                                         | Default        | Description                                       |
+| ------------- | ------------------------------------------------------------ | -------------- | ------------------------------------------------- |
+| `state`       | `"idle" \| "uploading" \| "processing" \| "error" \| "done"` | `"done"`       | The upload state. Drives styling and the shimmer. |
+| `size`        | `"default" \| "sm" \| "xs"`                                  | `"default"`    | The attachment size.                              |
+| `orientation` | `"horizontal" \| "vertical"`                                 | `"horizontal"` | Lay the media beside or above the content.        |
+| `className`   | `string`                                                     | -              | Additional classes to apply to the root element.  |
+
+### Attachment.Media
+
+The media slot for an icon or image preview.
+
+| Prop        | Type                | Default  | Description                                    |
+| ----------- | ------------------- | -------- | ---------------------------------------------- |
+| `variant`   | `"icon" \| "image"` | `"icon"` | Whether the media holds an icon or an `<img>`. |
+| `className` | `string`            | -        | Additional classes to apply to the media slot. |
+
+### Attachment.Content
+
+Wraps the title and description.
+
+| Prop        | Type     | Default | Description                                      |
+| ----------- | -------- | ------- | ------------------------------------------------ |
+| `className` | `string` | -       | Additional classes to apply to the content slot. |
+
+### Attachment.Title
+
+The attachment name. Shimmers while the attachment is `uploading` or `processing`.
+
+| Prop        | Type     | Default | Description                               |
+| ----------- | -------- | ------- | ----------------------------------------- |
+| `className` | `string` | -       | Additional classes to apply to the title. |
+
+### Attachment.Description
+
+Secondary metadata such as the file type, size, or upload status.
+
+| Prop        | Type     | Default | Description                                     |
+| ----------- | -------- | ------- | ----------------------------------------------- |
+| `className` | `string` | -       | Additional classes to apply to the description. |
+
+### Attachment.Actions
+
+A container for one or more actions, aligned to the end of the attachment.
+
+| Prop        | Type     | Default | Description                                 |
+| ----------- | -------- | ------- | ------------------------------------------- |
+| `className` | `string` | -       | Additional classes to apply to the actions. |
+
+### Attachment.Action
+
+An action button. Renders a [`Button`](/docs/components/button) and accepts all of its props.
+
+| Prop       | Type                                  | Default     | Description                              |
+| ---------- | ------------------------------------- | ----------- | ---------------------------------------- |
+| `size`     | `Button["size"]`                      | `"icon-xs"` | The button size.                         |
+| `...props` | `React.ComponentProps<typeof Button>` | -           | Props spread to the underlying `Button`. |
+
+### Attachment.Trigger
+
+A full-card overlay that activates the attachment. Renders a `<button>` by default.
+
+| Prop       | Type                             | Default | Description                                    |
+| ---------- | -------------------------------- | ------- | ---------------------------------------------- |
+| `render`   | `ReactElement \| function`       | -       | Render as a different element, such as a link. |
+| `...props` | `React.ComponentProps<"button">` | -       | Props spread to the trigger element.           |
+
+### Attachment.Group
+
+Lays out attachments in a horizontally scrollable, snapping row.
+
+| Prop        | Type     | Default | Description                               |
+| ----------- | -------- | ------- | ----------------------------------------- |
+| `className` | `string` | -       | Additional classes to apply to the group. |

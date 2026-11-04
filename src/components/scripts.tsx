@@ -1,0 +1,45 @@
+export function Scripts() {
+  const code = `(function(){
+    try {
+      const root = document.documentElement
+      const fonts = localStorage.getItem('font')
+      const fontSans = JSON.parse(fonts)?.state?.fontSans || 'Geist Variable'
+      const fontMono = JSON.parse(fonts)?.state?.fontMono || 'Geist Mono Variable'
+
+      root.style.setProperty('--font-sans', fontSans)
+      root.style.setProperty('--font-mono', fontMono)
+
+      const themes = localStorage.getItem('theme');
+      
+      if (themes) {
+        const parsedTheme = JSON.parse(themes);
+        const theme = parsedTheme?.state?.theme
+
+        if (theme === 'system' || !theme) {
+          theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        if (theme === 'dark') {
+          root.classList.add('dark');
+        } else {
+          root.classList.remove('dark');
+        }
+
+        const activeThemeVars = parsedTheme.state.preset[theme];
+
+        if (activeThemeVars) {
+          for (const key in activeThemeVars) {
+            root.style.setProperty('--' + key, activeThemeVars[key]);
+          }
+        }
+      }
+    } catch (e) {}
+   })()`
+  return (
+    <script
+      dangerouslySetInnerHTML={{
+        __html: code
+      }}
+    />
+  )
+}

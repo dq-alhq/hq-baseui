@@ -1,0 +1,38 @@
+---
+title: Badge
+description: A Chip is a small block of essential information that represent an input, attribute, or action.
+published: true
+---
+<Demo component='badge/badge-demo' />
+
+## Installation
+<Install component='badge' />
+
+## Examples
+
+### Variants
+Use the `variant` prop to change the variant of the badge.
+<Demo component='badge/badge-variants' />
+
+### Icon
+You can render an icon inside the badge.
+<Demo component='badge/badge-icon' />
+
+### Link
+Use the `render` prop to render a link as a badge.
+<Demo component='badge/badge-link' />
+
+### Spinner
+You can render a spinner inside the badge. Remember to add the `data-icon="inline-start"` or `data-icon="inline-end"` prop to the spinner.
+<Demo component='badge/badge-spinner' />
+
+## API Reference
+
+### Badge
+
+The `Badge` component displays a badge or a component that looks like a badge.
+
+| Prop        | Type                                                                                                              | Default     |
+| ----------- | ----------------------------------------------------------------------------------------------------------------- | ----------- |
+| `variant`   | `"primary" \| "outline" \| "ghost" \| "destructive" \| "secondary" \| "warning" \| "success" \| "info" \| "link"` | `"primary"` |
+| `className` | `string`                                                                                                          | -           |

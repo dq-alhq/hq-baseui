@@ -1,0 +1,99 @@
+---
+title: Installation
+description: Set up HQ UI in your React project and start building.
+order: 2
+---
+
+Get started with HQ UI by setting up the required dependencies and configuring your project.
+
+HQ UI is designed to integrate naturally into modern React applications, giving you full control over the components and their implementation.
+
+## Requirements
+
+Before getting started, make sure your project meets the following requirements:
+
+- [React](https://react.dev) 18 or later
+- [Tailwind CSS](https://tailwindcss.com) 4
+- [TypeScript](https://www.typescriptlang.org) (recommended)
+- A package manager such as npm, pnpm, yarn, or bun
+
+## Create a Project
+
+If you don't have a React project yet, you can create one using your preferred framework. Using shadcn cli:
+<CLI command='init' />
+
+## Install Dependencies
+
+HQ UI uses Base UI as its component foundation and Tailwind CSS for styling.
+
+Install the required dependencies:
+
+<CLI command='install' items={['@base-ui/react', 'tw-animate-css', 'cn']} />
+
+If Tailwind CSS is not already configured in your project, follow the [Tailwind CSS installation guide](https://tailwindcss.com/docs/installation).
+
+## Configure Tailwind CSS
+
+Make sure Tailwind CSS is properly configured in your project.
+
+For Tailwind CSS v4, import Tailwind in your main CSS file:
+
+```css title="globals.css" showLineNumbers 
+@import "tailwindcss";
+@import "tw-animate-css";
+```
+
+If your project uses a different CSS setup, follow the corresponding Tailwind CSS documentation.
+
+## Install Components
+
+HQ UI follows the [shadcn/ui](https://ui.shadcn.com/) approach. Instead of installing a traditional component library package, you add the component source code directly to your project.
+
+Browse the [HQ UI Components](https://hq-baseui.vercel.app) documentation, find the component you need, and copy its implementation into your project.
+
+You may add components using shadcn cli:
+
+<CLI command='add' items={['button','input','dialog']} />
+
+It will automatically add components in a dedicated directory:
+
+```text
+src/
+├── components/
+│   └── ui/
+│       ├── button.tsx
+│       ├── input.tsx
+│       ├── dialog.tsx
+│       └── ...
+└── ...
+```
+
+You can adjust the directory structure to match your project's conventions.
+
+## Start Building
+
+You're ready to use HQ UI!
+
+Import a component into your application:
+
+```tsx
+import { Button } from "@/components/ui/button"
+
+export function App() {
+  return (
+    <div className="flex min-h-screen items-center justify-center">
+      <Button>Get Started</Button>
+    </div>
+  )
+}
+```
+
+## What's Next?
+
+Now that HQ UI is set up, explore the available components and start building your interface.
+
+- Browse the component collection.
+- Explore component variants and examples.
+- Customize the source code to match your design system.
+
+Visit [hq-baseui.vercel.app](https://hq-baseui.vercel.app) to explore more.
