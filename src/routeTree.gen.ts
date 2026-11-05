@@ -14,7 +14,6 @@ import { Route as AppIndexRouteImport } from './routes/_app/index'
 import { Route as AppDocsRouteImport } from './routes/_app/docs'
 import { Route as AppThemesRouteImport } from './routes/_app/themes'
 import { Route as BlockSlugRouteImport } from './routes/block/$slug'
-import { Route as RIdRouteImport } from './routes/r/$id'
 import { Route as AppDocsIndexRouteImport } from './routes/_app/docs/index'
 import { Route as AppDocsSplatRouteImport } from './routes/_app/docs/$'
 import { Route as AppDocsChar123Char125DotmdRouteImport } from './routes/_app/docs/{$}[.]md'
@@ -43,11 +42,6 @@ const BlockSlugRoute = BlockSlugRouteImport.update({
   path: '/block/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RIdRoute = RIdRouteImport.update({
-  id: '/r/$id',
-  path: '/r/$id',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AppDocsIndexRoute = AppDocsIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -70,7 +64,6 @@ export interface FileRoutesByFullPath {
   '/docs': typeof AppDocsRouteWithChildren
   '/themes': typeof AppThemesRoute
   '/block/$slug': typeof BlockSlugRoute
-  '/r/$id': typeof RIdRoute
   '/docs/$': typeof AppDocsSplatRoute
   '/docs/{$}.md': typeof AppDocsChar123Char125DotmdRoute
   '/docs/': typeof AppDocsIndexRoute
@@ -78,7 +71,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/themes': typeof AppThemesRoute
   '/block/$slug': typeof BlockSlugRoute
-  '/r/$id': typeof RIdRoute
   '/': typeof AppIndexRoute
   '/docs/$': typeof AppDocsSplatRoute
   '/docs/{$}.md': typeof AppDocsChar123Char125DotmdRoute
@@ -90,7 +82,6 @@ export interface FileRoutesById {
   '/_app/docs': typeof AppDocsRouteWithChildren
   '/_app/themes': typeof AppThemesRoute
   '/block/$slug': typeof BlockSlugRoute
-  '/r/$id': typeof RIdRoute
   '/_app/': typeof AppIndexRoute
   '/_app/docs/$': typeof AppDocsSplatRoute
   '/_app/docs/{$}.md': typeof AppDocsChar123Char125DotmdRoute
@@ -103,26 +94,17 @@ export interface FileRouteTypes {
     | '/docs'
     | '/themes'
     | '/block/$slug'
-    | '/r/$id'
     | '/docs/$'
     | '/docs/{$}.md'
     | '/docs/'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/themes'
-    | '/block/$slug'
-    | '/r/$id'
-    | '/'
-    | '/docs/$'
-    | '/docs/{$}.md'
-    | '/docs'
+  to: '/themes' | '/block/$slug' | '/' | '/docs/$' | '/docs/{$}.md' | '/docs'
   id:
     | '__root__'
     | '/_app'
     | '/_app/docs'
     | '/_app/themes'
     | '/block/$slug'
-    | '/r/$id'
     | '/_app/'
     | '/_app/docs/$'
     | '/_app/docs/{$}.md'
@@ -132,7 +114,6 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   AppRoute: typeof AppRouteWithChildren
   BlockSlugRoute: typeof BlockSlugRoute
-  RIdRoute: typeof RIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -170,13 +151,6 @@ declare module '@tanstack/react-router' {
       path: '/block/$slug'
       fullPath: '/block/$slug'
       preLoaderRoute: typeof BlockSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/r/$id': {
-      id: '/r/$id'
-      path: '/r/$id'
-      fullPath: '/r/$id'
-      preLoaderRoute: typeof RIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_app/docs/': {
@@ -235,7 +209,6 @@ const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRouteWithChildren,
   BlockSlugRoute: BlockSlugRoute,
-  RIdRoute: RIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
