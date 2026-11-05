@@ -1,7 +1,7 @@
-import { slugify } from "#/utils/modifiers"
-
 export const fontSans = [
   "ABeeZee",
+  "Acme",
+  "Alatsi",
   "Barlow",
   "Basic",
   "Comfortaa",
@@ -30,6 +30,7 @@ export const fontSans = [
   "Quicksand",
   "Raleway",
   "Roboto",
+  "Signika",
   "Sora",
   "Source Sans Pro",
   "Space Grotesk",
@@ -37,6 +38,9 @@ export const fontSans = [
   "Work Sans"
 ]
 export const fontSerif = [
+  "Alegreya",
+  "Aleo",
+  "Alike",
   "EB Garamond",
   "Fraunces",
   "Libre Baskerville",
@@ -49,6 +53,7 @@ export const fontSerif = [
   "Source Serif Pro"
 ]
 export const fontMono = [
+  "Anonymous Pro",
   "Cascadia Code",
   "Chivo Mono",
   "Courier Prime",
@@ -59,11 +64,19 @@ export const fontMono = [
   "Google Sans Code",
   "IBM Plex Mono",
   "JetBrains Mono",
+  "Martian Mono",
   "Overpass Mono",
   "Roboto Mono",
+  "Share Tech Mono",
   "Source Code Pro",
   "Space Mono",
   "Ubuntu Mono"
 ]
+
+const slugify = (str: string): string =>
+  str
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9-]/g, "")
 
 export const fonts = [...fontSans, ...fontSerif, ...fontMono].map((f) => `${slugify(f)}:400`).join("|")
