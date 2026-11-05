@@ -1,71 +1,71 @@
 
 ## Getting Started
-- [Introduction](http://localhost:3000/docs/getting-started/introduction.md): A modern, customizable component library built with Base UI and Tailwind CSS.
-- [Installation](http://localhost:3000/docs/getting-started/installation.md): Set up HQ UI in your React project and start building.
-- [MCP Server](http://localhost:3000/docs/getting-started/mcp-server.md): Use the shadcn MCP server to browse, search, and install components from registries.
-- [llms.txt](http://localhost:3000/docs//llms.txt.md): LLMs for HQ Base UI are generated from the documentation and can be used to answer questions about the framework.
+- [Introduction](https://hq-baseui.vercel.app/docs/getting-started/introduction.md): A modern, customizable component library built with Base UI and Tailwind CSS.
+- [Installation](https://hq-baseui.vercel.app/docs/getting-started/installation.md): Set up HQ UI in your React project and start building.
+- [MCP Server](https://hq-baseui.vercel.app/docs/getting-started/mcp-server.md): Use the shadcn MCP server to browse, search, and install components from registries.
+- [llms.txt](https://hq-baseui.vercel.app/docs//llms.txt.md): LLMs for HQ Base UI are generated from the documentation and can be used to answer questions about the framework.
 
 ## Components
-- [Accordion](http://localhost:3000/docs/components/accordion.md): A vertically stacked set of interactive headings that each reveal a section of content.
-- [Alert](http://localhost:3000/docs/components/alert.md): The Alert component can be used to provide information or messages, but also highlighted information complementing the normal flow of paragraphs and headers on a page.
-- [Alert Dialog](http://localhost:3000/docs/components/alert-dialog.md): A modal dialog that interrupts the user with important content and expects a response.
-- [Attachment](http://localhost:3000/docs/components/attachment.md): Displays a file or image attachment with media, metadata, upload state, and actions.
-- [Avatar](http://localhost:3000/docs/components/avatar.md): The Avatar component is used to represent a user, and displays the profile picture, initials or fallback icon.
-- [Badge](http://localhost:3000/docs/components/badge.md): A Chip is a small block of essential information that represent an input, attribute, or action.
-- [Breadcrumbs](http://localhost:3000/docs/components/breadcrumbs.md): Breadcrumbs display a hierarchy of links to the current page or resource in an application.
-- [Bubble](http://localhost:3000/docs/components/bubble.md): Displays conversational content in a message bubble. Supports variants, alignment, grouping, reactions, and collapsible content.
-- [Button](http://localhost:3000/docs/components/button.md): A button allows a user to perform an action, with mouse, touch, and keyboard interactions.
-- [Button Group](http://localhost:3000/docs/components/button-group.md): A container that groups related buttons together with consistent styling.
-- [Calendar](http://localhost:3000/docs/components/calendar.md): A calendar displays one or more date grids and allows users to select a single date.
-- [Card](http://localhost:3000/docs/components/card.md): Cards are a flexible and extensible content container. They are commonly used within a page layout or as part of a related group of content.
-- [Carousel](http://localhost:3000/docs/components/carousel.md): The carousel is a slideshow for cycling through a series of content. It works with a series of images, text, or custom markup. It also includes support for previous/next controls and indicators.
-- [Chart](http://localhost:3000/docs/components/chart.md): Beautiful charts. Built using Recharts. Copy and paste into your apps.
-- [Checkbox](http://localhost:3000/docs/components/checkbox.md): A checkbox allows a user to select multiple items from a list of individual items, or to mark one individual item as selected.
-- [Collapsible](http://localhost:3000/docs/components/collapsible.md): An interactive component which expands/collapses a panel.
-- [Combobox](http://localhost:3000/docs/components/combobox.md): A combo box combines a text input with a listbox, allowing users to filter a list of options to items matching a query.
-- [Command](http://localhost:3000/docs/components/command.md): A command is like a button with a twist, it opens a menu of options. It's a cooler version of a combobox, ideal for command palettes, menus, and more.
-- [Container](http://localhost:3000/docs/components/container.md): Container is a component for fixing an element's width to the current breakpoint.
-- [Context Menu](http://localhost:3000/docs/components/context-menu.md): Displays a menu of actions triggered by a right click.
-- [Date Picker](http://localhost:3000/docs/components/date-picker.md): A date picker combines a DateField and a Calendar popover to allow users to enter or select a date and time value.
-- [Dialog](http://localhost:3000/docs/components/dialog.md): Pop up a dialog box, demanding attention like a traffic stop sign, ideal for critical interactions.
-- [Dropdown Menu](http://localhost:3000/docs/components/dropdown-menu.md): Menus display a list of actions or options that a user can choose.
-- [Empty](http://localhost:3000/docs/components/empty.md): The Empty component is used to display a message when there is no content to display.
-- [Field](http://localhost:3000/docs/components/field.md): Combine labels, controls, and help text to compose accessible form fields and grouped inputs.
-- [Input](http://localhost:3000/docs/components/input.md): Displays a form input field or a component that looks like an input field.
-- [Input Group](http://localhost:3000/docs/components/input-group.md): Add addons, buttons, and helper content to inputs.
-- [Input OTP](http://localhost:3000/docs/components/input-otp.md): Accessible one-time password component with copy paste functionality.
-- [Item](http://localhost:3000/docs/components/item.md): A versatile component for displaying content with media, title, description, and actions.
-- [KBD](http://localhost:3000/docs/components/kbd.md): KBD is a component to display which key or combination of keys performs a given action.
-- [Label](http://localhost:3000/docs/components/label.md): Renders an accessible label associated with controls.
-- [Marker](http://localhost:3000/docs/components/marker.md): Displays an inline status, system note, bordered row, or labeled separator in a conversation.
-- [Menubar](http://localhost:3000/docs/components/menubar.md): A visually persistent menu common in desktop applications that provides quick access to a consistent set of commands.
-- [Message](http://localhost:3000/docs/components/message.md): Displays a message in a conversation, with optional avatar, header, footer, and alignment.
-- [Meter](http://localhost:3000/docs/components/meter.md): A meter represents a quantity within a known range, or a fractional value.
-- [Native Select](http://localhost:3000/docs/components/native-select.md): A styled native HTML select element with consistent design system integration.
-- [Navbar](http://localhost:3000/docs/components/navbar.md): A navbar is a component that helps you organize your content and navigation in a consistent way.
-- [Navigation Menu](http://localhost:3000/docs/components/navigation-menu.md): A collection of links for navigating websites.
-- [Number Field](http://localhost:3000/docs/components/number-field.md): A number field allows a user to enter a number, and increment or decrement the value using stepper buttons.
-- [Pagination](http://localhost:3000/docs/components/pagination.md): The pagination component can be used to navigate across a series of content and data sets for various pages such as blog posts, products, and more.
-- [Popover](http://localhost:3000/docs/components/popover.md): A popover is an overlay element positioned relative to a trigger.
-- [Progress](http://localhost:3000/docs/components/progress.md): Progress show either determinate or indeterminate progress of an operation over time.
-- [Radio](http://localhost:3000/docs/components/radio.md): A radio group allows a user to select a single item from a list of mutually exclusive options.
-- [Resizable](http://localhost:3000/docs/components/resizable.md): Accessible resizable panel groups and layouts with keyboard support.
-- [Scroll Area](http://localhost:3000/docs/components/scroll-area.md): Augments native scroll functionality for custom, cross-browser styling.
-- [Select](http://localhost:3000/docs/components/select.md): A select displays a collapsible list of options and allows a user to select one of them.
-- [Separator](http://localhost:3000/docs/components/separator.md): A separator is a visual divider between two groups of content, e.g. groups of menu items or sections of a page.
-- [Sheet](http://localhost:3000/docs/components/sheet.md): Sheet is like modal, but it's used to display content that complements the main content of the screen.
-- [Sidebar](http://localhost:3000/docs/components/sidebar.md): A composable, themeable and customizable sidebar component.
-- [Skeleton](http://localhost:3000/docs/components/skeleton.md): Skeleton is a placeholder to show a loading state and the expected shape of a component.
-- [Slider](http://localhost:3000/docs/components/slider.md): A slider allows a user to select one or more values within a range.
-- [Switch](http://localhost:3000/docs/components/switch.md): A switch allows a user to turn a setting on or off.
-- [Table](http://localhost:3000/docs/components/table.md): A table displays data in rows and columns and enables a user to navigate its contents via directional navigation keys, and optionally supports row selection and sorting.
-- [Tabs](http://localhost:3000/docs/components/tabs.md): Tabs organize content into multiple sections and allow users to navigate between them.
-- [Textarea](http://localhost:3000/docs/components/textarea.md): Displays a form textarea or a component that looks like a textarea.
-- [Toast](http://localhost:3000/docs/components/toast.md): A non-intrusive, auto-dismissable notification component used to display brief status updates, alerts, or confirmation messages.
-- [Toggle](http://localhost:3000/docs/components/toggle.md): A toggle button allows a user to toggle a selection on or off, for example switching between two states or modes.
-- [Tooltip](http://localhost:3000/docs/components/tooltip.md): Hover to reveal details, like a secret whispering info, perfect for extra hints or help where needed.
-- [Trace](http://localhost:3000/docs/components/trace.md): The building block for reasoning, tool calls, sources and more.
+- [Accordion](https://hq-baseui.vercel.app/docs/components/accordion.md): A vertically stacked set of interactive headings that each reveal a section of content.
+- [Alert](https://hq-baseui.vercel.app/docs/components/alert.md): The Alert component can be used to provide information or messages, but also highlighted information complementing the normal flow of paragraphs and headers on a page.
+- [Alert Dialog](https://hq-baseui.vercel.app/docs/components/alert-dialog.md): A modal dialog that interrupts the user with important content and expects a response.
+- [Attachment](https://hq-baseui.vercel.app/docs/components/attachment.md): Displays a file or image attachment with media, metadata, upload state, and actions.
+- [Avatar](https://hq-baseui.vercel.app/docs/components/avatar.md): The Avatar component is used to represent a user, and displays the profile picture, initials or fallback icon.
+- [Badge](https://hq-baseui.vercel.app/docs/components/badge.md): A Chip is a small block of essential information that represent an input, attribute, or action.
+- [Breadcrumbs](https://hq-baseui.vercel.app/docs/components/breadcrumbs.md): Breadcrumbs display a hierarchy of links to the current page or resource in an application.
+- [Bubble](https://hq-baseui.vercel.app/docs/components/bubble.md): Displays conversational content in a message bubble. Supports variants, alignment, grouping, reactions, and collapsible content.
+- [Button](https://hq-baseui.vercel.app/docs/components/button.md): A button allows a user to perform an action, with mouse, touch, and keyboard interactions.
+- [Button Group](https://hq-baseui.vercel.app/docs/components/button-group.md): A container that groups related buttons together with consistent styling.
+- [Calendar](https://hq-baseui.vercel.app/docs/components/calendar.md): A calendar displays one or more date grids and allows users to select a single date.
+- [Card](https://hq-baseui.vercel.app/docs/components/card.md): Cards are a flexible and extensible content container. They are commonly used within a page layout or as part of a related group of content.
+- [Carousel](https://hq-baseui.vercel.app/docs/components/carousel.md): The carousel is a slideshow for cycling through a series of content. It works with a series of images, text, or custom markup. It also includes support for previous/next controls and indicators.
+- [Chart](https://hq-baseui.vercel.app/docs/components/chart.md): Beautiful charts. Built using Recharts. Copy and paste into your apps.
+- [Checkbox](https://hq-baseui.vercel.app/docs/components/checkbox.md): A checkbox allows a user to select multiple items from a list of individual items, or to mark one individual item as selected.
+- [Collapsible](https://hq-baseui.vercel.app/docs/components/collapsible.md): An interactive component which expands/collapses a panel.
+- [Combobox](https://hq-baseui.vercel.app/docs/components/combobox.md): A combo box combines a text input with a listbox, allowing users to filter a list of options to items matching a query.
+- [Command](https://hq-baseui.vercel.app/docs/components/command.md): A command is like a button with a twist, it opens a menu of options. It's a cooler version of a combobox, ideal for command palettes, menus, and more.
+- [Container](https://hq-baseui.vercel.app/docs/components/container.md): Container is a component for fixing an element's width to the current breakpoint.
+- [Context Menu](https://hq-baseui.vercel.app/docs/components/context-menu.md): Displays a menu of actions triggered by a right click.
+- [Date Picker](https://hq-baseui.vercel.app/docs/components/date-picker.md): A date picker combines a DateField and a Calendar popover to allow users to enter or select a date and time value.
+- [Dialog](https://hq-baseui.vercel.app/docs/components/dialog.md): Pop up a dialog box, demanding attention like a traffic stop sign, ideal for critical interactions.
+- [Dropdown Menu](https://hq-baseui.vercel.app/docs/components/dropdown-menu.md): Menus display a list of actions or options that a user can choose.
+- [Empty](https://hq-baseui.vercel.app/docs/components/empty.md): The Empty component is used to display a message when there is no content to display.
+- [Field](https://hq-baseui.vercel.app/docs/components/field.md): Combine labels, controls, and help text to compose accessible form fields and grouped inputs.
+- [Input](https://hq-baseui.vercel.app/docs/components/input.md): Displays a form input field or a component that looks like an input field.
+- [Input Group](https://hq-baseui.vercel.app/docs/components/input-group.md): Add addons, buttons, and helper content to inputs.
+- [Input OTP](https://hq-baseui.vercel.app/docs/components/input-otp.md): Accessible one-time password component with copy paste functionality.
+- [Item](https://hq-baseui.vercel.app/docs/components/item.md): A versatile component for displaying content with media, title, description, and actions.
+- [KBD](https://hq-baseui.vercel.app/docs/components/kbd.md): KBD is a component to display which key or combination of keys performs a given action.
+- [Label](https://hq-baseui.vercel.app/docs/components/label.md): Renders an accessible label associated with controls.
+- [Marker](https://hq-baseui.vercel.app/docs/components/marker.md): Displays an inline status, system note, bordered row, or labeled separator in a conversation.
+- [Menubar](https://hq-baseui.vercel.app/docs/components/menubar.md): A visually persistent menu common in desktop applications that provides quick access to a consistent set of commands.
+- [Message](https://hq-baseui.vercel.app/docs/components/message.md): Displays a message in a conversation, with optional avatar, header, footer, and alignment.
+- [Meter](https://hq-baseui.vercel.app/docs/components/meter.md): A meter represents a quantity within a known range, or a fractional value.
+- [Native Select](https://hq-baseui.vercel.app/docs/components/native-select.md): A styled native HTML select element with consistent design system integration.
+- [Navbar](https://hq-baseui.vercel.app/docs/components/navbar.md): A navbar is a component that helps you organize your content and navigation in a consistent way.
+- [Navigation Menu](https://hq-baseui.vercel.app/docs/components/navigation-menu.md): A collection of links for navigating websites.
+- [Number Field](https://hq-baseui.vercel.app/docs/components/number-field.md): A number field allows a user to enter a number, and increment or decrement the value using stepper buttons.
+- [Pagination](https://hq-baseui.vercel.app/docs/components/pagination.md): The pagination component can be used to navigate across a series of content and data sets for various pages such as blog posts, products, and more.
+- [Popover](https://hq-baseui.vercel.app/docs/components/popover.md): A popover is an overlay element positioned relative to a trigger.
+- [Progress](https://hq-baseui.vercel.app/docs/components/progress.md): Progress show either determinate or indeterminate progress of an operation over time.
+- [Radio](https://hq-baseui.vercel.app/docs/components/radio.md): A radio group allows a user to select a single item from a list of mutually exclusive options.
+- [Resizable](https://hq-baseui.vercel.app/docs/components/resizable.md): Accessible resizable panel groups and layouts with keyboard support.
+- [Scroll Area](https://hq-baseui.vercel.app/docs/components/scroll-area.md): Augments native scroll functionality for custom, cross-browser styling.
+- [Select](https://hq-baseui.vercel.app/docs/components/select.md): A select displays a collapsible list of options and allows a user to select one of them.
+- [Separator](https://hq-baseui.vercel.app/docs/components/separator.md): A separator is a visual divider between two groups of content, e.g. groups of menu items or sections of a page.
+- [Sheet](https://hq-baseui.vercel.app/docs/components/sheet.md): Sheet is like modal, but it's used to display content that complements the main content of the screen.
+- [Sidebar](https://hq-baseui.vercel.app/docs/components/sidebar.md): A composable, themeable and customizable sidebar component.
+- [Skeleton](https://hq-baseui.vercel.app/docs/components/skeleton.md): Skeleton is a placeholder to show a loading state and the expected shape of a component.
+- [Slider](https://hq-baseui.vercel.app/docs/components/slider.md): A slider allows a user to select one or more values within a range.
+- [Switch](https://hq-baseui.vercel.app/docs/components/switch.md): A switch allows a user to turn a setting on or off.
+- [Table](https://hq-baseui.vercel.app/docs/components/table.md): A table displays data in rows and columns and enables a user to navigate its contents via directional navigation keys, and optionally supports row selection and sorting.
+- [Tabs](https://hq-baseui.vercel.app/docs/components/tabs.md): Tabs organize content into multiple sections and allow users to navigate between them.
+- [Textarea](https://hq-baseui.vercel.app/docs/components/textarea.md): Displays a form textarea or a component that looks like a textarea.
+- [Toast](https://hq-baseui.vercel.app/docs/components/toast.md): A non-intrusive, auto-dismissable notification component used to display brief status updates, alerts, or confirmation messages.
+- [Toggle](https://hq-baseui.vercel.app/docs/components/toggle.md): A toggle button allows a user to toggle a selection on or off, for example switching between two states or modes.
+- [Tooltip](https://hq-baseui.vercel.app/docs/components/tooltip.md): Hover to reveal details, like a secret whispering info, perfect for extra hints or help where needed.
+- [Trace](https://hq-baseui.vercel.app/docs/components/trace.md): The building block for reasoning, tool calls, sources and more.
 
 ## Utils
-- [scroll-fade](http://localhost:3000/docs/utils/scroll-fade.md): Utilities for adding a fade effect to the edges of a scroll container.
-- [shimmer](http://localhost:3000/docs/utils/shimmer.md): Utilities for adding a shimmer effect to text elements.
+- [scroll-fade](https://hq-baseui.vercel.app/docs/utils/scroll-fade.md): Utilities for adding a fade effect to the edges of a scroll container.
+- [shimmer](https://hq-baseui.vercel.app/docs/utils/shimmer.md): Utilities for adding a shimmer effect to text elements.

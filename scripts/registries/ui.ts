@@ -1,31 +1,33 @@
-import type { RegistryItem } from "shadcn/schema"
-import { promises as fs } from "node:fs"
-import path from "node:path"
-import { siteConfig } from "@/config/site"
-import { checkHooks, getChildComponents, getDeps } from "./utils"
+import type { RegistryItem } from "shadcn/schema";
+import { promises as fs } from "node:fs";
+import path from "node:path";
+import { siteConfig } from "@/config/site";
+import { checkHooks, getChildComponents, getDeps } from "./utils";
 
-const uiDir = path.join(process.cwd(), "src", "components", "ui")
+const uiDir = path.join(process.cwd(), "src", "components", "ui");
 
 async function getComponents() {
-  const components: string[] = []
-  const files = await fs.readdir(uiDir)
+  const components: string[] = [];
+  const files = await fs.readdir(uiDir);
   for (const file of files) {
     if (file.endsWith(".tsx")) {
-      components.push(file)
+      components.push(file);
     }
   }
-  return components
+  return components;
 }
 
-const uiComponents: RegistryItem[] = []
+const uiComponents: RegistryItem[] = [];
 
-const components = await getComponents()
+const components = await getComponents();
 
 for (const component of components) {
-  const content = await fs.readFile(path.join(uiDir, component), "utf8")
-  const regDeps = getChildComponents(content).map((c) => `${siteConfig.url}/r/${c}`)
-  const deps = getDeps(content)
-  checkHooks(content).forEach((c) => regDeps.push(`${siteConfig.url}/r/${c}`))
+  const content = await fs.readFile(path.join(uiDir, component), "utf8");
+  const regDeps = getChildComponents(content).map(
+    (c) => `${siteConfig.url}/r/${c}`,
+  );
+  const deps = getDeps(content);
+  checkHooks(content).forEach((c) => regDeps.push(`${siteConfig.url}/r/${c}`));
 
   uiComponents.push({
     name: component.replace(".tsx", ""),
@@ -35,11 +37,11 @@ for (const component of components) {
     files: [
       {
         path: `src/components/ui/${component}`,
-        type: "registry:ui"
-      }
+        type: "registry:ui",
+      },
     ],
-    type: "registry:ui"
-  })
+    type: "registry:ui",
+  });
 }
 
 uiComponents.push({
@@ -47,8 +49,10 @@ uiComponents.push({
   extends: "none",
   type: "registry:ui",
   title: "All UI Components",
-  dependencies: [],
-  registryDependencies: components.map((c) => `${siteConfig.url}/r/${c.replace(".tsx", "")}`)
-})
+  dependencies: ["@base-ui/react", "@tabler/icons-react", "cn"],
+  registryDependencies: components.map(
+    (c) => `${siteConfig.url}/r/${c.replace(".tsx", "")}`,
+  ),
+});
 
-export { uiComponents }
+export { uiComponents };
