@@ -1,101 +1,121 @@
-"use client"
+"use client";
 
-export type DateFormatToken = "dd" | "MM" | "yyyy"
+import type { DateRange as CalendarDateRange } from "@daypicker/react";
+import { IconCalendar, IconX } from "@tabler/icons-react";
+import {
+  type ChangeEvent,
+  type ComponentProps,
+  type KeyboardEvent,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
+import { Calendar } from "./calendar";
+import { InputGroup } from "./input-group";
+import { Popover } from "./popover";
 
-const TOKEN_REGEX = /yyyy|MM|dd/g
+export type DateFormatToken = "dd" | "MM" | "yyyy";
+
+const TOKEN_REGEX = /yyyy|MM|dd/g;
 
 export function isValidDate(value: unknown): value is Date {
-  return value instanceof Date && !Number.isNaN(value.getTime())
+  return value instanceof Date && !Number.isNaN(value.getTime());
 }
 
 export function startOfDay(date: Date): Date {
-  const result = new Date(date)
-  result.setHours(0, 0, 0, 0)
-  return result
+  const result = new Date(date);
+  result.setHours(0, 0, 0, 0);
+  return result;
 }
 
 export function isSameDay(a: Date | undefined, b: Date | undefined) {
-  if (!a || !b) return a === b
+  if (!a || !b) return a === b;
 
-  return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate()
+  return (
+    a.getFullYear() === b.getFullYear() &&
+    a.getMonth() === b.getMonth() &&
+    a.getDate() === b.getDate()
+  );
 }
 
 export function getFormatTokens(format: string) {
   return [...format.matchAll(TOKEN_REGEX)].map((match) => ({
     token: match[0] as DateFormatToken,
-    index: match.index!
-  }))
+    index: match.index!,
+  }));
 }
 
 export function validateDateFormat(format: string) {
-  const tokens = getFormatTokens(format)
-  const names = tokens.map(({ token }) => token)
+  const tokens = getFormatTokens(format);
+  const names = tokens.map(({ token }) => token);
 
   if (
     tokens.length !== 3 ||
     new Set(names).size !== 3 ||
     !["dd", "MM", "yyyy"].every((token) => names.includes(token as DateFormatToken))
   ) {
-    throw new Error(`Invalid dateFormat "${format}". Expected dd, MM and yyyy exactly once.`)
+    throw new Error(`Invalid dateFormat "${format}". Expected dd, MM and yyyy exactly once.`);
   }
 }
 
 export function formatDate(date: Date | undefined, format: string) {
-  if (!isValidDate(date)) return ""
+  if (!isValidDate(date)) return "";
 
   const values: Record<DateFormatToken, string> = {
     dd: String(date.getDate()).padStart(2, "0"),
     MM: String(date.getMonth() + 1).padStart(2, "0"),
-    yyyy: String(date.getFullYear()).padStart(4, "0")
-  }
+    yyyy: String(date.getFullYear()).padStart(4, "0"),
+  };
 
-  return format.replace(TOKEN_REGEX, (token) => values[token as DateFormatToken])
+  return format.replace(TOKEN_REGEX, (token) => values[token as DateFormatToken]);
 }
 
 function escapeRegex(value: string) {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 export function parseDate(value: string, format: string): Date | undefined {
-  const tokens = getFormatTokens(format)
-  let pattern = ""
-  let cursor = 0
+  const tokens = getFormatTokens(format);
+  let pattern = "";
+  let cursor = 0;
 
   for (const { token, index } of tokens) {
-    pattern += escapeRegex(format.slice(cursor, index))
-    pattern += token === "yyyy" ? "(\\d{4})" : "(\\d{2})"
-    cursor = index + token.length
+    pattern += escapeRegex(format.slice(cursor, index));
+    pattern += token === "yyyy" ? "(\\d{4})" : "(\\d{2})";
+    cursor = index + token.length;
   }
 
-  pattern += escapeRegex(format.slice(cursor))
+  pattern += escapeRegex(format.slice(cursor));
 
-  const match = new RegExp(`^${pattern}$`).exec(value)
+  const match = new RegExp(`^${pattern}$`).exec(value);
 
-  if (!match) return undefined
+  if (!match) return undefined;
 
-  const parts: Partial<Record<DateFormatToken, number>> = {}
+  const parts: Partial<Record<DateFormatToken, number>> = {};
 
   tokens.forEach(({ token }, index) => {
-    parts[token] = Number(match[index + 1])
-  })
+    parts[token] = Number(match[index + 1]);
+  });
 
-  const year = parts.yyyy!
-  const month = parts.MM!
-  const day = parts.dd!
+  const year = parts.yyyy!;
+  const month = parts.MM!;
+  const day = parts.dd!;
 
   if (month < 1 || month > 12 || day < 1 || day > 31) {
-    return undefined
+    return undefined;
   }
 
-  const date = new Date(0)
-  date.setHours(0, 0, 0, 0)
-  date.setFullYear(year, month - 1, day)
+  const date = new Date(0);
+  date.setHours(0, 0, 0, 0);
+  date.setFullYear(year, month - 1, day);
 
   if (date.getFullYear() !== year || date.getMonth() !== month - 1 || date.getDate() !== day) {
-    return undefined
+    return undefined;
   }
 
-  return date
+  return date;
 }
 
 /**
@@ -106,27 +126,27 @@ export function parseDate(value: string, format: string): Date | undefined {
  * 20261031 -> 2026-10-31
  */
 export function applyDateMask(value: string, format: string) {
-  const tokens = getFormatTokens(format)
-  const digits = value.replace(/\D/g, "").slice(0, 8)
+  const tokens = getFormatTokens(format);
+  const digits = value.replace(/\D/g, "").slice(0, 8);
 
-  let result = ""
-  let offset = 0
+  let result = "";
+  let offset = 0;
 
   tokens.forEach(({ token, index }, tokenIndex) => {
-    const length = token === "yyyy" ? 4 : 2
-    const segment = digits.slice(offset, offset + length)
+    const length = token === "yyyy" ? 4 : 2;
+    const segment = digits.slice(offset, offset + length);
 
-    result += segment
-    offset += segment.length
+    result += segment;
+    offset += segment.length;
 
-    const next = tokens[tokenIndex + 1]
+    const next = tokens[tokenIndex + 1];
 
     if (next && segment.length === length && offset < digits.length) {
-      result += format.slice(index + token.length, next.index)
+      result += format.slice(index + token.length, next.index);
     }
-  })
+  });
 
-  return result
+  return result;
 }
 
 /**
@@ -134,92 +154,79 @@ export function applyDateMask(value: string, format: string) {
  * not character count.
  */
 export function getCaretPosition(value: string, digitCount: number) {
-  if (digitCount <= 0) return 0
+  if (digitCount <= 0) return 0;
 
-  let count = 0
+  let count = 0;
 
   for (let i = 0; i < value.length; i++) {
-    if (/\d/.test(value[i])) count++
+    if (/\d/.test(value[i])) count++;
 
-    if (count === digitCount) return i + 1
+    if (count === digitCount) return i + 1;
   }
 
-  return value.length
+  return value.length;
 }
 
 export function isDateInRange(date: Date, minDate?: Date, maxDate?: Date) {
-  const current = startOfDay(date)
+  const current = startOfDay(date);
 
-  if (minDate && current < startOfDay(minDate)) return false
-  if (maxDate && current > startOfDay(maxDate)) return false
+  if (minDate && current < startOfDay(minDate)) return false;
+  if (maxDate && current > startOfDay(maxDate)) return false;
 
-  return true
+  return true;
 }
 
-import type { DateRange as CalendarDateRange } from "react-day-picker"
-import { IconCalendar, IconX } from "@tabler/icons-react"
-import {
-  type ChangeEvent,
-  type ComponentProps,
-  type KeyboardEvent,
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState
-} from "react"
-import { Calendar } from "./calendar"
-import { InputGroup } from "./input-group"
-import { Popover } from "./popover"
-
-type InputProps = Omit<ComponentProps<typeof InputGroup.Input>, "value" | "defaultValue" | "onChange">
+type InputProps = Omit<
+  ComponentProps<typeof InputGroup.Input>,
+  "value" | "defaultValue" | "onChange"
+>;
 
 export type DatePickerProps = InputProps & {
-  value?: Date | null
-  defaultValue?: Date
-  onChange?: (date: Date | undefined) => void
+  value?: Date | null;
+  defaultValue?: Date;
+  onChange?: (date: Date | undefined) => void;
 
-  dateFormat?: string
-  mask?: boolean
+  dateFormat?: string;
+  mask?: boolean;
 
-  minDate?: Date
-  maxDate?: Date
-  isDateDisabled?: (date: Date) => boolean
+  minDate?: Date;
+  maxDate?: Date;
+  isDateDisabled?: (date: Date) => boolean;
 
-  clearable?: boolean
-  defaultMonth?: Date
+  clearable?: boolean;
+  defaultMonth?: Date;
 
-  onTextChange?: (value: string) => void
-  onInvalid?: (value: string) => void
-}
+  onTextChange?: (value: string) => void;
+  onInvalid?: (value: string) => void;
+};
 
 type DateValidation = {
-  valid: boolean
-  date?: Date
-}
+  valid: boolean;
+  date?: Date;
+};
 
 function validateInput(
   value: string,
   format: string,
   minDate?: Date,
   maxDate?: Date,
-  isDateDisabled?: (date: Date) => boolean
+  isDateDisabled?: (date: Date) => boolean,
 ): DateValidation {
   if (!value) {
-    return { valid: true }
+    return { valid: true };
   }
 
-  const date = parseDate(value, format)
+  const date = parseDate(value, format);
 
   if (!date) {
-    return { valid: false }
+    return { valid: false };
   }
 
   if (!isDateInRange(date, minDate, maxDate) || isDateDisabled?.(date)) {
-    return { valid: false }
+    return { valid: false };
   }
 
-  return { valid: true, date }
+  return { valid: true, date };
 }
 
 function DatePicker({
@@ -241,79 +248,79 @@ function DatePicker({
   onBlur,
   ...props
 }: DatePickerProps) {
-  validateDateFormat(dateFormat)
+  validateDateFormat(dateFormat);
 
   // ---------------------------------------------------------------------------
   // Controlled / uncontrolled state
   // ---------------------------------------------------------------------------
 
-  const controlled = value !== undefined
+  const controlled = value !== undefined;
 
   const [internalDate, setInternalDate] = useState<Date | undefined>(() =>
-    isValidDate(defaultValue) ? defaultValue : undefined
-  )
+    isValidDate(defaultValue) ? defaultValue : undefined,
+  );
 
-  const selectedDate = controlled ? (isValidDate(value) ? value : undefined) : internalDate
+  const selectedDate = controlled ? (isValidDate(value) ? value : undefined) : internalDate;
 
   // ---------------------------------------------------------------------------
   // Input state
   // ---------------------------------------------------------------------------
 
-  const [inputValue, setInputValue] = useState(() => formatDate(selectedDate, dateFormat))
+  const [inputValue, setInputValue] = useState(() => formatDate(selectedDate, dateFormat));
 
-  const validation = validateInput(inputValue, dateFormat, minDate, maxDate, isDateDisabled)
+  const validation = validateInput(inputValue, dateFormat, minDate, maxDate, isDateDisabled);
 
-  const invalid = inputValue.length > 0 && !validation.valid
+  const invalid = inputValue.length > 0 && !validation.valid;
 
   // ---------------------------------------------------------------------------
   // Calendar state
   // ---------------------------------------------------------------------------
 
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
-  const [month, setMonth] = useState(() => selectedDate ?? defaultMonth ?? new Date())
+  const [month, setMonth] = useState(() => selectedDate ?? defaultMonth ?? new Date());
 
   // ---------------------------------------------------------------------------
   // Refs
   // ---------------------------------------------------------------------------
 
-  const inputRef = useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const caretRef = useRef<{
-    start: number
-    end: number
-  } | null>(null)
+    start: number;
+    end: number;
+  } | null>(null);
 
-  const previousFormat = useRef(dateFormat)
+  const previousFormat = useRef(dateFormat);
 
   // ---------------------------------------------------------------------------
   // Synchronization
   // ---------------------------------------------------------------------------
 
   useEffect(() => {
-    setInputValue(formatDate(selectedDate, dateFormat))
+    setInputValue(formatDate(selectedDate, dateFormat));
 
     if (selectedDate) {
-      setMonth(selectedDate)
+      setMonth(selectedDate);
     }
-  }, [selectedDate?.getTime(), dateFormat])
+  }, [selectedDate?.getTime(), dateFormat]);
 
   useEffect(() => {
-    if (previousFormat.current === dateFormat) return
+    if (previousFormat.current === dateFormat) return;
 
-    previousFormat.current = dateFormat
+    previousFormat.current = dateFormat;
 
     // Reformat the selected date when format changes.
-    setInputValue(formatDate(selectedDate, dateFormat))
-  }, [dateFormat])
+    setInputValue(formatDate(selectedDate, dateFormat));
+  }, [dateFormat]);
 
   useLayoutEffect(() => {
-    if (!caretRef.current) return
+    if (!caretRef.current) return;
 
-    inputRef.current?.setSelectionRange(caretRef.current.start, caretRef.current.end)
+    inputRef.current?.setSelectionRange(caretRef.current.start, caretRef.current.end);
 
-    caretRef.current = null
-  }, [inputValue])
+    caretRef.current = null;
+  }, [inputValue]);
 
   // ---------------------------------------------------------------------------
   // Date commit
@@ -321,61 +328,61 @@ function DatePicker({
 
   const commitDate = useCallback(
     (nextDate: Date | undefined) => {
-      if (nextDate && !isValidDate(nextDate)) return
+      if (nextDate && !isValidDate(nextDate)) return;
 
       if (nextDate && (!isDateInRange(nextDate, minDate, maxDate) || isDateDisabled?.(nextDate))) {
-        return
+        return;
       }
 
-      if (isSameDay(selectedDate, nextDate)) return
+      if (isSameDay(selectedDate, nextDate)) return;
 
       if (!controlled) {
-        setInternalDate(nextDate)
+        setInternalDate(nextDate);
       }
 
-      onChange?.(nextDate)
+      onChange?.(nextDate);
     },
-    [controlled, selectedDate, minDate, maxDate, isDateDisabled, onChange]
-  )
+    [controlled, selectedDate, minDate, maxDate, isDateDisabled, onChange],
+  );
 
   // ---------------------------------------------------------------------------
   // Input change
   // ---------------------------------------------------------------------------
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
-    const input = event.currentTarget
-    const rawValue = input.value
+    const input = event.currentTarget;
+    const rawValue = input.value;
 
-    let nextValue = rawValue
+    let nextValue = rawValue;
 
     if (mask) {
-      const start = input.selectionStart ?? rawValue.length
-      const end = input.selectionEnd ?? start
+      const start = input.selectionStart ?? rawValue.length;
+      const end = input.selectionEnd ?? start;
 
-      const startDigits = rawValue.slice(0, start).replace(/\D/g, "").length
-      const endDigits = rawValue.slice(0, end).replace(/\D/g, "").length
+      const startDigits = rawValue.slice(0, start).replace(/\D/g, "").length;
+      const endDigits = rawValue.slice(0, end).replace(/\D/g, "").length;
 
-      nextValue = applyDateMask(rawValue, dateFormat)
+      nextValue = applyDateMask(rawValue, dateFormat);
 
       caretRef.current = {
         start: getCaretPosition(nextValue, startDigits),
-        end: getCaretPosition(nextValue, endDigits)
-      }
+        end: getCaretPosition(nextValue, endDigits),
+      };
     }
 
-    setInputValue(nextValue)
-    onTextChange?.(nextValue)
+    setInputValue(nextValue);
+    onTextChange?.(nextValue);
 
-    const result = validateInput(nextValue, dateFormat, minDate, maxDate, isDateDisabled)
+    const result = validateInput(nextValue, dateFormat, minDate, maxDate, isDateDisabled);
 
     if (!result.valid) {
       if (nextValue.length > 0) {
-        onInvalid?.(nextValue)
+        onInvalid?.(nextValue);
       }
-      return
+      return;
     }
 
-    commitDate(result.date)
+    commitDate(result.date);
   }
 
   // ---------------------------------------------------------------------------
@@ -383,11 +390,11 @@ function DatePicker({
   // ---------------------------------------------------------------------------
 
   function handleClear() {
-    setInputValue("")
-    onTextChange?.("")
-    commitDate(undefined)
+    setInputValue("");
+    onTextChange?.("");
+    commitDate(undefined);
 
-    inputRef.current?.focus()
+    inputRef.current?.focus();
   }
 
   // ---------------------------------------------------------------------------
@@ -395,22 +402,22 @@ function DatePicker({
   // ---------------------------------------------------------------------------
 
   function handleKeyDown(event: KeyboardEvent<HTMLInputElement>) {
-    onKeyDown?.(event)
+    onKeyDown?.(event);
 
-    if (event.defaultPrevented || disabled) return
+    if (event.defaultPrevented || disabled) return;
 
     if (event.key === "ArrowDown" && !event.altKey && !readOnly) {
-      event.preventDefault()
-      setOpen(true)
+      event.preventDefault();
+      setOpen(true);
     }
 
     if (event.key === "Escape") {
-      setOpen(false)
+      setOpen(false);
     }
 
     if (event.key === "Enter" && open) {
-      event.preventDefault()
-      setOpen(false)
+      event.preventDefault();
+      setOpen(false);
     }
   }
 
@@ -420,10 +427,10 @@ function DatePicker({
 
   const isDisabledDate = useCallback(
     (date: Date) => {
-      return !isDateInRange(date, minDate, maxDate) || Boolean(isDateDisabled?.(date))
+      return !isDateInRange(date, minDate, maxDate) || Boolean(isDateDisabled?.(date));
     },
-    [minDate, maxDate, isDateDisabled]
-  )
+    [minDate, maxDate, isDateDisabled],
+  );
 
   // ---------------------------------------------------------------------------
   // Render
@@ -451,7 +458,13 @@ function DatePicker({
 
       <InputGroup.Addon align="inline-end">
         {clearable && inputValue && !disabled && !readOnly && (
-          <InputGroup.Button aria-label="Clear date" onClick={handleClear} size="icon-xs" type="button" variant="ghost">
+          <InputGroup.Button
+            aria-label="Clear date"
+            onClick={handleClear}
+            size="icon-xs"
+            type="button"
+            variant="ghost"
+          >
             <IconX />
           </InputGroup.Button>
         )}
@@ -487,14 +500,14 @@ function DatePicker({
               month={month}
               onMonthChange={setMonth}
               onSelect={(nextDate) => {
-                if (!nextDate) return
+                if (!nextDate) return;
 
-                const formatted = formatDate(nextDate, dateFormat)
+                const formatted = formatDate(nextDate, dateFormat);
 
-                setInputValue(formatted)
-                onTextChange?.(formatted)
-                commitDate(nextDate)
-                setOpen(false)
+                setInputValue(formatted);
+                onTextChange?.(formatted);
+                commitDate(nextDate);
+                setOpen(false);
               }}
               selected={selectedDate}
             />
@@ -502,7 +515,7 @@ function DatePicker({
         </Popover>
       </InputGroup.Addon>
     </InputGroup>
-  )
+  );
 }
 
 // -----------------------------------------------------------------------------
@@ -510,92 +523,97 @@ function DatePicker({
 // -----------------------------------------------------------------------------
 
 export type DateRange = {
-  from?: Date
-  to?: Date
-}
+  from?: Date;
+  to?: Date;
+};
 
 type RangeInputProps = Omit<
   ComponentProps<typeof InputGroup.Input>,
   "value" | "defaultValue" | "onChange" | "type" | "onKeyDown"
->
+>;
 
 export type DateRangePickerProps = RangeInputProps & {
-  value?: DateRange | null
-  defaultValue?: DateRange
+  value?: DateRange | null;
+  defaultValue?: DateRange;
 
-  onChange?: (range: DateRange | undefined) => void
+  onChange?: (range: DateRange | undefined) => void;
 
-  dateFormat?: string
-  mask?: boolean
+  dateFormat?: string;
+  mask?: boolean;
 
-  minDate?: Date
-  maxDate?: Date
+  minDate?: Date;
+  maxDate?: Date;
 
-  isDateDisabled?: (date: Date) => boolean
+  isDateDisabled?: (date: Date) => boolean;
 
-  numberOfMonths?: number
-  defaultMonth?: Date
+  numberOfMonths?: number;
+  defaultMonth?: Date;
 
-  onTextChange?: (value: string, field: "from" | "to") => void
+  onTextChange?: (value: string, field: "from" | "to") => void;
 
-  onInvalid?: (value: string, field: "from" | "to") => void
+  onInvalid?: (value: string, field: "from" | "to") => void;
 
-  onKeyDown?: (event: KeyboardEvent<HTMLInputElement>, field: "from" | "to") => void
-}
+  onKeyDown?: (event: KeyboardEvent<HTMLInputElement>, field: "from" | "to") => void;
+};
 
-type RangeField = "from" | "to"
+type RangeField = "from" | "to";
 
-type DraftRange = Record<RangeField, string>
+type DraftRange = Record<RangeField, string>;
 
 // -----------------------------------------------------------------------------
 // Helpers
 // -----------------------------------------------------------------------------
 
 function normalizeRange(range: DateRange | null | undefined): DateRange | undefined {
-  if (!range) return undefined
+  if (!range) return undefined;
 
   return {
     from: isValidDate(range.from) ? range.from : undefined,
-    to: isValidDate(range.to) ? range.to : undefined
-  }
+    to: isValidDate(range.to) ? range.to : undefined,
+  };
 }
 
 function formatRange(range: DateRange | undefined, format: string): DraftRange {
   return {
     from: formatDate(range?.from, format),
-    to: formatDate(range?.to, format)
-  }
+    to: formatDate(range?.to, format),
+  };
 }
 
 function isSameRange(a: DateRange | undefined, b: DateRange | undefined) {
-  return a?.from?.getTime() === b?.from?.getTime() && a?.to?.getTime() === b?.to?.getTime()
+  return a?.from?.getTime() === b?.from?.getTime() && a?.to?.getTime() === b?.to?.getTime();
 }
 
-function isRangeValid(range: DateRange, minDate?: Date, maxDate?: Date, isDateDisabled?: (date: Date) => boolean) {
-  const { from, to } = range
+function isRangeValid(
+  range: DateRange,
+  minDate?: Date,
+  maxDate?: Date,
+  isDateDisabled?: (date: Date) => boolean,
+) {
+  const { from, to } = range;
 
   if (from && (!isDateInRange(from, minDate, maxDate) || isDateDisabled?.(from))) {
-    return false
+    return false;
   }
 
   if (to && (!isDateInRange(to, minDate, maxDate) || isDateDisabled?.(to))) {
-    return false
+    return false;
   }
 
   if (from && to && from.getTime() > to.getTime()) {
-    return false
+    return false;
   }
 
-  return true
+  return true;
 }
 
 function createCalendarRange(range: DateRange | undefined): CalendarDateRange | undefined {
-  if (!range?.from) return undefined
+  if (!range?.from) return undefined;
 
   return {
     from: range.from,
-    to: range.to
-  }
+    to: range.to,
+  };
 }
 
 // -----------------------------------------------------------------------------
@@ -627,73 +645,75 @@ function DateRangePicker({
   placeholder,
   ...props
 }: DateRangePickerProps) {
-  validateDateFormat(dateFormat)
+  validateDateFormat(dateFormat);
 
   // ---------------------------------------------------------------------------
   // Controlled / uncontrolled
   // ---------------------------------------------------------------------------
 
-  const controlled = value !== undefined
+  const controlled = value !== undefined;
 
-  const [internalRange, setInternalRange] = useState<DateRange | undefined>(() => normalizeRange(defaultValue))
+  const [internalRange, setInternalRange] = useState<DateRange | undefined>(() =>
+    normalizeRange(defaultValue),
+  );
 
-  const range = normalizeRange(controlled ? value : internalRange)
+  const range = normalizeRange(controlled ? value : internalRange);
 
-  const fromTimestamp = range?.from?.getTime()
-  const toTimestamp = range?.to?.getTime()
+  const fromTimestamp = range?.from?.getTime();
+  const toTimestamp = range?.to?.getTime();
 
   // ---------------------------------------------------------------------------
   // Draft inputs
   // ---------------------------------------------------------------------------
 
-  const [draft, setDraft] = useState<DraftRange>(() => formatRange(range, dateFormat))
+  const [draft, setDraft] = useState<DraftRange>(() => formatRange(range, dateFormat));
 
   // ---------------------------------------------------------------------------
   // Calendar
   // ---------------------------------------------------------------------------
 
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
-  const [month, setMonth] = useState(() => range?.from ?? defaultMonth ?? new Date())
+  const [month, setMonth] = useState(() => range?.from ?? defaultMonth ?? new Date());
 
   // ---------------------------------------------------------------------------
   // Refs
   // ---------------------------------------------------------------------------
 
-  const fromRef = useRef<HTMLInputElement>(null)
-  const toRef = useRef<HTMLInputElement>(null)
+  const fromRef = useRef<HTMLInputElement>(null);
+  const toRef = useRef<HTMLInputElement>(null);
 
   const pendingCaret = useRef<{
-    field: RangeField
-    start: number
-    end: number
-  } | null>(null)
+    field: RangeField;
+    start: number;
+    end: number;
+  } | null>(null);
 
   // ---------------------------------------------------------------------------
   // Synchronization
   // ---------------------------------------------------------------------------
 
   useEffect(() => {
-    setDraft(formatRange(range, dateFormat))
+    setDraft(formatRange(range, dateFormat));
 
     if (range?.from) {
-      setMonth(range.from)
+      setMonth(range.from);
     } else if (range?.to) {
-      setMonth(range.to)
+      setMonth(range.to);
     }
-  }, [fromTimestamp, toTimestamp, dateFormat])
+  }, [fromTimestamp, toTimestamp, dateFormat]);
 
   useLayoutEffect(() => {
-    const pending = pendingCaret.current
+    const pending = pendingCaret.current;
 
-    if (!pending) return
+    if (!pending) return;
 
-    const input = pending.field === "from" ? fromRef.current : toRef.current
+    const input = pending.field === "from" ? fromRef.current : toRef.current;
 
-    input?.setSelectionRange(pending.start, pending.end)
+    input?.setSelectionRange(pending.start, pending.end);
 
-    pendingCaret.current = null
-  }, [draft])
+    pendingCaret.current = null;
+  }, [draft]);
 
   // ---------------------------------------------------------------------------
   // Range update
@@ -701,103 +721,103 @@ function DateRangePicker({
 
   const commitRange = useCallback(
     (nextRange: DateRange | undefined, syncDraft = true) => {
-      const normalized = normalizeRange(nextRange)
+      const normalized = normalizeRange(nextRange);
 
       if (normalized && !isRangeValid(normalized, minDate, maxDate, isDateDisabled)) {
-        return false
+        return false;
       }
 
       if (isSameRange(range, normalized)) {
         if (syncDraft) {
-          setDraft(formatRange(normalized, dateFormat))
+          setDraft(formatRange(normalized, dateFormat));
         }
 
-        return true
+        return true;
       }
 
       if (!controlled) {
-        setInternalRange(normalized)
+        setInternalRange(normalized);
       }
 
       if (syncDraft) {
-        setDraft(formatRange(normalized, dateFormat))
+        setDraft(formatRange(normalized, dateFormat));
       }
 
-      onChange?.(normalized)
+      onChange?.(normalized);
 
-      return true
+      return true;
     },
-    [range, controlled, dateFormat, minDate, maxDate, isDateDisabled, onChange]
-  )
+    [range, controlled, dateFormat, minDate, maxDate, isDateDisabled, onChange],
+  );
 
   // ---------------------------------------------------------------------------
   // Input handling
   // ---------------------------------------------------------------------------
 
   function handleInputChange(field: RangeField, event: ChangeEvent<HTMLInputElement>) {
-    const input = event.currentTarget
-    const rawValue = input.value
+    const input = event.currentTarget;
+    const rawValue = input.value;
 
-    let nextValue = rawValue
+    let nextValue = rawValue;
 
     if (mask) {
-      const start = input.selectionStart ?? rawValue.length
-      const end = input.selectionEnd ?? start
+      const start = input.selectionStart ?? rawValue.length;
+      const end = input.selectionEnd ?? start;
 
-      const startDigits = rawValue.slice(0, start).replace(/\D/g, "").length
+      const startDigits = rawValue.slice(0, start).replace(/\D/g, "").length;
 
-      const endDigits = rawValue.slice(0, end).replace(/\D/g, "").length
+      const endDigits = rawValue.slice(0, end).replace(/\D/g, "").length;
 
-      nextValue = applyDateMask(rawValue, dateFormat)
+      nextValue = applyDateMask(rawValue, dateFormat);
 
       pendingCaret.current = {
         field,
         start: getCaretPosition(nextValue, startDigits),
-        end: getCaretPosition(nextValue, endDigits)
-      }
+        end: getCaretPosition(nextValue, endDigits),
+      };
     }
 
     const nextDraft = {
       ...draft,
-      [field]: nextValue
-    }
+      [field]: nextValue,
+    };
 
-    setDraft(nextDraft)
-    onTextChange?.(nextValue, field)
+    setDraft(nextDraft);
+    onTextChange?.(nextValue, field);
 
     // Clearing start date also clears end date.
     if (!nextValue) {
       if (field === "from") {
-        commitRange(undefined)
-        return
+        commitRange(undefined);
+        return;
       }
 
       commitRange({
         from: range?.from,
-        to: undefined
-      })
+        to: undefined,
+      });
 
-      return
+      return;
     }
 
-    const parsedDate = parseDate(nextValue, dateFormat)
+    const parsedDate = parseDate(nextValue, dateFormat);
 
     if (!parsedDate) {
-      onInvalid?.(nextValue, field)
-      return
+      onInvalid?.(nextValue, field);
+      return;
     }
 
     const nextRange: DateRange = {
       from: field === "from" ? parsedDate : range?.from,
-      to: field === "to" ? parsedDate : range?.to
-    }
+      to: field === "to" ? parsedDate : range?.to,
+    };
 
     if (!isRangeValid(nextRange, minDate, maxDate, isDateDisabled)) {
-      onInvalid?.(nextValue, field)
-      return
+      onInvalid?.(nextValue, field);
+      return;
     }
 
-    commitRange(nextRange, false)
+    commitRange(nextRange, false);
   }
 
   // ---------------------------------------------------------------------------
@@ -806,50 +826,50 @@ function DateRangePicker({
 
   const handleCalendarSelect = useCallback(
     (nextRange: CalendarDateRange | undefined) => {
-      const normalized = normalizeRange(nextRange)
+      const normalized = normalizeRange(nextRange);
 
       if (normalized && !isRangeValid(normalized, minDate, maxDate, isDateDisabled)) {
-        return
+        return;
       }
 
-      commitRange(normalized)
+      commitRange(normalized);
 
       // Keep the calendar open while the range is incomplete.
       if (normalized?.from && normalized?.to) {
-        setOpen(false)
+        setOpen(false);
       }
     },
-    [commitRange, minDate, maxDate, isDateDisabled]
-  )
+    [commitRange, minDate, maxDate, isDateDisabled],
+  );
 
   const isDisabledDate = useCallback(
     (date: Date) => {
-      return !isDateInRange(date, minDate, maxDate) || Boolean(isDateDisabled?.(date))
+      return !isDateInRange(date, minDate, maxDate) || Boolean(isDateDisabled?.(date));
     },
-    [minDate, maxDate, isDateDisabled]
-  )
+    [minDate, maxDate, isDateDisabled],
+  );
 
   // ---------------------------------------------------------------------------
   // Keyboard
   // ---------------------------------------------------------------------------
 
   function handleFieldKeyDown(event: KeyboardEvent<HTMLInputElement>, field: RangeField) {
-    onKeyDown?.(event, field)
+    onKeyDown?.(event, field);
 
-    if (event.defaultPrevented || disabled) return
+    if (event.defaultPrevented || disabled) return;
 
     if (event.key === "ArrowDown" && !event.altKey) {
-      event.preventDefault()
-      setOpen(true)
+      event.preventDefault();
+      setOpen(true);
     }
 
     if (event.key === "Escape") {
-      setOpen(false)
+      setOpen(false);
     }
 
     if (event.key === "Enter" && open) {
-      event.preventDefault()
-      setOpen(false)
+      event.preventDefault();
+      setOpen(false);
     }
   }
 
@@ -857,7 +877,7 @@ function DateRangePicker({
   // Render
   // ---------------------------------------------------------------------------
 
-  const calendarRange = createCalendarRange(range)
+  const calendarRange = createCalendarRange(range);
 
   return (
     <InputGroup>
@@ -869,10 +889,10 @@ function DateRangePicker({
         id={`${props.id}_start`}
         inputMode={mask ? "numeric" : "text"}
         onChange={(event) => {
-          handleInputChange("from", event)
+          handleInputChange("from", event);
         }}
         onKeyDown={(event) => {
-          handleFieldKeyDown(event, "from")
+          handleFieldKeyDown(event, "from");
         }}
         placeholder={typeof placeholder === "string" ? placeholder : dateFormat}
         readOnly={readOnly}
@@ -892,10 +912,10 @@ function DateRangePicker({
         id={`end`}
         inputMode={mask ? "numeric" : "text"}
         onChange={(event) => {
-          handleInputChange("to", event)
+          handleInputChange("to", event);
         }}
         onKeyDown={(event) => {
-          handleFieldKeyDown(event, "to")
+          handleFieldKeyDown(event, "to");
         }}
         placeholder={dateFormat}
         readOnly={readOnly}
@@ -942,7 +962,7 @@ function DateRangePicker({
         </Popover>
       </InputGroup.Addon>
     </InputGroup>
-  )
+  );
 }
 
-export { DatePicker, DateRangePicker }
+export { DatePicker, DateRangePicker };
