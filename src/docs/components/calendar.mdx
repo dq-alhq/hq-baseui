@@ -1,23 +1,24 @@
 ---
 title: Calendar
 description: A calendar displays one or more date grids and allows users to select a single date.
-references: ['https://daypicker.dev/']
+references: ["https://daypicker.dev/"]
 published: true
 ---
 
-<Demo component='calendar/calendar-demo' />
+<Demo component="calendar/calendar-demo" />
 
 ## Installation
-<Install component='calendar' />
+
+<Install component="calendar" />
 
 ## Usage
 
 ```tsx showLineNumbers
-import { Calendar } from "@/components/ui/calendar"
+import { Calendar } from "@/components/ui/calendar";
 ```
 
 ```tsx showLineNumbers
-const [date, setDate] = React.useState<Date | undefined>(new Date())
+const [date, setDate] = React.useState<Date | undefined>(new Date());
 
 return (
   <Calendar
@@ -26,13 +27,12 @@ return (
     onSelect={setDate}
     className="rounded-lg border"
   />
-)
+);
 ```
 
 ## About
 
 The `Calendar` component is built on top of [React DayPicker](https://daypicker.dev).
-
 
 ## Persian / Hijri / Jalali Calendar
 
@@ -53,12 +53,12 @@ The Calendar component accepts a `timeZone` prop to ensure dates are displayed a
 
 ```tsx showLineNumbers
 export function CalendarWithTimezone() {
-  const [date, setDate] = useState<Date | undefined>(undefined)
-  const [timeZone, setTimeZone] = useState<string | undefined>(undefined)
+  const [date, setDate] = useState<Date | undefined>(undefined);
+  const [timeZone, setTimeZone] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-    setTimeZone(Intl.DateTimeFormat().resolvedOptions().timeZone)
-  }, [])
+    setTimeZone(Intl.DateTimeFormat().resolvedOptions().timeZone);
+  }, []);
 
   return (
     <Calendar
@@ -67,7 +67,7 @@ export function CalendarWithTimezone() {
       onSelect={setDate}
       timeZone={timeZone}
     />
-  )
+  );
 }
 ```
 
@@ -81,9 +81,16 @@ A basic calendar component. We used `className="rounded-lg border"` to style the
 
 <Demo component="calendar/calendar-basic" />
 
+### Controlled
+
+Use `selected` and `onSelect` to control the selected date.
+
+<Demo component="calendar/calendar-controlled" />
+
 ### Range Calendar
 
 Use the `mode="range"` prop to enable range selection.
+
 <Demo component="calendar/calendar-range" />
 
 ### Month and Year Selector
@@ -139,4 +146,3 @@ Use `showWeekNumber` to show week numbers.
 ## API Reference
 
 See the [React DayPicker](https://daypicker.dev/) documentation for more information on the `Calendar` component.
-

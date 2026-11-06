@@ -1,0 +1,289 @@
+---
+title: Form
+description: A native form element with consolidated error handling, built to be composed with Field.
+published: true
+references: ["https://base-ui.com/react/components/form"]
+---
+
+<Demo component="form/form-demo" />
+
+## Installation
+
+<Install component="form" />
+
+## Usage
+
+```tsx showLineNumbers
+import { Field } from "@/components/ui/field";
+import { Form } from "@/components/ui/form";
+```
+
+```tsx showLineNumbers
+<Form onFormSubmit={(values) => console.log(values)}>
+  <Field name="email">
+    <Field.Label>Email</Field.Label>
+    <Input required type="email" />
+    <Field.Error />
+  </Field>
+  <Button type="submit">Submit</Button>
+</Form>
+```
+
+## Composition
+
+`Form` is composed together with [`Field`](/docs/components/field). The `name` of each `Field` is the key used to map errors passed to `errors`.
+
+```text
+Form
+├── Field (name="email")
+│   ├── Field.Label
+│   ├── Input / Textarea / Select / ...
+│   ├── Field.Description
+│   └── Field.Error
+├── Field (name="password")
+│   └── ...
+└── Button (type="submit")
+```
+
+## Examples
+
+### Server errors
+
+Pass validation errors returned by a server to `errors`. The keys must match the `name` of each `Field`, and `Field.Error` renders the message. The error is cleared as soon as the user edits the field.
+
+<Demo component="form/form-demo" />
+
+### Submit with a Server Function
+
+Forms using `useActionState` can be submitted with a [Server Function](https://react.dev/reference/react-dom/components/form#handle-form-submission-with-a-server-function) by passing `action` instead of `onSubmit`.
+
+<Demo component="form/form-action-state" />
+
+### Submit form values as an object
+
+Use `onFormSubmit` instead of the native `onSubmit` to receive the form values as a JavaScript object. This is useful when you need to transform the values before submission, or integrate with third-party APIs. `preventDefault` is called on the native submit event for you.
+
+<Demo component="form/form-submit-values" />
+
+### Validation mode
+
+Use `validationMode` to control when fields are validated: `onSubmit` (default), `onBlur` or `onChange`. The prop on `Field` takes precedence over the one on `Form`.
+
+<Demo component="form/form-validation-mode" />
+
+### Zod
+
+Parse the values with `schema.safeParse()` and map `z.flattenError(result.error).fieldErrors` to the `errors` prop.
+
+<Demo component="form/form-zod" />
+
+## React Hook Form
+
+You can build forms with [`react-hook-form`](https://react-hook-form.com) and [`zod`](https://zod.dev). Use `Controller` to connect each Base UI control, and the `Field` component to render the label, description and error.
+
+### Installation
+
+<CLI
+  command="install"
+  items={["react-hook-form", "@hookform/resolvers", "zod"]}
+/>
+
+### Usage
+
+#### Create a form schema
+
+Define the shape of your form using a Zod schema.
+
+```tsx showLineNumbers
+import { z } from "zod";
+
+const schema = z.object({
+  username: z.string().min(2, "Username must be at least 2 characters."),
+});
+```
+
+#### Define a form
+
+Use the `useForm` hook with `zodResolver` to define your form.
+
+```tsx showLineNumbers
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+
+const form = useForm<z.infer<typeof schema>>({
+  resolver: zodResolver(schema),
+  defaultValues: { username: "" },
+});
+```
+
+#### Build your form
+
+Wrap each control in a `Controller`. Pass `fieldState.invalid` to `Field` and use `match` on `Field.Error` to let React Hook Form control when the error is visible.
+
+```tsx showLineNumbers
+<Form onSubmit={form.handleSubmit((data) => console.log(data))}>
+  <Controller
+    control={form.control}
+    name="username"
+    render={({ field, fieldState }) => (
+      <Field invalid={fieldState.invalid} name={field.name}>
+        <Field.Label>Username</Field.Label>
+        <Input {...field} />
+        <Field.Description>This is your public display name.</Field.Description>
+        <Field.Error match={fieldState.invalid}>
+          {fieldState.error?.message}
+        </Field.Error>
+      </Field>
+    )}
+  />
+  <Button type="submit">Submit</Button>
+</Form>
+```
+
+### Input
+
+<Demo component="form/form-rhf-input" />
+
+### Textarea
+
+<Demo component="form/form-rhf-textarea" />
+
+### Select
+
+<Demo component="form/form-rhf-select" />
+
+### Checkbox
+
+<Demo component="form/form-rhf-checkbox" />
+
+### Radio
+
+<Demo component="form/form-rhf-radio" />
+
+### Switch
+
+<Demo component="form/form-rhf-switch" />
+
+### Combobox
+
+<Demo component="form/form-rhf-combobox" />
+
+### Date Picker
+
+<Demo component="form/form-rhf-date-picker" />
+
+## TanStack Form
+
+You can build forms with [`@tanstack/react-form`](https://tanstack.com/form) and [`zod`](https://zod.dev). The `useAppForm` hook is pre-bound to a `Message` field component and a `Submit` form component.
+
+### Installation
+
+<CLI command="install" items={["@tanstack/react-form", "zod"]} />
+
+### Usage
+
+#### Define a form
+
+Use the `useAppForm` hook with a Zod schema as `validators.onChange`.
+
+```tsx showLineNumbers
+import { z } from "zod";
+import { useAppForm } from "@/components/ui/tanstack-form";
+
+const schema = z.object({
+  username: z.string().min(2, "Username must be at least 2 characters."),
+});
+
+const form = useAppForm({
+  defaultValues: { username: "" } as z.infer<typeof schema>,
+  validators: { onChange: schema },
+  onSubmit({ value }) {
+    console.log(value);
+  },
+});
+```
+
+#### Build your form
+
+Use `form.AppField` for each field and `isFieldInvalid(field)` to flag the `Field`. `field.Message` renders the validation errors, and `form.Submit` is a submit button that shows a loading state while submitting.
+
+```tsx showLineNumbers
+<Form
+  onSubmit={(event) => {
+    event.preventDefault();
+    form.handleSubmit();
+  }}
+>
+  <form.AppField name="username">
+    {(field) => (
+      <Field invalid={isFieldInvalid(field)} name={field.name}>
+        <Field.Label>Username</Field.Label>
+        <Input
+          onBlur={field.handleBlur}
+          onChange={(event) => field.handleChange(event.target.value)}
+          value={field.state.value}
+        />
+        <Field.Description>This is your public display name.</Field.Description>
+        <field.Message />
+      </Field>
+    )}
+  </form.AppField>
+  <form.AppForm>
+    <form.Submit>Submit</form.Submit>
+  </form.AppForm>
+</Form>
+```
+
+#### Add pre-bound components
+
+Since you own the code, you can add your own field and form components to the form hook in `tanstack-form.tsx`. See the [TanStack Form documentation](https://tanstack.com/form/latest/docs/framework/react/guides/form-composition#pre-bound-field-components) for more information.
+
+```tsx showLineNumbers
+const { useAppForm } = createFormHook({
+  fieldComponents: {
+    Message: FieldMessage,
+    // Select: FieldSelect,
+  },
+  formComponents: {
+    Submit: SubmitButton,
+  },
+  fieldContext,
+  formContext,
+});
+```
+
+### Input
+
+<Demo component="form/form-tanstack-input" />
+
+### Textarea
+
+<Demo component="form/form-tanstack-textarea" />
+
+### Select
+
+<Demo component="form/form-tanstack-select" />
+
+### Checkbox
+
+<Demo component="form/form-tanstack-checkbox" />
+
+### Radio
+
+<Demo component="form/form-tanstack-radio" />
+
+### Switch
+
+<Demo component="form/form-tanstack-switch" />
+
+### Combobox
+
+<Demo component="form/form-tanstack-combobox" />
+
+### Date Picker
+
+<Demo component="form/form-tanstack-date-picker" />
+
+## API Reference
+
+See the [Base UI documentation](https://base-ui.com/react/components/form#api-reference) for the full API reference.

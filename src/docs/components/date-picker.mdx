@@ -1,14 +1,15 @@
 ---
 title: Date Picker
 description: A date picker combines a DateField and a Calendar popover to allow users to enter or select a date and time value.
-references: ['https://daypicker.dev/']
+references: ["https://daypicker.dev/"]
 published: true
 ---
 
 <Demo component="date-picker/date-picker-demo" />
 
 ## Installation
-<Install component='date-picker' />
+
+<Install component="date-picker" />
 
 ## Usage
 
@@ -33,10 +34,10 @@ const form = useForm({
 <DatePicker
   dateFormat="dd/MM/yyyy"
   onChange={(date) => {
-    console.log("Valid date:", date)
+    console.log("Valid date:", date);
   }}
   onInvalid={(value) => {
-    console.log("Invalid input:", value)
+    console.log("Invalid input:", value);
   }}
   aria-describedby="tanggal-error"
 />
@@ -47,7 +48,7 @@ const form = useForm({
 ```tsx
 <DatePicker
   isDateDisabled={(date) => {
-    return [0, 6].includes(date.getDay())
+    return [0, 6].includes(date.getDay());
   }}
 />
 ```
@@ -60,13 +61,9 @@ const form = useForm({
   dateFormat="yyyy-MM-dd"
   onChange={(range) => {
     router.get("/reports", {
-      start_date: range?.from
-        ? format(range.from, "yyyy-MM-dd")
-        : undefined,
-      end_date: range?.to
-        ? format(range.to, "yyyy-MM-dd")
-        : undefined
-    })
+      start_date: range?.from ? format(range.from, "yyyy-MM-dd") : undefined,
+      end_date: range?.to ? format(range.to, "yyyy-MM-dd") : undefined,
+    });
   }}
 />
 ```
@@ -79,6 +76,12 @@ A basic date picker component.
 
 <Demo component="date-picker/date-picker-basic" />
 
+### Controlled
+
+Use `defaultValue` for uncontrolled date pickers, or `value` and `onChange` to control the selected date.
+
+<Demo component="date-picker/date-picker-controlled" />
+
 ### Date Range Picker
 
 A date picker component for selecting a range of dates.
@@ -90,4 +93,3 @@ A date picker component for selecting a range of dates.
 A date picker component with a time input field for selecting a time.
 
 <Demo component="date-picker/date-picker-time" />
-

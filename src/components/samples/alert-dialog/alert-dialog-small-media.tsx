@@ -1,12 +1,11 @@
-import { IconBluetooth } from "@tabler/icons-react"
-import { AlertDialog } from "@/components/ui/alert-dialog"
-import { Button } from "@/components/ui/button"
+import { IconBluetooth } from "@tabler/icons-react";
+import { AlertDialog } from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
 
 export default () => {
   return (
     <AlertDialog>
       <AlertDialog.Trigger render={<Button variant="outline">Show Dialog</Button>} />
-
       <AlertDialog.Content size="sm">
         <AlertDialog.Header>
           <AlertDialog.Media>
@@ -23,5 +22,5 @@ export default () => {
         </AlertDialog.Footer>
       </AlertDialog.Content>
     </AlertDialog>
-  )
-}
+  );
+};

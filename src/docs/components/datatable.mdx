@@ -1,0 +1,352 @@
+---
+title: DataTable
+description: Powerful table and datagrids built using TanStack Table.
+published: true
+references:
+  [
+    "https://ui.shadcn.com/docs/components/base/data-table",
+    "https://tanstack.com/table/latest",
+  ]
+---
+
+<Demo component="data-table/data-table-demo" />
+
+## Introduction
+
+Every data table or datagrid is unique: different sorting and filtering requirements, different data sources. The `DataTable` component is a thin, reusable layer on top of [TanStack Table](https://tanstack.com/table) and the [`Table`](/docs/components/table) component. It gives you the common behavior out of the box, and exports every building block so you can compose your own when you need more control.
+
+## Installation
+
+<Install component="data-table" />
+
+This component uses **TanStack Table v9**. If you install it manually, add the dependency as well:
+
+```bash
+pnpm add @tanstack/react-table
+```
+
+## Usage
+
+```tsx showLineNumbers
+import {
+  createDataTableColumnHelper,
+  DataTable,
+} from "@/components/ui/data-table";
+```
+
+```tsx showLineNumbers
+type Payment = {
+  id: string;
+  amount: number;
+  status: "pending" | "processing" | "success" | "failed";
+  email: string;
+};
+
+const columnHelper = createDataTableColumnHelper<Payment>();
+
+const columns = columnHelper.columns([
+  columnHelper.accessor("status", { header: "Status" }),
+  columnHelper.accessor("email", { header: "Email" }),
+  columnHelper.accessor("amount", { header: "Amount" }),
+]);
+
+export function PaymentsTable({ data }: { data: Payment[] }) {
+  return <DataTable columns={columns} data={data} />;
+}
+```
+
+## Composition
+
+```text
+DataTable
+├── Input                  (filterColumn)
+├── DataTableViewOptions   (columnToggle)
+├── DataTableContent
+│   └── Table
+└── DataTablePagination    (pagination)
+```
+
+`DataTable` is all-in-one. `DataTableContent`, `DataTablePagination`, `DataTableViewOptions` and `DataTableColumnHeader` are exported so you can compose a table yourself with `useTable`.
+
+## Table features
+
+TanStack Table v9 is feature-based: you opt into the behavior you want with `tableFeatures()`. The component registers `columnFilteringFeature`, `columnVisibilityFeature`, `rowPaginationFeature`, `rowSelectionFeature` and `rowSortingFeature`, together with the matching row models, and exports them as `dataTableFeatures`. Pass `DataTableFeatures` as the first generic argument to `ColumnDef`, `Column` and `Table`, or use the `createDataTableColumnHelper` and `DataTableColumnDef` helpers that already do it for you.
+
+## Examples
+
+### Basic table
+
+Define the columns with `createDataTableColumnHelper`. Use `accessor` for data columns and `display` for columns without data. Set `pagination={false}` to render all the rows.
+
+<Demo component="data-table/data-table-basic" />
+
+### Cell formatting
+
+Use the `header` and `cell` options to format the content of a column, for example the amount as a currency and the status as a `Badge`.
+
+<Demo component="data-table/data-table-cell-formatting" />
+
+### Row actions
+
+Add a `display` column with a `DropdownMenu`. Use `row.original` to access the data of the row.
+
+<Demo component="data-table/data-table-actions" />
+
+### Pagination
+
+Rows are paginated into pages of 10 by default. Use `pageSize` and `pageSizeOptions` to customize it, or set `pagination={false}` to disable it.
+
+<Demo component="data-table/data-table-pagination" />
+
+### Sorting
+
+Use `DataTableColumnHeader` as the `header` of a column to let the user sort it ascending or descending, and hide it. Set `enableSorting: false` on a column to opt out.
+
+<Demo component="data-table/data-table-sorting" />
+
+### Filtering
+
+Pass the id of a column to `filterColumn` to render a search input that filters on it.
+
+<Demo component="data-table/data-table-filtering" />
+
+### Visibility
+
+Use `columnToggle` to render a dropdown to show and hide columns. Set `enableHiding: false` on a column to keep it always visible.
+
+<Demo component="data-table/data-table-visibility" />
+
+### Row selection
+
+Add `createDataTableSelectColumn()` to the columns, and `showSelection` to show the selected rows count. Use `getRowId` and `onRowSelectionChange` to read the selection.
+
+<Demo component="data-table/data-table-selection" />
+
+### Custom table
+
+Compose the building blocks with `useTable` when you need full control over the state or the layout.
+
+<Demo component="data-table/data-table-custom" />
+
+### Server-side
+
+When the data lives on a server, let the server paginate, sort and filter, and tell the table not to do it again. Compose the building blocks with `useTable` and:
+
+- set `manualPagination` and `manualSorting` to `true`,
+- pass the total number of rows as `rowCount` so the pagination knows the page count,
+- keep `pagination` and `sorting` in `state`, and refetch whenever they change.
+
+<Demo component="data-table/data-table-server-side" />
+
+## Laravel Inertia
+
+With [Laravel](https://laravel.com) and [Inertia](https://inertiajs.com) (React), the URL is the state. Every page, sort or search change is an Inertia `router.get` visit, Laravel returns the next page of results, and the table renders it.
+
+```bash
+npm install @inertiajs/react @tanstack/react-table
+```
+
+### Controller
+
+Return Laravel's `paginate()` result together with the active filters. Whitelist the sortable columns.
+
+```php showLineNumbers title="app/Http/Controllers/PaymentController.php"
+public function index(Request $request)
+{
+    $sort = in_array($request->query('sort'), ['email', 'amount'], true)
+        ? $request->query('sort')
+        : 'id';
+
+    $payments = Payment::query()
+        ->when($request->query('search'), fn ($query, $search) => $query->where('email', 'like', "%{$search}%"))
+        ->orderBy($sort, $request->query('direction') === 'desc' ? 'desc' : 'asc')
+        ->paginate($request->integer('per_page', 10))
+        ->withQueryString();
+
+    return Inertia::render('payments/index', [
+        'payments' => $payments,
+        'filters' => $request->only('search', 'sort', 'direction'),
+    ]);
+}
+```
+
+### Page
+
+`payments.current_page`, `payments.per_page` and `payments.total` from the paginator drive the table state. Sorting and pagination changes call `router.get`, and the search input is debounced. `only` limits the visit to the props that change, and `preserveState` keeps the input focused.
+
+```tsx showLineNumbers title="resources/js/pages/payments/index.tsx"
+import { router, usePage } from "@inertiajs/react";
+import { type SortingState, useTable } from "@tanstack/react-table";
+import { useEffect, useState } from "react";
+import {
+  createDataTableColumnHelper,
+  DataTableColumnHeader,
+  DataTableContent,
+  DataTablePagination,
+  dataTableFeatures,
+} from "@/components/ui/data-table";
+import { Input } from "@/components/ui/input";
+
+type Payment = {
+  id: number;
+  amount: number;
+  status: "pending" | "processing" | "success" | "failed";
+  email: string;
+};
+
+// The shape of Laravel's `paginate()` result (only the keys we use).
+type Paginated<T> = {
+  data: T[];
+  current_page: number;
+  per_page: number;
+  total: number;
+};
+
+type Filters = {
+  search?: string;
+  sort?: string;
+  direction?: "asc" | "desc";
+};
+
+const columnHelper = createDataTableColumnHelper<Payment>();
+
+const columns = columnHelper.columns([
+  columnHelper.accessor("email", {
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Email" />
+    ),
+  }),
+  columnHelper.accessor("status", { header: "Status", enableSorting: false }),
+  columnHelper.accessor("amount", {
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Amount" />
+    ),
+    cell: ({ cell }) => `$${cell.getValue()}`,
+  }),
+]);
+
+export default function PaymentsIndex({
+  payments,
+  filters,
+}: {
+  payments: Paginated<Payment>;
+  filters: Filters;
+}) {
+  const path = usePage().url.split("?")[0];
+  const [search, setSearch] = useState(filters.search ?? "");
+
+  // Every interaction is an Inertia visit. The URL is the single source of truth.
+  const visit = (params: Record<string, string | number | undefined>) =>
+    router.get(
+      path,
+      {
+        search: filters.search,
+        sort: filters.sort,
+        direction: filters.direction,
+        per_page: payments.per_page,
+        ...params,
+      },
+      {
+        preserveState: true,
+        preserveScroll: true,
+        replace: true,
+        only: ["payments", "filters"],
+      },
+    );
+
+  // Search after the user stops typing.
+  useEffect(() => {
+    if (search === (filters.search ?? "")) {
+      return;
+    }
+    const timeout = setTimeout(
+      () => visit({ search: search || undefined, page: 1 }),
+      300,
+    );
+    return () => clearTimeout(timeout);
+  }, [search]);
+
+  const pagination = {
+    pageIndex: payments.current_page - 1,
+    pageSize: payments.per_page,
+  };
+  const sorting: SortingState = filters.sort
+    ? [{ id: filters.sort, desc: filters.direction === "desc" }]
+    : [];
+
+  const table = useTable({
+    features: dataTableFeatures,
+    data: payments.data,
+    columns,
+    manualPagination: true,
+    manualSorting: true,
+    rowCount: payments.total,
+    state: { pagination, sorting },
+    onPaginationChange: (updater) => {
+      const next =
+        typeof updater === "function" ? updater(pagination) : updater;
+      // Go back to the first page when the page size changes.
+      visit({
+        page: next.pageSize === pagination.pageSize ? next.pageIndex + 1 : 1,
+        per_page: next.pageSize,
+      });
+    },
+    onSortingChange: (updater) => {
+      const next = typeof updater === "function" ? updater(sorting) : updater;
+      visit({
+        sort: next[0]?.id,
+        direction: next[0] ? (next[0].desc ? "desc" : "asc") : undefined,
+        page: 1,
+      });
+    },
+  });
+
+  return (
+    <div className="flex w-full flex-col gap-4">
+      <Input
+        className="max-w-sm"
+        onChange={(event) => setSearch(event.target.value)}
+        placeholder="Search emails..."
+        value={search}
+      />
+      <DataTableContent table={table} />
+      <DataTablePagination showSelection={false} table={table} />
+    </div>
+  );
+}
+```
+
+The same component is available as the `data-table-inertia` sample. It needs an Inertia app to render, so it isn't previewed here.
+
+## API Reference
+
+### DataTable
+
+| Prop                   | Type                          | Default         | Description                                                          |
+| ---------------------- | ----------------------------- | --------------- | -------------------------------------------------------------------- |
+| `columns`              | `DataTableColumnDef<TData>[]` | -               | The column definitions.                                              |
+| `data`                 | `TData[]`                     | -               | The rows of the table.                                               |
+| `filterColumn`         | `string`                      | -               | The id of the column the search input filters on.                    |
+| `filterPlaceholder`    | `string`                      | `"Filter..."`   | The placeholder of the search input.                                 |
+| `columnToggle`         | `boolean`                     | `false`         | Show the column visibility dropdown.                                 |
+| `pagination`           | `boolean`                     | `true`          | Show the pagination controls. When `false`, all rows are rendered.   |
+| `pageSize`             | `number`                      | `10`            | The initial page size.                                               |
+| `pageSizeOptions`      | `number[]`                    | `[10,20,30,50]` | The options of the page size select.                                 |
+| `showSelection`        | `boolean`                     | `false`         | Show the selected rows count.                                        |
+| `getRowId`             | `(row, index) => string`      | -               | Returns a stable id for a row. Used as the key of the row selection. |
+| `emptyMessage`         | `ReactNode`                   | `"No results."` | Rendered when there are no rows.                                     |
+| `onRowSelectionChange` | `(rowSelection) => void`      | -               | Called when the row selection changes.                               |
+
+### Building blocks
+
+| Export                        | Description                                                                           |
+| ----------------------------- | ------------------------------------------------------------------------------------- |
+| `dataTableFeatures`           | The TanStack Table features used by the component.                                    |
+| `createDataTableColumnHelper` | `createColumnHelper` bound to `DataTableFeatures`.                                    |
+| `createDataTableSelectColumn` | A column with a checkbox to select a row, and one to select the whole page.           |
+| `DataTableColumnHeader`       | A column header with sorting (asc, desc, reset) and hide actions.                     |
+| `DataTableViewOptions`        | A dropdown to toggle the visibility of the columns.                                   |
+| `DataTablePagination`         | Page size, page number, first/previous/next/last buttons and the selected rows count. |
+| `DataTableContent`            | Renders the header groups and the rows of a table instance.                           |
+
+See the [TanStack Table documentation](https://tanstack.com/table/latest/docs/overview) for the full API reference.

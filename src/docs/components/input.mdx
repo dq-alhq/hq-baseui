@@ -4,101 +4,108 @@ description: Displays a form input field or a component that looks like an input
 published: true
 ---
 
-<Demo component='input/input-demo'  />
+<Demo component="input/input-demo" />
 
 ## Installation
-<Install component='input' />
+
+<Install component="input" />
 
 ## Usage
 
 ```tsx
-import { Input } from "@/components/ui/input"
+import { Input } from "@/components/ui/input";
 ```
 
 ```tsx
 <Input />
 ```
 
-
 ## Examples
 
 ### Basic
 
-<Demo component='input/input-basic'  />
+<Demo component="input/input-basic" />
+
+### Controlled
+
+Use `value` and `onChange` to control the input state.
+
+<Demo component="input/input-controlled" />
 
 ### Field
 
 Use `Field`, `FieldLabel`, and `FieldDescription` to create an input with a
 label and description.
 
-<Demo component='input/input-field'  />
+<Demo component="input/input-field" />
 
 ### Field Group
 
 Use `FieldGroup` to show multiple `Field` blocks and to build forms.
 
-<Demo component='input/input-fieldgroup'  />
+<Demo component="input/input-fieldgroup" />
 
 ### Disabled
 
 Use the `disabled` prop to disable the input. To style the disabled state, add the `data-disabled` attribute to the `Field` component.
 
-<Demo component='input/input-disabled'  />
+<Demo component="input/input-disabled" />
 
 ### Invalid
 
 Use the `aria-invalid` prop to mark the input as invalid. To style the invalid state, add the `data-invalid` attribute to the `Field` component.
 
-<Demo component='input/input-invalid'  />
+<Demo component="input/input-invalid" />
 
 ### File
 
 Use the `type="file"` prop to create a file input.
 
-<Demo component='input/input-file'  />
+<Demo component="input/input-file" />
 
 ### Inline
 
 Use `Field` with `orientation="horizontal"` to create an inline input.
 Pair with `Button` to create a search input with a button.
 
-<Demo component='input/input-inline'  />
+<Demo component="input/input-inline" />
 
 ### Grid
 
 Use a grid layout to place multiple inputs side by side.
 
-<Demo component='input/input-grid'  />
+<Demo component="input/input-grid" />
 
 ### Required
 
 Use the `required` attribute to indicate required inputs.
 
-<Demo component='input/input-required'  />
+<Demo component="input/input-required" />
 
 ### Badge
 
 Use `Badge` in the label to highlight a recommended field.
 
-<Demo component='input/input-badge'  />
+<Demo component="input/input-badge" />
 
 ### Input Group
 
 To add icons, text, or buttons inside an input, use the `InputGroup` component. See the [Input Group](/docs/components/input-group) component for more examples.
 
-<Demo component='input-group/input-input-group'  />
+<Demo component="input-group/input-input-group" />
 
 ### Button Group
 
 To add buttons to an input, use the `ButtonGroup` component. See the [Button Group](/docs/components/button-group) component for more examples.
 
-<Demo component='input/input-button-group'  />
+<Demo component="input/input-button-group" />
 
 ### Form
 
 A full form example with multiple inputs, a select, and a button.
 
-<Demo component='input/input-form' />
+<Demo component="input/input-form" />
 
 ## API References
+
 See the [Base UI documentation](https://base-ui.com/react/components/input) for the full API reference.

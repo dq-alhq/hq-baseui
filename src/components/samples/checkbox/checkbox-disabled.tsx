@@ -1,5 +1,5 @@
-import { Checkbox } from "@/components/ui/checkbox"
-import { Field } from "@/components/ui/field"
+import { Checkbox } from "@/components/ui/checkbox";
+import { Field } from "@/components/ui/field";
 
 export default () => {
   return (
@@ -7,5 +7,5 @@ export default () => {
       <Checkbox />
       <Field.Label>Enable notifications</Field.Label>
     </Field>
-  )
-}
+  );
+};

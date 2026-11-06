@@ -1,19 +1,20 @@
 ---
 title: Select
 description: A select displays a collapsible list of options and allows a user to select one of them.
-references: ['https://base-ui.com/react/components/select']
+references: ["https://base-ui.com/react/components/select"]
 published: true
 ---
 
-<Demo component='select/select-demo' />
+<Demo component="select/select-demo" />
 
 ## Installation
-<Install component='select' />
+
+<Install component="select" />
 
 ## Usage
 
 ```tsx showLineNumbers
-import { Select } from "@/components/ui/select"
+import { Select } from "@/components/ui/select";
 ```
 
 ```tsx showLineNumbers
@@ -61,6 +62,12 @@ Select
 
 ## Examples
 
+### Controlled
+
+Use `defaultValue` for uncontrolled selects, or `value` and `onValueChange` to control the state.
+
+<Demo component="select/select-controlled" />
+
 ### Align Item With Trigger
 
 Use `alignItemWithTrigger` on `Select.Content` to control whether the selected item aligns with the trigger. When `true` (default), the popup positions so the selected item appears over the trigger. When `false`, the popup aligns to the trigger edge.
@@ -99,4 +106,5 @@ Add the `invalid` attribute to the `Field` component to show an error state.
 <Demo component="select/select-invalid" />
 
 ## API Reference
+
 See the [Base UI Select](https://base-ui.com/react/components/select#api-reference) documentation.

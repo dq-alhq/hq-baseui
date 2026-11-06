@@ -11,12 +11,13 @@ description: A styled native HTML select element with consistent design system i
 <Demo component="native-select/native-select-demo" />
 
 ## Installation
-<Install component='native-select' />
+
+<Install component="native-select" />
 
 ## Usage
 
 ```tsx showLineNumbers
-import { NativeSelect } from "@/components/ui/native-select"
+import { NativeSelect } from "@/components/ui/native-select";
 ```
 
 ```tsx showLineNumbers
@@ -57,19 +58,25 @@ NativeSelect
     └── NativeSelect.Item
 ```
 
-## Groups
+### Controlled
+
+Use `value` and `onChange` to control the native select state.
+
+<Demo component="native-select/native-select-controlled" />
+
+### Groups
 
 Use `NativeSelect.Group` to organize options into categories.
 
 <Demo component="native-select/native-select-groups" />
 
-## Disabled
+### Disabled
 
 Add the `disabled` prop to the `NativeSelect` component to disable the select.
 
 <Demo component="native-select/native-select-disabled" />
 
-## Invalid
+### Invalid
 
 Use `invalid` attribute to `Field` to show validation errors.
 

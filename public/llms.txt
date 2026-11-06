@@ -26,11 +26,13 @@
 - [Command](https://hq-baseui.vercel.app/docs/components/command.md): A command is like a button with a twist, it opens a menu of options. It's a cooler version of a combobox, ideal for command palettes, menus, and more.
 - [Container](https://hq-baseui.vercel.app/docs/components/container.md): Container is a component for fixing an element's width to the current breakpoint.
 - [Context Menu](https://hq-baseui.vercel.app/docs/components/context-menu.md): Displays a menu of actions triggered by a right click.
+- [DataTable](https://hq-baseui.vercel.app/docs/components/datatable.md): Powerful table and datagrids built using TanStack Table.
 - [Date Picker](https://hq-baseui.vercel.app/docs/components/date-picker.md): A date picker combines a DateField and a Calendar popover to allow users to enter or select a date and time value.
 - [Dialog](https://hq-baseui.vercel.app/docs/components/dialog.md): Pop up a dialog box, demanding attention like a traffic stop sign, ideal for critical interactions.
 - [Dropdown Menu](https://hq-baseui.vercel.app/docs/components/dropdown-menu.md): Menus display a list of actions or options that a user can choose.
 - [Empty](https://hq-baseui.vercel.app/docs/components/empty.md): The Empty component is used to display a message when there is no content to display.
 - [Field](https://hq-baseui.vercel.app/docs/components/field.md): Combine labels, controls, and help text to compose accessible form fields and grouped inputs.
+- [Form](https://hq-baseui.vercel.app/docs/components/form.md): A native form element with consolidated error handling, built to be composed with Field.
 - [Input](https://hq-baseui.vercel.app/docs/components/input.md): Displays a form input field or a component that looks like an input field.
 - [Input Group](https://hq-baseui.vercel.app/docs/components/input-group.md): Add addons, buttons, and helper content to inputs.
 - [Input OTP](https://hq-baseui.vercel.app/docs/components/input-otp.md): Accessible one-time password component with copy paste functionality.

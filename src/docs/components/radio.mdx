@@ -1,20 +1,21 @@
 ---
 title: Radio
 description: A radio group allows a user to select a single item from a list of mutually exclusive options.
-references: ['https://base-ui.com/react/components/radio-group']
+references: ["https://base-ui.com/react/components/radio-group"]
 published: true
 ---
 
-<Demo component='radio/radio-group-demo' />
+<Demo component="radio/radio-group-demo" />
 
 ## Installation
-<Install component='radio' />
+
+<Install component="radio" />
 
 ## Usage
 
 ```tsx showLineNumbers
-import { Field } from "@/components/ui/field"
-import { Radio } from "@/components/ui/radio"
+import { Field } from "@/components/ui/field";
+import { Radio } from "@/components/ui/radio";
 ```
 
 ```tsx showLineNumbers
@@ -50,6 +51,12 @@ RadioGroup
 
 ## Examples
 
+### Controlled
+
+Use `defaultValue` for uncontrolled groups, or `value` and `onValueChange` on `Radio.Group` to control the state.
+
+<Demo component="radio/radio-group-controlled" />
+
 ### Description
 
 Radio group items with a description using the `Field` component.
@@ -79,7 +86,6 @@ Use the `disabled` prop on `Radio.Group` to disable all items.
 Use `aria-invalid` on `RadioGroupItem` and `data-invalid` on `Field` to show validation errors.
 
 <Demo component="radio/radio-group-invalid" />
-
 
 ## API Reference
 

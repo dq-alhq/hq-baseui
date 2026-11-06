@@ -1,19 +1,20 @@
 ---
 title: Accordion
 description: A vertically stacked set of interactive headings that each reveal a section of content.
-references: ['https://base-ui.com/react/components/accordion']
+references: ["https://base-ui.com/react/components/accordion"]
 published: true
 ---
-<Demo component='accordion/accordion-demo' />
+
+<Demo component="accordion/accordion-demo" />
 
 ## Installation
-<Install component='accordion' />
 
+<Install component="accordion" />
 
 ## Usage
 
 ```tsx showLineNumbers
-import { Accordion } from "@/components/ui/accordion"
+import { Accordion } from "@/components/ui/accordion";
 ```
 
 ```tsx showLineNumbers
@@ -41,35 +42,38 @@ Accordion
     └── Accordion.Content
 ```
 
-
 ## Examples
 
 ### Basic
 
 A basic accordion that shows one item at a time. The first item is open by default.
 
-<Demo component='accordion/accordion-basic' />
+<Demo component="accordion/accordion-basic" />
 
 ### Multiple
 
 Use the `multiple` prop to allow multiple items to be open at the same time.
 
-<Demo component='accordion/accordion-multiple' />
+<Demo component="accordion/accordion-multiple" />
 
 ### Disabled
 
 Use the `disabled` prop on `Accordion.Item` to disable individual items.
 
-<Demo component='accordion/accordion-disabled' />
+<Demo component="accordion/accordion-disabled" />
 
 ### Borders
 
 Add `border` to the `Accordion` and `border-b last:border-b-0` to the `Accordion.Item` to add borders to the items.
 
-<Demo component='accordion/accordion-borders' />
+<Demo component="accordion/accordion-borders" />
 
 ### Card
 
 Wrap the `Accordion` in a `Card` component.
 
-<Demo component='accordion/accordion-card' />
+<Demo component="accordion/accordion-card" />
+
+### Controlled
+
+<Demo component="accordion/accordion-controlled" />

@@ -6,12 +6,13 @@ description: Displays a form textarea or a component that looks like a textarea.
 <Demo component="textarea/textarea-demo" />
 
 ## Installation
-<Install component='textarea' />
+
+<Install component="textarea" />
 
 ## Usage
 
 ```tsx
-import { Textarea } from "@/components/ui/textarea"
+import { Textarea } from "@/components/ui/textarea";
 ```
 
 ```tsx
@@ -26,9 +27,15 @@ Use `Field`, `Field.Label`, and `Field.Description` to create a textarea with a 
 
 <Demo component="textarea/textarea-field" />
 
+### Controlled
+
+Use `value` and `onChange` to control the textarea state.
+
+<Demo component="textarea/textarea-controlled" />
+
 ### Disabled
 
-Use the `disabled` prop to the `Field` component to disable the textarea. 
+Use the `disabled` prop to the `Field` component to disable the textarea.
 
 <Demo component="textarea/textarea-disabled" />
 

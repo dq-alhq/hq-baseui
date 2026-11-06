@@ -1,23 +1,24 @@
 ---
 title: Combobox
 description: A combo box combines a text input with a listbox, allowing users to filter a list of options to items matching a query.
-references: ['https://base-ui.com/react/components/combobox']
+references: ["https://base-ui.com/react/components/combobox"]
 published: true
 ---
 
-<Demo component='combobox/combobox-demo' />
+<Demo component="combobox/combobox-demo" />
 
 ## Installation
-<Install component='combobox' />
+
+<Install component="combobox" />
 
 ## Usage
 
 ```tsx showLineNumbers
-import { Combobox } from "@/components/ui/combobox"
+import { Combobox } from "@/components/ui/combobox";
 ```
 
 ```tsx showLineNumbers
-const frameworks = ["Next.js", "SvelteKit", "Nuxt.js", "Remix", "Astro"]
+const frameworks = ["Next.js", "SvelteKit", "Nuxt.js", "Remix", "Astro"];
 
 export function ExampleCombobox() {
   return (
@@ -34,7 +35,7 @@ export function ExampleCombobox() {
         </Combobox.List>
       </Combobox.Content>
     </Combobox>
-  )
+  );
 }
 ```
 
@@ -99,20 +100,20 @@ Combobox
 Use `itemToStringValue` when your items are objects.
 
 ```tsx showLineNumbers
-import * as React from "react"
+import * as React from "react";
 
-import { Combobox } from "@/components/ui/combobox"
+import { Combobox } from "@/components/ui/combobox";
 
 type Framework = {
-  label: string
-  value: string
-}
+  label: string;
+  value: string;
+};
 
 const frameworks: Framework[] = [
   { label: "Next.js", value: "next" },
   { label: "SvelteKit", value: "sveltekit" },
   { label: "Nuxt", value: "nuxt" },
-]
+];
 
 export function ExampleComboboxCustomItems() {
   return (
@@ -132,7 +133,7 @@ export function ExampleComboboxCustomItems() {
         </Combobox.List>
       </Combobox.Content>
     </Combobox>
-  )
+  );
 }
 ```
 
@@ -141,14 +142,14 @@ export function ExampleComboboxCustomItems() {
 Use `multiple` with chips for multi-select behavior.
 
 ```tsx showLineNumbers
-import * as React from "react"
+import * as React from "react";
 
-import { Combobox } from "@/components/ui/combobox"
+import { Combobox } from "@/components/ui/combobox";
 
-const frameworks = ["Next.js", "SvelteKit", "Nuxt.js", "Remix", "Astro"]
+const frameworks = ["Next.js", "SvelteKit", "Nuxt.js", "Remix", "Astro"];
 
 export function ExampleComboboxMultiple() {
-  const [value, setValue] = React.useState<string[]>([])
+  const [value, setValue] = React.useState<string[]>([]);
 
   return (
     <Combobox
@@ -176,7 +177,7 @@ export function ExampleComboboxMultiple() {
         </Combobox.List>
       </Combobox.Content>
     </Combobox>
-  )
+  );
 }
 ```
 
@@ -187,6 +188,12 @@ export function ExampleComboboxMultiple() {
 A simple combobox with a list of frameworks.
 
 <Demo component="combobox/combobox-basic" />
+
+### Controlled
+
+Use `defaultValue` for uncontrolled comboboxes, or `value` and `onValueChange` to control the selected item.
+
+<Demo component="combobox/combobox-controlled" />
 
 ### Multiple
 
@@ -241,7 +248,6 @@ You can trigger the combobox from a button or any other component by using the `
 You can add an addon to the combobox by using the `InputGroupAddon` component inside the `Combobox.Input`.
 
 <Demo component="combobox/combobox-input-group" />
-
 
 ## API Reference
 

@@ -1,71 +1,76 @@
-import { IconCode } from "@tabler/icons-react"
-import { cn } from "cn"
-import { Suspense, useEffect, useState } from "react"
-import { previews } from "@/components/samples/generated/previews"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Dialog } from "@/components/ui/dialog"
-import { siteConfig } from "@/config/site"
-import { Skeleton } from "../ui/skeleton"
-import { CLI } from "./cli"
-import { Code } from "./code-client"
+import { IconCode } from "@tabler/icons-react";
+import { cn } from "cn";
+import { Suspense, useEffect, useState } from "react";
+import { previews } from "@/components/samples/generated/previews";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Dialog } from "@/components/ui/dialog";
+import { siteConfig } from "@/config/site";
+import { Skeleton } from "../ui/skeleton";
+import { CLI } from "./cli";
+import { Code } from "./code-client";
 
 export function Demo({
   component,
   containerClassName,
-  className
+  className,
 }: {
-  component: string
-  containerClassName?: string
-  className?: string
+  component: string;
+  containerClassName?: string;
+  className?: string;
 }) {
-  const Component = previews[component]?.component
-  const [isOpen, setIsOpen] = useState(false)
-  const [code, setCode] = useState<string | null>(null)
-  const [isLoading, setIsLoading] = useState(false)
+  const Component = previews[component]?.component;
+  const [isOpen, setIsOpen] = useState(false);
+  const [code, setCode] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const componentName = component.split("/").pop()
+  const componentName = component.split("/").pop();
 
   useEffect(() => {
-    if (!isOpen || code !== null) return
+    if (!isOpen || code !== null) return;
 
-    let cancelled = false
+    let cancelled = false;
 
     async function loadCode() {
-      setIsLoading(true)
+      setIsLoading(true);
 
       try {
-        const res = await fetch(`${siteConfig.url}/r/${componentName}`)
+        const res = await fetch(`${siteConfig.url}/r/${componentName}`);
 
         if (!res.ok) {
-          throw new Error("Failed to load code")
+          throw new Error("Failed to load code");
         }
 
-        const data = await res.json()
+        const data = await res.json();
 
         if (!cancelled) {
-          setCode(data.files[0].content)
+          setCode(data.files[0].content);
         }
       } catch (error) {
         if (!cancelled) {
-          console.error("Failed to load code", error)
+          console.error("Failed to load code", error);
         }
       } finally {
         if (!cancelled) {
-          setIsLoading(false)
+          setIsLoading(false);
         }
       }
     }
 
-    loadCode()
+    loadCode();
 
     return () => {
-      cancelled = true
-    }
-  }, [isOpen, code, componentName])
+      cancelled = true;
+    };
+  }, [isOpen, code, componentName]);
 
   return (
-    <div className={cn("group/demo bg-background relative mt-2 overflow-hidden rounded-lg border", containerClassName)}>
+    <div
+      className={cn(
+        "group/demo bg-background relative mt-2 overflow-hidden rounded-lg border",
+        containerClassName,
+      )}
+    >
       <div className="bg-muted flex w-full items-center justify-between gap-1 overflow-hidden px-2 py-1 backdrop-blur-2xl">
         <Badge className="text-xs font-medium">{componentName}</Badge>
         <Dialog onOpenChange={setIsOpen} open={isOpen}>
@@ -99,8 +104,8 @@ export function Demo({
       </div>
       <div
         className={cn(
-          "relative flex min-h-52 items-center justify-center px-8 py-12 has-data-[slot=card]:w-full has-data-[slot=chart]:p-2! has-data-[slot=command]:p-0! has-data-[slot=chart]:**:data-[slot=card]:w-full max-sm:px-4",
-          className
+          "relative flex min-h-52 items-center [&:has(>[data-slot=field]:only-child)]:grid justify-center px-8 py-12 has-data-[slot=card]:w-full has-data-[slot=chart]:p-2! has-data-[slot=command]:p-0! has-data-[slot=chart]:**:data-[slot=card]:w-full max-sm:px-4",
+          className,
         )}
       >
         {Component && (
@@ -110,5 +115,5 @@ export function Demo({
         )}
       </div>
     </div>
-  )
+  );
 }

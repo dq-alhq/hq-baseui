@@ -1,6 +1,6 @@
-import { IconCircleDashedPlus } from "@tabler/icons-react"
-import { AlertDialog } from "@/components/ui/alert-dialog"
-import { Button } from "@/components/ui/button"
+import { IconCircleDashedPlus } from "@tabler/icons-react";
+import { AlertDialog } from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
 
 export default () => {
   return (
@@ -22,5 +22,5 @@ export default () => {
         </AlertDialog.Footer>
       </AlertDialog.Content>
     </AlertDialog>
-  )
-}
+  );
+};
