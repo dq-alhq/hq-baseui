@@ -1,0 +1,89 @@
+:root {
+    /* Nuansa Hijau NU yang khas dengan sentuhan putih bersih dan aksen emas elegan */
+    --background: oklch(0.985 0.005 145);
+    --foreground: oklch(0.18 0.04 150);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.18 0.04 150);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.18 0.04 150);
+    
+    /* Hijau NU (Primary) */
+    --primary: oklch(0.42 0.15 152);
+    --primary-foreground: oklch(0.98 0.01 150);
+    
+    --secondary: oklch(0.93 0.02 145);
+    --secondary-foreground: oklch(0.22 0.05 150);
+    --muted: oklch(0.95 0.01 145);
+    --muted-foreground: oklch(0.52 0.03 150);
+    
+    /* Aksen Emas/Kuning (Melambangkan kemegahan, kehangatan, dan ornamen Islami) */
+    --accent: oklch(0.72 0.16 80);
+    --accent-foreground: oklch(0.18 0.04 150);
+    
+    --destructive: oklch(0.577 0.245 27.325);
+    --border: oklch(0.88 0.02 145);
+    --input: oklch(0.88 0.02 145);
+    --ring: oklch(0.42 0.15 152);
+    
+    /* Warna Grafik / Statistik Medis */
+    --chart-1: oklch(0.42 0.15 152); /* Hijau NU */
+    --chart-2: oklch(0.72 0.16 80);  /* Emas */
+    --chart-3: oklch(0.55 0.14 200); /* Biru Medis */
+    --chart-4: oklch(0.65 0.12 140); /* Hijau Muda */
+    --chart-5: oklch(0.80 0.08 90);  /* Kuning Lembut */
+    
+    --sidebar: oklch(0.97 0.01 145);
+    --sidebar-foreground: oklch(0.18 0.04 150);
+    --sidebar-primary: oklch(0.42 0.15 152);
+    --sidebar-primary-foreground: oklch(0.98 0.01 150);
+    --sidebar-accent: oklch(0.93 0.02 145);
+    --sidebar-accent-foreground: oklch(0.18 0.04 150);
+    --sidebar-border: oklch(0.88 0.02 145);
+    --sidebar-ring: oklch(0.42 0.15 152);
+
+    --font-sans: "Geist";
+    --font-mono: "Geist Mono";
+    --radius: 0.625rem;
+}
+
+.dark {
+    --background: oklch(0.13 0.03 150);
+    --foreground: oklch(0.95 0.01 150);
+    --card: oklch(0.18 0.03 150);
+    --card-foreground: oklch(0.95 0.01 150);
+    --popover: oklch(0.18 0.03 150);
+    --popover-foreground: oklch(0.95 0.01 150);
+    
+    /* Hijau NU yang lebih terang untuk mode gelap */
+    --primary: oklch(0.55 0.16 152);
+    --primary-foreground: oklch(0.13 0.03 150);
+    
+    --secondary: oklch(0.24 0.03 150);
+    --secondary-foreground: oklch(0.95 0.01 150);
+    --muted: oklch(0.22 0.03 150);
+    --muted-foreground: oklch(0.70 0.02 150);
+    
+    /* Aksen Emas Malam */
+    --accent: oklch(0.78 0.18 80);
+    --accent-foreground: oklch(0.13 0.03 150);
+    
+    --destructive: oklch(0.704 0.191 22.216);
+    --border: oklch(1 0 0 / 10%);
+    --input: oklch(1 0 0 / 15%);
+    --ring: oklch(0.55 0.16 152);
+    
+    --chart-1: oklch(0.55 0.16 152);
+    --chart-2: oklch(0.78 0.18 80);
+    --chart-3: oklch(0.60 0.14 200);
+    --chart-4: oklch(0.70 0.12 140);
+    --chart-5: oklch(0.85 0.08 90);
+    
+    --sidebar: oklch(0.15 0.03 150);
+    --sidebar-foreground: oklch(0.95 0.01 150);
+    --sidebar-primary: oklch(0.55 0.16 152);
+    --sidebar-primary-foreground: oklch(0.13 0.03 150);
+    --sidebar-accent: oklch(0.24 0.03 150);
+    --sidebar-accent-foreground: oklch(0.95 0.01 150);
+    --sidebar-border: oklch(1 0 0 / 10%);
+    --sidebar-ring: oklch(0.55 0.16 152);
+}

@@ -100,19 +100,19 @@ export function CLI({ items, command = "add", registered, className }: CLIProps)
       <DropdownMenu>
         <DropdownMenu.Trigger render={<CopyButton isCopied={copied} size={"icon-sm"} />} />
         <DropdownMenu.Content align="start" side="left">
-          <DropdownMenu.Item onSelect={() => onAction("npm")}>
+          <DropdownMenu.Item onClick={() => onAction("npm")}>
             <BrandIcon name="npm" />
             NPM
           </DropdownMenu.Item>
-          <DropdownMenu.Item onSelect={() => onAction("yarn")}>
+          <DropdownMenu.Item onClick={() => onAction("yarn")}>
             <BrandIcon name="yarn" />
             Yarn
           </DropdownMenu.Item>
-          <DropdownMenu.Item onSelect={() => onAction("pnpm")}>
+          <DropdownMenu.Item onClick={() => onAction("pnpm")}>
             <BrandIcon name="pnpm" />
             PNPM
           </DropdownMenu.Item>
-          <DropdownMenu.Item onSelect={() => onAction("bun")}>
+          <DropdownMenu.Item onClick={() => onAction("bun")}>
             <BrandIcon name="bun" />
             Bun
           </DropdownMenu.Item>

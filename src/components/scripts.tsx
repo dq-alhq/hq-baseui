@@ -3,8 +3,8 @@ export function Scripts() {
     try {
       const root = document.documentElement
       const fonts = localStorage.getItem('font')
-      const fontSans = JSON.parse(fonts)?.state?.fontSans || 'Geist Variable'
-      const fontMono = JSON.parse(fonts)?.state?.fontMono || 'Geist Mono Variable'
+      const fontSans = JSON.parse(fonts)?.state?.fontSans || 'Geist'
+      const fontMono = JSON.parse(fonts)?.state?.fontMono || 'Geist Mono'
 
       root.style.setProperty('--font-sans', fontSans)
       root.style.setProperty('--font-mono', fontMono)

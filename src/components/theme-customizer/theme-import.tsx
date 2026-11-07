@@ -5,13 +5,13 @@ import { IconAlertTriangle, IconDownload } from "@tabler/icons-react"
 import { cn } from "cn"
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Dialog } from "@/components/ui/dialog"
 import { Empty } from "@/components/ui/empty"
 import { Field } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { formatColor } from "@/lib/themes/color-formatter"
 import { useTheme } from "@/stores/theme-store"
 import { ColorPicker, ColorPickerContent, ColorPickerSwatch, ColorPickerTrigger } from "../reui/color-picker"
+import { Drawer } from "../ui/drawer"
 import { Label } from "../ui/label"
 import { Textarea } from "../ui/textarea"
 
@@ -50,18 +50,22 @@ export function ThemeImport() {
   }
 
   return (
-    <Dialog>
-      <Button variant={"outline"}>
-        <IconDownload />
-        Import
-      </Button>
-      <Dialog.Content className="sm:max-w-5xl">
-        <Dialog.Header>
-          <Dialog.Title>Import Themes</Dialog.Title>
-          <Dialog.Description>Paste the css code</Dialog.Description>
-        </Dialog.Header>
-        <Dialog.Body>
-          <div className="scroll-fade grid max-h-[65vh] gap-3 overflow-auto p-0.5 sm:max-h-97 sm:grid-cols-2">
+    <Drawer showSwipeHandle swipeDirection="right">
+      <Drawer.Trigger
+        render={
+          <Button variant={"outline"}>
+            <IconDownload />
+            Import
+          </Button>
+        }
+      />
+      <Drawer.Content className="sm:max-w-5xl">
+        <Drawer.Header>
+          <Drawer.Title>Import Themes</Drawer.Title>
+          <Drawer.Description>Paste the css code</Drawer.Description>
+        </Drawer.Header>
+        <Drawer.Body>
+          <div className="scroll-fade grid gap-3 overflow-auto p-0.5">
             <Field>
               <Field.Label className="sr-only">CSS Code</Field.Label>
               <Textarea
@@ -108,17 +112,17 @@ export function ThemeImport() {
               )}
             </div>
           </div>
-        </Dialog.Body>
-        <Dialog.Footer>
+        </Drawer.Body>
+        <Drawer.Footer>
           <Button slot="close" variant="secondary">
             Close
           </Button>
           <Button disabled={!parsed || !isValid} onClick={applyTheme}>
             Apply
           </Button>
-        </Dialog.Footer>
-      </Dialog.Content>
-    </Dialog>
+        </Drawer.Footer>
+      </Drawer.Content>
+    </Drawer>
   )
 }
 

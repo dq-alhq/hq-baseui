@@ -31,8 +31,10 @@ export function FontSansSelector() {
         <Field.Label>Font Sans</Field.Label>
         <Combobox.Trigger
           render={
-            <Button className="w-full justify-between" variant="outline">
-              <Combobox.Value />
+            <Button className="justify-between" variant="outline">
+              <span className="truncate">
+                <Combobox.Value />
+              </span>
               <IconSelector />
             </Button>
           }
@@ -76,8 +78,10 @@ export function FontMonoSelector() {
         <Field.Label>Font Mono</Field.Label>
         <Combobox.Trigger
           render={
-            <Button className="w-full justify-between" variant="outline">
-              <Combobox.Value />
+            <Button className="justify-between" variant="outline">
+              <span className="truncate">
+                <Combobox.Value />
+              </span>
               <IconSelector />
             </Button>
           }
